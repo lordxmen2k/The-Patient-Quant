@@ -1,0 +1,202 @@
+% =====================================================================
+%  Chapter 22 — Selection: DSR, PBO, the Reality Check and the SPA
+% =====================================================================
+
+\chapter{Selection: DSR, PBO, the Reality Check and the SPA}
+\label{ch:selection}
+
+This chapter builds the four tests that judge the book's own system. They
+are not decorations and they are not applied to somebody else's strategy.
+They are implemented here, from their definitions, so that the reader can
+see exactly what is being claimed when the book says a result is
+distinguishable from luck.
+
+\section{Why one test is not enough}
+
+Each of the four tests answers a different question, and none of them
+answers all of it.
+
+\begin{itemize}
+\item The \textbf{Deflated Sharpe Ratio} asks: given that I tried \(N\)
+strategies, is my Sharpe ratio larger than the expected maximum Sharpe
+ratio of \(N\) draws from the null?
+\item The \textbf{Probability of backtest overfitting} asks: if I split my
+record in half, how often does the strategy that wins on the first half
+lose on the second?
+\item The \textbf{Reality Check} asks: is the best member of my family
+better than the benchmark by more than the family would manage by chance?
+\item The \textbf{Superior Predictive Ability} test asks the same
+question, but weights the family members by their own performance rather
+than assuming they are equally good.
+\end{itemize}
+
+A result that passes all four is stronger than a result that passes one.
+A result that passes none is dead.
+
+\section{The Deflated Sharpe Ratio}
+
+Bailey and L\'opez de Prado's construction begins from the observation that
+the expected maximum Sharpe ratio of \(N\) independent trials with
+variance \(V\) across trials is
+\begin{equation}
+SR_0 = \sqrt{V}\left[(1-\gamma)\,Z^{-1}\!\left(1-\frac{1}{N}\right)
+                     + \gamma\,Z^{-1}\!\left(1-\frac{1}{Ne}\right)\right],
+\end{equation}
+where \(Z^{-1}\) is the inverse standard normal cumulative distribution,
+\(e\) is Euler's number, and \(\gamma\) is the Euler--Mascheroni constant,
+\(0.5772156649\).
+
+The Deflated Sharpe Ratio then asks whether the observed Sharpe ratio
+exceeds \(SR_0\), correcting for the non-normality of the return
+distribution:
+\begin{equation}
+DSR = Z\!\left[
+  \frac{(\widehat{SR} - SR_0)\sqrt{T-1}}
+       {\sqrt{1 - \gamma_3\widehat{SR}
+              + \frac{\gamma_4 - 1}{4}\widehat{SR}^{\,2}}}
+\right],
+\end{equation}
+where \(\gamma_3\) and \(\gamma_4\) are the skewness and kurtosis of the
+returns, and \(Z\) is the standard normal cumulative distribution.
+
+The correction term in the denominator is the skewness and kurtosis
+adjustment: if the returns are negatively skewed, the observed Sharpe
+ratio is flattered by the left tail, and the denominator grows. The book
+computes \(\gamma_3\) and \(\gamma_4\) from the actual return series.
+
+There is a second and subtler correction. The variance \(V\) in \(SR_0\)
+is the variance of the Sharpe ratios \emph{across the trial family}, not
+the variance of the returns. If the family members all produce nearly
+identical portfolios --- which, as Chapter 33 will show, they nearly do ---
+then \(V\) is tiny and \(SR_0\) is tiny, and the test is correspondingly
+weak. That is correct behaviour, and it is why the book also computes the
+implied number of independent trials and repeats the test with it.
+
+\section{CSCV and the probability of backtest overfitting}
+
+The probability of backtest overfitting is built on a combinatorial
+construction that is worth understanding, because it is elegant and it is
+the test that most directly answers the question a reader will ask: does
+this strategy's edge survive being cut in half?
+
+Take the \(T\) months of the strategy family's returns. Split them into
+\(S\) contiguous sub-periods of equal length, in every possible way: the
+number of splits is the binomial coefficient
+\(\binom{T}{S/2}\), and the book uses eight sub-periods, so the splits
+are the \(\binom{T}{4}\) ways of choosing four months out of eight.
+
+For each split, the first half is the \emph{in-sample} half and the
+second is the \emph{out-of-sample} half. For each split, compute the
+Sharpe ratio of every family member on each half, rank the members by
+Sharpe ratio on the first half, and record the rank of the member that
+was best on the first half in the second half's ranking. The logit of the
+normalised rank is
+\begin{equation}
+\lambda_c = \log\frac{\omega_c}{1-\omega_c},
+\qquad
+\omega_c = \frac{r^c_{n^*}}{N+1},
+\end{equation}
+where \(r^c_{n^*}\) is the out-of-sample rank of the in-sample winner and
+\(N\) is the number of trials. The probability of backtest overfitting is
+then the probability that \(\lambda < 0\), i.e. the probability that the
+in-sample winner is out of sample in the bottom half:
+\begin{equation}
+PBO = \phi = \int_{-\infty}^{0} f(\lambda)\,d\lambda .
+\end{equation}
+
+The interpretation is devastating and is the reason this test is the one
+a reader should insist on. A PBO of 0.5 means that a coin flip is as good
+as the strategy for picking the configuration that will work. A PBO
+above 0.5 means the selection procedure is actively harmful.
+
+\section{The reality check}
+
+White's reality check asks whether the best member of a family beats a
+benchmark by more than the family would by chance. The test statistic is
+the maximum, over the family, of the difference in mean performance
+between the member and the benchmark, standardised:
+\begin{equation}
+V = \max_k \left(
+  \frac{\bar{r}_{k} - \bar{r}_{b}}
+       {\hat{\sigma}_{k}/\sqrt{T}}
+  \right),
+\qquad
+d_k(t) = r_k(t) - r_b(t),
+\end{equation}
+with the null distribution obtained by bootstrapping the centred
+differences \(d_k(t) - \bar{d}_k\).
+
+The bootstrap is the stationary bootstrap, in which each observation is
+either drawn from the sample or from its immediate successor, with the
+probability of drawing the successor fixed at a small value. The
+stationary bootstrap is used rather than the simple bootstrap because the
+returns are serially correlated, and the simple bootstrap would destroy
+that dependence and produce a null distribution that is too narrow.
+
+The reality check is the most conservative of the four tests, because it
+does not assume the family members are equal and because it is testing the
+\emph{maximum}, which is the statistic that a researcher would have
+reported.
+
+\section{Hansen's superior predictive ability test}
+
+The SPA test corrects the reality check's most wasteful conservatism. The
+reality check's null distribution is the distribution of the maximum over
+the family, which is wide when the family contains both good and bad
+members; a family with one good member among many mediocre ones will fail
+the test not because the good member is not better, but because the
+maximum of the null is wide.
+
+Hansen reweights. The test statistic uses the studentised mean differences
+with weights that are proportional to each member's own performance:
+\begin{equation}
+t_{k,t} = \frac{d_{k,t}}{\hat{\sigma}_k},
+\qquad
+\bar{t}_k = \frac{1}{T}\sum_{t=1}^{T} t_{k,t},
+\qquad
+w_k = \frac{\max(0, \bar{t}_k)}{\sum_{j}\max(0, \bar{t}_j)},
+\end{equation}
+and the test statistic is the studentised sum
+\begin{equation}
+t^* = \max_k \frac{\sqrt{T}\,\bar{t}_k}
+                           {\sqrt{1 - kT/n}},
+\end{equation}
+with the same stationary bootstrap for the null distribution.
+
+A member with a negative mean difference receives zero weight and does
+not contribute to the width of the null. A family of one good member and
+twenty bad ones therefore faces a much narrower null than under the
+reality check, and the test has real power.
+
+\section{How the book applies them}
+
+All four tests are applied to the book's own family, against the
+benchmark, with the following discipline.
+
+The family is the one that was actually run: the model configurations,
+the ablations, the sizing variants, the ensemble half-life variants and
+the alternative strategic policies. Its size is published.
+
+The tests are run against the benchmark on the same months as the system,
+with the same alignment.
+
+The implied number of independent trials is computed from the family's own
+correlation matrix and substituted into the Deflated Sharpe Ratio, and
+the result is reported both ways.
+
+And the result is reported whatever it is. Chapter 33 is where the
+numbers appear, and they are not flattering.
+
+\begin{keytakeaways}
+\item Four tests, four questions: is the Sharpe ratio above the expected
+maximum for \(N\) trials; does the in-sample winner survive being cut in
+half; does the best family member beat the benchmark by more than chance;
+and the same question with the family weighted by its own performance.
+\item The Deflated Sharpe Ratio deflates by the expected maximum Sharpe
+ratio of the family and corrects for skewness and kurtosis.
+\item The reality check and the SPA test differ in how they weight the
+family, and the book's family deliberately contains members that the SPA
+test's reweighting will discard.
+\item All four are applied to the book's own family, with its size
+published.
+\end{keytakeaways}

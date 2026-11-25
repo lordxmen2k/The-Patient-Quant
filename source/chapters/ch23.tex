@@ -1,0 +1,128 @@
+% =====================================================================
+%  Chapter 23 — The Strategic Allocation Is a Decision, Not an Estimate
+% =====================================================================
+
+\chapter{The Strategic Allocation Is a Decision, Not an Estimate}
+\label{ch:strategic}
+
+The book's architecture has one rule that everything else follows from:
+the strategic allocation is never set by the model. This chapter states
+the rule, argues for it, and describes what the model is permitted to do
+instead.
+
+\section{The rule}
+
+The system has four sleeves. The strategic allocation --- the split of the
+portfolio across those four sleeves --- is fixed in advance by a stated
+policy:
+
+\begin{equation}
+(w_{\mathrm{US}}, w_{\mathrm{intl}}, w_{\mathrm{bonds}}, w_{\mathrm{real}})
+= (0.36,\ 0.24,\ 0.30,\ 0.10).
+\end{equation}
+
+The model cannot change these numbers. It cannot change them by a
+percentage point. The only thing that varies them is the availability of
+the underlying funds: a sleeve with no listed fund has its weight
+redistributed over the sleeves that do have one, which is a fact about
+the data rather than a decision.
+
+What the model \emph{is} permitted to do is reallocate \emph{within} a
+sleeve, subject to a bound. The bound is the fraction of the sleeve that
+the tilt may move: at the book's default, a tilt can move a sleeve's
+weight by up to an eighth in either direction, and the sleeve's total is
+then restored.
+
+\section{Why the rule is the right one}
+
+There are three reasons, and the third is the important one.
+
+The first is that the strategic allocation is a statement about the
+investor's circumstances, not about the market. How much risk a person
+should hold depends on their income, their age, the stability of their
+employment and the horizon over which they will not need the money. None
+of those are in the price series, and a model that could read them would
+be a model of something other than returns.
+
+The second is that the strategic allocation is the part of the portfolio
+that the sequence-of-returns argument of Chapter 7 acts upon. A saver's
+ruin probability is dominated by the allocation, not by the choice of
+funds within a sleeve, and a system that lets a forecast choose the
+allocation would be letting a quantity with no representation of the
+sequence choose the thing that the sequence most affects.
+
+The third is the one that decides it: \textbf{the strategic allocation is
+the part of the portfolio that can be justified without a backtest}. The
+reader can read the argument in Chapter 24 and disagree with it. The
+reader cannot read the argument for the tilt, because there is none --- the
+tilt is justified by a forecast whose value the reader cannot assess in
+advance and whose record the book will show to be worth approximately
+nothing.
+
+\begin{takeaway}[The rule]
+The strategic allocation is stated, argued, and fixed. The model may tilt
+within a sleeve, by a bounded amount, and may not touch the split across
+sleeves at all. Everything the model does is therefore reversible by the
+reader without changing the book's argument.
+\end{takeaway}
+
+\section{What the model is permitted to do, precisely}
+
+Three things, and no more.
+
+\textbf{Tilt inside a sleeve.} For sleeve \(s\), the base weights come
+from the inverse-volatility weighting of its live members. The tilt
+multiplies each member's weight by a factor derived from the model's
+posterior, and the sleeve's total is then restored, so the tilt changes
+the composition of the sleeve and not its size.
+
+\textbf{Shift the sleeve's weight within the bound.} The tilt may move a
+sleeve's total by up to the tilt scale times the bound on the deviation.
+
+\textbf{Hold cash.} The system's cash vehicle is a short Treasury bill
+fund, which is a portfolio decision rather than an idle balance: it has
+a defined net asset value, a near-zero duration, and a yield. When the
+model has no edge --- and, as Chapter 20 shows, it usually does not --- the
+portfolio's response is to hold more of this.
+
+What the model may not do: set a sleeve's weight, set the total risk of
+the portfolio, decide whether to hold the portfolio at all, or choose the
+benchmark.
+
+\section{How the base weights inside a sleeve are set}
+
+Within a sleeve, the base allocation is inverse-volatility over the live
+members, computed from the trailing sixty months of returns:
+\begin{equation}
+b_{i} = \frac{1/\hat{\sigma}_i}{\sum_{j \in s} 1/\hat{\sigma}_j},
+\qquad
+\hat{\sigma}_i = \sqrt{12}\, s_i,
+\end{equation}
+where \(s_i\) is the sample standard deviation of the fund's trailing
+monthly returns, and the annualisation factor is applied for legibility
+only.
+
+Inverse-volatility is chosen over equal weight for a reason that is about
+robustness rather than about performance. Equal weight over a sleeve of
+eleven funds, most of which track the same index, is a perfectly
+reasonable allocation and it has one very attractive property: it cannot
+be much wrong. It is also, by construction, insensitive to any estimate,
+which is a virtue in a layer that is downstream of a forecast the book
+does not trust.
+
+The final weights are therefore a product of two ideas with different
+justifications: a stated policy for the sleeves, and a parameter-free
+rule for the funds inside each sleeve, with the model's forecast permitted
+to adjust the second and never the first.
+
+\begin{keytakeaways}
+\item The strategic allocation is fixed in advance, is not set by the
+model, and is argued from the investor's circumstances rather than from
+the data.
+\item The model may tilt within a sleeve, move a sleeve's weight within a
+bound, and hold cash --- and nothing else.
+\item Base weights inside a sleeve are inverse-volatility over the live
+members, chosen for robustness rather than for performance.
+\item Everything the model does is reversible by the reader without
+changing the book's argument.
+\end{keytakeaways}

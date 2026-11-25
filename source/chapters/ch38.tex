@@ -1,0 +1,168 @@
+% =====================================================================
+%  Chapter 38 — The Verdict
+% =====================================================================
+
+\chapter{The Verdict, and What to Do With Your Own Money}
+\label{ch:verdict}
+
+The owner's question was whether there is a machine-learning procedure that
+makes money and protects principal at the same time, and that can be
+evaluated honestly enough that the investor knows which of the two it is
+doing. This chapter answers it.
+
+\section{The answer}
+
+The system that this book builds earns \numFullCAGR{} a year against the
+index's \numSpyCAGR{}, with a deepest drawdown of \numFullDD{} against
+the index's \numSpyDD{}, a Sharpe ratio of \numFullSharpe{} against
+\numSpySharpe{}, and a probability of backtest overfitting of \numPBO{}.
+
+It does not beat the index, and the selection tests say clearly that it
+could not be distinguished from the index on this evidence. It does
+reduce the worst episode by a wide margin, and the risk governor that does
+it contributes positively in every one of the \numWindowCount{} starting
+months tested.
+
+The machine-learning layer contributes \numTiltMean{} a year, with a
+median of \numTiltMedian{}, and is positive in \numTiltPosFrac{} of the
+windows.
+
+So the answer to the question is, in three parts.
+
+\textbf{Does it protect principal?} Not in the sense of never losing
+money --- nothing does. In the sense that matters for a saver, which is a
+bounded and recoverable worst episode: yes, substantially, and for a
+reason that does not depend on a forecast being right.
+
+\textbf{Does it make money?} It makes a real, positive compound return,
+and it makes less than the index does. Whether that is ``making money''
+depends on the reader's alternative, and the honest comparison is the
+equal-weighted portfolio of the same universe, which makes more.
+
+\textbf{Can it be evaluated honestly enough that the investor knows which
+of the two it is doing?} Yes, and this is the part that was actually
+novel. The book declares its trial family, publishes its count, applies
+four selection tests to its own results, reports that they fail, and
+computes its layer attribution from every starting month. A reader who
+runs this can know exactly what they have.
+
+\section{What the book actually claims}
+
+Five claims, and they are not the ones the reader might expect.
+
+\textbf{One: the prediction is the easy part and it does not work.} A
+twelve-feature panel regression on price and volume, run over
+\numModelConfigs{} configurations, produces a posterior over the forward
+return whose signal-to-noise ratio is far below one. On this data, in
+this universe, at this horizon, that is what a price-based forecast
+looks like.
+
+\textbf{Two: the risk layer is where the value is.} The governor needs no
+forecast, so it cannot be wrong about the future, and its contribution is
+stable across every window tested.
+
+\textbf{Two and a half: the architecture is the point.} A layer that
+prices its own uncertainty cannot destroy the portfolio it is part of.
+The system's protection comes from the policy and the governor, and the
+model's contribution to that protection is that it is bounded.
+
+\textbf{Three: the best strategy in the universe was the naive one.} The
+equal-weighted portfolio of sixty-one funds earned more compound return
+over this record than the system, without a model, without an optimiser
+and without a governor. The book's own evidence for this is in Chapter
+25, from the literature, and in Chapter 32, from the record.
+
+\textbf{Four: selection is the binding constraint on the whole subject.}
+The probability of backtest overfitting above one half, and the implied
+number of independent trials at \numImpliedTrials{} for a family of
+\numFamilySize{}, are not statistics about this book. They are statistics
+about the field.
+
+\textbf{Five: the one large number in the subject that the reader can
+change is behavioural.} The psychic cost of evaluating a long-horizon
+portfolio annually is 5.1 per cent a year. No fee, no tax and no
+execution error in this book is that large.
+
+\begin{takeaway}[The book in one paragraph]
+A machine-learning forecast of liquid equity ETFs, built honestly and
+evaluated honestly, does not beat the index and cannot be distinguished
+from it. A risk governor that needs no forecast reduces the worst episode
+by seventeen percentage points and does so in every window tested. The
+architecture that lets the two coexist --- a stated allocation the
+machine cannot touch, a bounded tilt, a posterior that prices its own
+uncertainty, a governor, a tax engine, and a trial family declared in
+advance --- is the transferable result. The largest single number in the
+subject is not a fee or a tax but the cost of looking at the account too
+often.
+\end{takeaway}
+
+\section{What to do with your own money}
+
+The book's recommendations, in order, and the reasons for them.
+
+\textbf{Decide your own horizon before you decide your allocation.} The
+strategy in this book is for a reader with twenty or more years and a
+stable income. For a reader with five years, the tax and the behavioural
+friction compound and the answer is probably the index, held.
+
+\textbf{Write down the three numbers from Chapter 2.} The maximum
+drawdown you will not abandon the strategy for, the number of years you
+can wait for a recovery, and the annual withdrawal your plan depends on.
+Those three numbers define the feasible set of portfolios, and they are
+inputs to the system rather than outputs of it.
+
+\textbf{If your circumstances permit it, use the tax-exempt account.} The
+tax costs \numTaxPenalty{} a year of compound growth over this record.
+
+\textbf{Do not expect the model to help you, and do not let it cost you.}
+The tilt's contribution is \numTiltMean{} a year. If the reader runs the
+system, the model's contribution is a rounding error, and the entire
+value of running it is that it makes the discipline automatic.
+
+\textbf{Look at the account at least four times a year, and not more.} This
+is the one recommendation in the book with a number attached to it that is
+larger than every other number in the book combined.
+
+\textbf{Do not override it because the portfolio is down.} Override it when
+your circumstances change. The strategic allocation was never the
+model's to set, and it is the reader's to change.
+
+\begin{takeaway}[The five sentences]
+Write down your three numbers. Use the tax-exempt account if you can.
+Do not expect the model to help and do not let it cost you. Look at the
+account four times a year, not more. Do not sell in a drawdown.
+\end{takeaway}
+
+\section{The last thing this book has to say}
+
+There is a version of this book in which the machine finds the edge and
+the reader's problem is solved. It was not written, because the
+measurements did not support it, and because a book that reports a null
+result with the same rigour as an alpha is more useful to the reader than
+one that reports only alphas.
+
+But the null result is not nothing, and the reader should not read it as
+an instruction to do nothing. The measurements say something specific:
+that the protection layer works, that the prediction layer does not, and
+that the second fact is not a reason to abandon the first. A portfolio
+that is the stated policy plus a governor, with a bounded and honestly
+uncertain forecast on top, gives a reader the index's risk-adjusted
+return with a materially shallower worst episode, and it does so without
+requiring the reader to believe anything that the evidence does not
+support.
+
+That is the patient part. It is also, on this evidence, all of the
+available part.
+
+\begin{keytakeaways}
+\item The system protects the principal in the sense that matters --- a
+bounded, recoverable worst episode --- and it does so without needing a
+forecast to be right.
+\item It makes less money than the index, and the best strategy in the
+universe on this record was the naive equal-weighted one.
+\item The evaluation is the transferable result: a declared trial family,
+four selection tests applied to the book's own results, a layer
+attribution from every starting month, and a null reported as a null.
+\item The largest single number in the subject is behavioural: the cost of
+evaluating the portfolio too often.
+\end{keytakeaways}

@@ -1,0 +1,137 @@
+% =====================================================================
+%  Chapter 32 — The Record
+% =====================================================================
+
+\chapter{The Record}
+\label{ch:record}
+
+This chapter reports the system's record and puts it beside four
+comparators, with every number computed by the same code on the same
+months. It is the chapter in which the reader decides whether the
+architecture is worth running, and the decision is not the one the
+book's author would make.
+
+\section{The window}
+
+The system runs from \numRecordStart{} to \numRecordEnd{}: \numRecordMonths{}
+months, or just over twenty-four years. The panel it draws on is longer,
+running from \numPanelStart{} to \numPanelEnd{}, because the model needs a
+warm-up before it will produce a forecast and because the earlier years
+are needed to establish the benchmark's own history.
+
+The initial capital is \numInitialCapital{} dollars, and the account is
+rebalanced monthly.
+
+\section{The five portfolios}
+
+\begin{center}
+\begin{tabular}{@{}P{1.62in}rrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Growth} & & & \\
+Variant & annual rate & Sharpe & drawdown & worst 12m & recovery \\
+\midrule
+The index, bought and held   & \numSpyCAGR{} & \numSpySharpe{} & \numSpyDD{} & \numSpyWorstYear{} & \numSpyRecovery{} \\
+Equal weight of every fund   & \numEqualCAGR{} & \numEqualSharpe{} & \numEqualDD{} & \numEqualWorstYear{} & \numEqualRecovery{} \\
+The policy, no rebalancing   & \numPolicyCAGR{} & \numPolicySharpe{} & \numPolicyDD{} & \numPolicyWorstYear{} & \numPolicyRecovery{} \\
+\textbf{The system}           & \textbf{\numFullCAGR{}} & \textbf{\numFullSharpe{}} & \textbf{\numFullDD{}} & \textbf{\numFullWorstYear{}} & \numFullRecovery{} \\
+The system, in a taxable account & \numTaxCAGR{} & \numTaxSharpe{} & \numTaxDD{} & \numTaxWorstYear{} & \numTaxRecovery{} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Four things are visible in that table, and they pull in different
+directions.
+
+\textbf{The system does not make more money than the index.} It makes
+\numFullCAGR{} against the index's \numSpyCAGR{}, a difference of about
+two and a half percentage points a year. Over twenty-four years, a
+difference of that size is the difference between the system finishing
+with a little over six times the capital and the index finishing with
+nearly nine.
+
+\textbf{The system does not take more risk-adjusted.} Its Sharpe ratio is
+\numFullSharpe{} against the index's \numSpySharpe{}, and its Sortino
+ratio is \numFullSortino{} against \numSpySortino{}. On the
+discipline-adjusted measure it is slightly ahead; on the risk-adjusted
+measure it is a tie.
+
+\textbf{The system does take less risk.} Its deepest drawdown is
+\numFullDD{} against the index's \numSpyDD{}, its worst rolling
+twelve-month outcome is \numFullWorstYear{} against the index's \numSpyWorstYear{}, and
+its annualised volatility is \numFullVol{} against the index's
+\numSpyVol{}. It also takes longer to recover --- \numFullRecovery{} months
+against the index's \numSpyRecovery{}, which is an improvement, but the
+taxable account's \numTaxRecovery{} months is not.
+
+\textbf{An equal-weighted portfolio of all sixty-one funds does better on
+the money and worse on the drawdown.} The naive comparator earns
+\numEqualCAGR{} with a drawdown of \numEqualDD{}. This is Chapter 25's
+finding made concrete: the book's architecture is not the best available
+way to invest in this universe, and a rule requiring no model, no
+shrinkage, no Kelly solve and no governor earns more compound return over
+this record.
+
+\begin{center}\emph{The system's growth against the index's is shown in \figref{fig:wealth}, and the same two return streams as drawdowns in \figref{fig:drawdown}.}\end{center}
+
+\section{The comparison the book does not make}
+
+It would be easy, and wrong, to present the table above as though the
+system were competitive. It is not competitive on compound return, and
+the difference is large enough that a reader who wanted the most money
+would not run this system.
+
+What the system is competitive on is the pair that the owner's question
+actually asks for: growth \emph{and} protection. Judged on the compound
+growth rate alone, the index wins and the system loses. Judged on the
+Sharpe ratio, the system and the index are indistinguishable. Judged on
+the deepest drawdown, the system wins by a wide margin and the equal
+weight comparator is second.
+
+That is the trade this book offers, and it is a trade rather than a
+dominance. A reader who wants maximum compound return should buy the
+index and stop reading. A reader who wants the index's return with a
+materially shallower worst episode should run the system, and should
+understand that they are paying about two and a half percentage points a
+year for it.
+
+\begin{takeaway}[What the record says]
+On growth the index wins by about two and a half percentage points a year.
+On risk-adjusted return the two are indistinguishable. On the deepest
+drawdown the system wins by seventeen percentage points. On worst
+twelve-month outcome the system wins by fourteen. The book does not claim
+the system is better; it claims it is different in one specific way, and
+that the way may be worth paying for.
+\end{takeaway}
+
+\section{What the record does not cover}
+
+Four exclusions, carried forward from the chapters that established them.
+
+It does not cover the possibility that the record's particular period was
+unlucky for the index or lucky for the system; Chapter 34 treats this
+directly by recomputing the attribution from every starting month, and
+the governor's conclusion survives it.
+
+It does not cover a reader whose circumstances are different. The
+alternative policies are in Chapter 33's family, and the defensive policy
+earns \numDefCAGR{} with a drawdown of \numDefDD{} while the aggressive one
+earns \numAggCAGR{} with a drawdown of \numAggDD{}.
+
+It does not cover the costs of running the system. It does not cover the
+behaviour of an investor who overrides it.
+
+And it does not cover the possibility that the benchmark's twenty-four
+years are the wrong benchmark for the reader's own horizon.
+
+\begin{keytakeaways}
+\item Over twenty-four years the system earns \numFullCAGR{} against the
+index's \numSpyCAGR{}, with a Sharpe ratio of \numFullSharpe{} against
+\numSpySharpe{} and a deepest drawdown of \numFullDD{} against \numSpyDD{}.
+\item An equal-weighted portfolio of all sixty-one funds earns
+\numEqualCAGR{} with a drawdown of \numEqualDD{} --- more money, more
+pain, and no machinery.
+\item The offer is a trade, not a dominance: the index's growth against
+the system's shallower worst episode.
+\item The record covers one period, one set of policies and one set of
+costs; Chapter 34 recomputes the conclusion from every starting month.
+\end{keytakeaways}

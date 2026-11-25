@@ -1,0 +1,493 @@
+{
+  "rows": [
+    {
+      "ticker": "SPY",
+      "n_bars": 8514,
+      "first": "1993-01-29",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VTI",
+      "n_bars": 6399,
+      "first": "2001-06-15",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "IVV",
+      "n_bars": 6669,
+      "first": "2000-05-19",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "QQQ",
+      "n_bars": 6972,
+      "first": "1999-03-10",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "IWM",
+      "n_bars": 6664,
+      "first": "2000-05-26",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "RSP",
+      "n_bars": 5931,
+      "first": "2003-05-01",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "MDY",
+      "n_bars": 7943,
+      "first": "1995-05-04",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VUG",
+      "n_bars": 5742,
+      "first": "2004-01-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VTV",
+      "n_bars": 5742,
+      "first": "2004-01-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "MGK",
+      "n_bars": 4758,
+      "first": "2007-12-27",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "MGY",
+      "n_bars": 2365,
+      "first": "2017-06-29",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "EFA",
+      "n_bars": 6349,
+      "first": "2001-08-27",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "EEM",
+      "n_bars": 5943,
+      "first": "2003-04-14",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VEA",
+      "n_bars": 4865,
+      "first": "2007-07-26",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VWO",
+      "n_bars": 5463,
+      "first": "2005-03-10",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "ACWI",
+      "n_bars": 4696,
+      "first": "2008-03-28",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "SPDW",
+      "n_bars": 4928,
+      "first": "2007-04-26",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLK",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLF",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLE",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLV",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLI",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLY",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLP",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLU",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLB",
+      "n_bars": 7024,
+      "first": "1998-12-22",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLRE",
+      "n_bars": 2799,
+      "first": "2015-10-08",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "XLC",
+      "n_bars": 2121,
+      "first": "2018-06-19",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "MTUM",
+      "n_bars": 3423,
+      "first": "2013-04-18",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VLUE",
+      "n_bars": 3423,
+      "first": "2013-04-18",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "QUAL",
+      "n_bars": 3360,
+      "first": "2013-07-18",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "USMV",
+      "n_bars": 3796,
+      "first": "2011-10-20",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "SIZE",
+      "n_bars": 3423,
+      "first": "2013-04-18",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "SPHD",
+      "n_bars": 3539,
+      "first": "2012-10-26",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "USSG",
+      "n_bars": 1941,
+      "first": "2019-03-08",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "EFV",
+      "n_bars": 5360,
+      "first": "2005-08-05",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "AVUV",
+      "n_bars": 1801,
+      "first": "2019-09-26",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "SFY",
+      "n_bars": 1917,
+      "first": "2019-04-11",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "DEM",
+      "n_bars": 4874,
+      "first": "2007-07-13",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "SHY",
+      "n_bars": 6121,
+      "first": "2002-07-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "IEF",
+      "n_bars": 6121,
+      "first": "2002-07-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "TLT",
+      "n_bars": 6121,
+      "first": "2002-07-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "BIL",
+      "n_bars": 4905,
+      "first": "2007-05-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "SHV",
+      "n_bars": 5000,
+      "first": "2007-01-11",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "BND",
+      "n_bars": 4940,
+      "first": "2007-04-10",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "LQD",
+      "n_bars": 6121,
+      "first": "2002-07-30",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "HYG",
+      "n_bars": 4939,
+      "first": "2007-04-11",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "JNK",
+      "n_bars": 4774,
+      "first": "2007-12-04",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "TIP",
+      "n_bars": 5779,
+      "first": "2003-12-05",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "MUB",
+      "n_bars": 4834,
+      "first": "2007-09-10",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VCIT",
+      "n_bars": 4277,
+      "first": "2009-11-23",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VGLT",
+      "n_bars": 4250,
+      "first": "2010-01-04",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "BNDX",
+      "n_bars": 3391,
+      "first": "2013-06-04",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "GLD",
+      "n_bars": 5539,
+      "first": "2004-11-18",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "IAU",
+      "n_bars": 5491,
+      "first": "2005-01-28",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VNQ",
+      "n_bars": 5575,
+      "first": "2004-09-29",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "VNQI",
+      "n_bars": 4041,
+      "first": "2010-11-01",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "DBC",
+      "n_bars": 5234,
+      "first": "2006-02-06",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "PDBC",
+      "n_bars": 3029,
+      "first": "2014-11-07",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "DBMF",
+      "n_bars": 1899,
+      "first": "2019-05-08",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    },
+    {
+      "ticker": "RINF",
+      "n_bars": 3739,
+      "first": "2012-01-12",
+      "last": "2026-11-24",
+      "status": "ok",
+      "detail": ""
+    }
+  ],
+  "failures": []
+}

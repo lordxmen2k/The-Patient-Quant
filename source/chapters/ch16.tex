@@ -1,0 +1,152 @@
+% =====================================================================
+%  Chapter 16 — Look-Ahead: The Five Ways to Cheat
+% =====================================================================
+
+\chapter{Look-Ahead: The Five Ways to Cheat}
+\label{ch:look-ahead}
+
+A backtest that uses information the investor could not have had is not a
+weak backtest. It is a different object from the one it claims to be, and
+no amount of statistical care elsewhere repairs it. This chapter enumerates
+the five ways it happens in a system like this one, states the mechanism
+by which the book prevents each, and identifies the one that the book
+cannot fully prevent.
+
+\section{One: the shifted target}
+
+The first is the subtlest and the most common in home-built systems. A
+trailing rolling product looks like a forward return, because the index
+runs forwards, and a system trained on it learns to predict the past.
+
+The defence is the shift described in Chapter 15, and the test is
+arithmetic: the target at row \(t\) must equal the realised return between
+\(t\) and \(t+h\), and must be \emph{unavailable} at \(t\). The book
+enforces this in the training-set construction of Chapter 17, where the
+rows used to fit the model at date \(t\) are restricted to those with
+\(s + h \le t\).
+
+\section{Two: the survivorship-adjusted universe}
+
+The second is the universe. A backtest that holds a fund which did not
+exist yet, or that had been liquidated, has made an error of the same kind
+as the first, in the cross-section rather than in the time series.
+
+The book's defence is structural: the eligible set at date \(t\) is the set
+of funds with a finite price on \(t\), and no allocation can be made to any
+other fund. The live window of every fund is reported in Appendix A so
+that the claim can be checked rather than trusted.
+
+\section{Three: the revised series}
+
+The third is the macro trap of Chapter 12. A macroeconomic series that has
+been revised since the formation date carries information the investor did
+not have. The exposure is largest for series that are revised
+\emph{quietly} --- employment, GDP, and anything derived from them --- and
+it is invisible in the results, because the revised series makes the
+historical relationship look better than it was.
+
+The book's defence is to use no revised series at all. Where a macro
+quantity is wanted it is proxied from the price series, which is never
+revised. The cost is a narrower feature set, and Chapter 14 states it.
+
+\section{Four: the whole-sample statistic}
+
+The fourth is the subtlest of the leaks that survive the obvious defences.
+Any statistic computed over the whole sample --- a mean, a standard
+deviation, a regression coefficient, a correlation --- carries information
+about the future into the past, because the future is part of the sample.
+
+The book's defences are specific. Feature standardisation is computed per
+date, on the cross-section that exists on that date. The covariance matrix
+is estimated from a trailing window only. The model is refitted at every
+formation date on the data available at that date. And the parameter
+estimates themselves --- the shrinkage intensity, the ensemble weights ---
+are computed from realised outcomes only, with the ensemble's horizon-aware
+scoring ensuring that a member's score at date \(t\) uses an outcome that
+was realised by \(t\) and not later.
+
+That last one is worth a paragraph of its own, because it is the leak that
+a Bayesian ensemble is most likely to have. A member with a three-month
+horizon produces a forecast at date \(s\) whose outcome is realised at
+\(s+3\). If the ensemble scored that member using the outcome on the date
+the forecast was \emph{made}, the member would be scored on the future.
+The book's scoring rule uses, at date \(t\), only the forecast made at
+\(t - h\) for a member with horizon \(h\), whose outcome is realised
+exactly at \(t\). A member with a one-month horizon and a member with a
+three-month horizon are therefore both scored on outcomes that were
+available at the moment of scoring.
+
+\section{Five: the researcher, not the code}
+
+The fifth is not a bug. It is the one the book cannot prevent, and it is
+the reason Chapter 4 exists.
+
+A look-ahead leak that is introduced by a person --- by choosing the
+feature set after seeing the results, by choosing the start date after
+seeing the results, by choosing which configuration to report --- is
+invisible to every code-level defence. No amount of careful implementation
+will stop it.
+
+The book's defences against it are procedural, and they are the ones
+listed in Chapter 4: the trial family is declared before the test and its
+size published; the ablations and the sizing variants are in the family
+and not only the configurations that might work; the window sensitivity is
+reported rather than a single window; and the result is reported whatever
+it is, including a null.
+
+\begin{takeaway}[The five leaks]
+\begin{enumerate}
+\item The unshifted target: the model trained on a trailing product.
+\item The survivorship-adjusted universe: holding a fund that did not
+exist.
+\item The revised macro series: information that was published later.
+\item The whole-sample statistic: a mean, a scale or a coefficient
+computed over the entire record.
+\item The researcher: a choice of feature set, window or configuration
+made after seeing the answer.
+\end{enumerate}
+\end{takeaway}
+
+\section{The one the book cannot fully prevent}
+
+The fifth is not fully preventable and it is worth being honest about how
+much of the book's own confidence rests on it.
+
+The book is written by a machine that has read the literature. The
+features it uses --- momentum with a skip, reversal, volatility, trend
+shape, drawdown state, beta, correlation, illiquidity --- are the
+features a reader who has read the same literature would choose. That is
+not independence. The book is not discovering the feature set from
+scratch; it is re-implementing a small, well-known set of ideas and asking
+whether the resulting system, built honestly and evaluated honestly, does
+anything.
+
+This is not a fatal objection, for two reasons.
+
+The first is that the literature's features are the ones that survived
+replication testing, and Jensen, Kelly and Pedersen's finding is that most
+published factors do replicate. Using them is the rational response to
+what is known, not a form of cheating.
+
+The second is that the book's claim is not about the feature set at all.
+The claim is about the \emph{architecture}: a stated strategic allocation
+that the machine cannot touch, a bounded tilt, a posterior that prices its
+own uncertainty, a risk governor, a tax engine, and an evaluation that
+subtracts the selection effect. A reader who replaced the twelve features
+with their own would keep the architecture, and the book's conclusions
+about the architecture would survive. The conclusions about the feature
+set would not, and the book does not make any that would not survive.
+
+\begin{keytakeaways}
+\item The five leaks are the unshifted target, the survivorship-adjusted
+universe, the revised macro series, the whole-sample statistic, and the
+researcher.
+\item The first four are prevented structurally and each defence is stated
+where it is made.
+\item The fifth cannot be prevented by code; it is prevented procedurally,
+by declaring the trial family before the test and reporting the result
+whatever it is.
+\item The book's own feature set is not independent of the literature, and
+the book's claim is about the architecture rather than about the
+features.
+\end{keytakeaways}

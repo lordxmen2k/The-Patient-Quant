@@ -1,0 +1,162 @@
+% =====================================================================
+%  Chapter 19 — Online Bayesian Model Averaging
+% =====================================================================
+
+\chapter{Online Bayesian Model Averaging}
+\label{ch:ensemble}
+
+The book's model set has twelve members. This chapter explains how they
+are combined, why the combination is done online rather than in one pass,
+and why the combination is where the book's most important number is
+produced.
+
+\section{Why twelve, and not one}
+
+Twelve members is three feature sets --- the full set, a trend-only set,
+and a risk-only set --- crossed with two horizons and two prior
+strengths. The crossing is not decoration. Each factor is a real
+hypothesis:
+
+\textbf{The feature set} is a hypothesis about where the signal is. The
+full set says the signal is in the joint behaviour of price and volume.
+The trend set says it is in the shape of the price path. The risk set says
+it is in the risk characteristics of the fund. These are genuinely
+different claims, and a book that tested only one of them would be making
+a claim about the whole subject from one experiment.
+
+\textbf{The horizon} is a hypothesis about the speed of the signal, as
+Chapter 15 set out.
+
+\textbf{The prior strength} is a hypothesis about how much the data should
+be allowed to move the coefficients, and it interacts with the horizon: a
+stronger prior matters more when the training set is small, which happens
+at short horizons and in the early years.
+
+Twelve members is also a *count*, and the count is a liability. Every
+member is a trial, and Chapter 22's machinery exists to price that
+liability. The book does not claim twelve is optimal; it claims that
+twelve is the number of things actually tried, and that the number is
+reported.
+
+\section{Combining models online}
+
+The combination is an online Bayesian model average. At each formation
+date \(t\), every member produces a forecast, each member is scored
+against the outcome that has just become known, and the members are
+weighted in proportion to the exponential of their accumulated score.
+
+The scoring rule for member \(m\) at date \(t\) uses the standardised
+forecast error:
+\begin{equation}
+z_{i,m,t} = \frac{y_{i,t} - \mu_{i,m,t}}{\sqrt{v_{i,m,t}}},
+\qquad
+\ell_{m,t} = \frac{1}{N_t}\sum_{i} -\frac{1}{2}z_{i,m,t}^2 ,
+\end{equation}
+averaged over the cross-section. This is a proper scoring rule: a member
+whose forecasts are calibrated scores about \(-1/2\) on average whether or
+not it has skill, and a member that is systematically overconfident scores
+worse than one that is appropriately uncertain. The rule therefore
+rewards calibration first and skill second, which is the right order for
+a system whose purpose is to size positions.
+
+The horizon-aware part is the critical detail. A member with horizon \(h\)
+produces a forecast at date \(s\) whose outcome is realised at \(s+h\). At
+date \(t\), the score of that member uses the forecast made at \(t-h\),
+because that is the forecast whose outcome is realised exactly now. The
+book implements this by construction: the score is attached to the
+formation date \(t-h\), and it becomes available to the ensemble only at
+\(t\).
+
+\begin{takeaway}[The rule that must not be broken]
+A member's score at date \(t\) may use only an outcome that was realised
+by \(t\). For a member with horizon \(h\), that means the forecast made at
+\(t-h\). Using the forecast made at \(t\) and scoring it against the
+outcome at \(t\) would let the ensemble weight itself on the future, and
+the resulting equity curve would be a fiction.
+\end{takeaway}
+
+\section{Why the score is discounted}
+
+The score is accumulated with an exponential discount:
+\begin{equation}
+L_{m,t} = \delta\, L_{m,t-1} + \ell_{m,t},
+\qquad
+\delta = 2^{-1/H},
+\end{equation}
+where \(H\) is a half-life in months and the book uses \(H = 60\) by
+default.
+
+Two arguments justify the discount, and they are different.
+
+The first is statistical. The score is an average over the cross-section
+of a standardised error, and the cross-sectional average of a squared
+standardised error has expectation one when the member is calibrated.
+Summing it over hundreds of months accumulates the noise in that average
+as if it were evidence, and the difference between two members' sums is
+dominated by luck rather than by skill. The discount bounds the effective
+sample size of the comparison.
+
+The second is economic, and it is the more interesting one. Chapter 3
+documented that published factor returns decay: the return to a signal
+falls once it is widely known, because the arbitrage that pushed it up
+exhausts itself. The same thing happens to a model built on price data.
+A member that was excellent five years ago may be worthless now, and an
+ensemble that remembers its whole record will weight it as though it were
+still excellent. The half-life is a statement about how fast the book
+believes a model's edge can change.
+
+The half-life is a parameter, and parameters that can be chosen are
+parameters that can be overfitted. It is therefore in the trial family:
+the book runs the whole system with a half-life of twenty-four months and
+with one of a hundred and twenty, alongside the default sixty, so that the
+reader can see what the choice is worth.
+
+\section{From the weights to the combined forecast}
+
+With weights \(w_{m,t}\) summing to one, the combined posterior mean for
+fund \(i\) is the weighted average of the members' means:
+\begin{equation}
+\mu_{i,t} = \sum_m w_{m,t}\,\mu_{i,m,t}.
+\end{equation}
+
+The combined posterior variance is where the interesting part is. By the
+law of total variance,
+\begin{equation}
+v_{i,t} = \underbrace{\sum_m w_{m,t}\,v_{i,m,t}}_{\text{within}}
+          + \underbrace{\sum_m w_{m,t}\left(\mu_{i,m,t} - \mu_{i,t}\right)^2}_{\text{between}} .
+\end{equation}
+
+The first term is the members' own uncertainty, averaged. The second is
+the disagreement between the members, and it is the term that does the
+architectural work of this book.
+
+If the members agree, the between term is small, the combined forecast is
+confident, and the portfolio layer is willing to tilt. If the members
+disagree --- because one of them is reading the same price path as a trend
+and another is reading it as risk --- the between term is large, the
+combined forecast is uncertain, and the Kelly solve of Chapter 26
+shrinks the position toward the stated policy.
+
+The ensemble's own weights over the record are shown in \figref{fig:model-weights}. No configuration ever dominates, and the weights move slowly.
+
+This is the sentence the book has been building towards: \emph{the
+machine-learning layer's real job is to estimate the posterior over the
+edge, and the disagreement between models is itself information about how
+much edge there is.} A model that reported only a point forecast and no
+uncertainty would be a different system, and a worse one --- not because
+it would be wrong, but because it would not know that it was wrong.
+
+\begin{keytakeaways}
+\item Twelve members, three feature sets by two horizons by two prior
+strengths, each a real hypothesis and each a trial whose count is
+published.
+\item The scoring rule is a proper scoring rule on the standardised
+forecast error, applied horizon-aware so that no member is ever scored on
+an outcome that had not yet been realised.
+\item The score is discounted with a sixty-month half-life, because
+accumulated noise otherwise masquerades as skill and because the edge
+itself decays.
+\item The combined variance carries a between-model term, and that term is
+what makes the portfolio shrink toward the policy when the members
+disagree.
+\end{keytakeaways}

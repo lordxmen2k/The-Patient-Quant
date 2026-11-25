@@ -1,0 +1,154 @@
+% =====================================================================
+%  Chapter 13 — The Universe: Sixty-One Funds and Their Live Windows
+% =====================================================================
+
+\chapter{The Universe: Sixty-One Funds and Their Live Windows}
+\label{ch:universe}
+
+The universe is a deliberately small and deliberately unglamorous thing:
+sixty-one exchange-traded funds, all of them US-listed, all of them
+buyable with a few hundred dollars, none of them leveraged, inverse,
+synthetic or exotic. This chapter sets it out, shows what it can and
+cannot contain at each point in time, and argues for the restrictions.
+
+\section{The list}
+
+The universe is grouped into five sleeves, and the grouping is the
+book's investment taxonomy as well as its allocation taxonomy.
+
+\textbf{United States equity (eleven funds).} A broad S\&P 500 tracker, a
+total-market tracker, a second S\&P 500 tracker, a large-cap growth
+tracker, a small-cap tracker, an equal-weight tracker, a mid-cap tracker,
+and four growth/value pairs from two providers.
+
+\textbf{International equity (six funds).} Developed and emerging markets
+from two providers, an all-country developed tracker, and two all-country
+trackers with different breadth.
+
+\textbf{Sector equity (eleven funds).} The eleven sector funds of the
+Select Sector SPDR family: technology, financials, energy, health care,
+industrials, consumer discretionary, consumer staples, utilities,
+materials, real estate and communication services.
+
+\textbf{Factor (eleven funds).} Momentum, value, quality, minimum
+volatility, size, high dividend, an environmental screen, developed-market
+value, and two more.
+
+\textbf{Bonds (fourteen funds).} Treasuries at three maturities, three
+short-bill and cash vehicles, an aggregate bond fund, four credit funds
+across the investment-grade and high-yield divide, inflation-protected
+bonds, a municipal fund, and a non-US aggregate fund.
+
+\textbf{Real assets and alternatives (eight funds).} Two gold vehicles, two
+real-estate funds, one international real-estate fund, two broad commodity
+funds, a managed-futures fund, and a real-estate income fund.
+
+Two tickers that were on the original list, a cryptocurrency product and a
+European equity product, do not exist in the vendor's data and were
+dropped rather than substituted. The universe is what it is: sixty-one
+funds.
+
+\section{What the universe looks like over time}
+
+The live window of each fund is not a detail. It is the difference between
+a backtest and a simulation of something that could have happened.
+
+The panel covers 407 months, from January 1993 to November 2026. The
+number of funds with a live price on the panel changes as follows: one
+fund in 1993, by which the panel begins; twelve by 1999; thirty by 2005;
+thirty-nine by 2007; fifty-three by 2013; and all sixty-one from 2019.
+
+The live window of every fund is shown in \figref{fig:live}, and the number of funds with a price on the panel by year is the record's own first fact.
+
+This has three consequences that run through the whole book.
+
+The first is that the early record is a record of a \emph{narrower}
+portfolio. In 1994 the investable universe was one fund. The book's
+strategic allocation is therefore scaled to what exists: a sleeve with no
+live fund has its weight redistributed over the sleeves that do, and the
+system holds more cash than the policy would suggest because the policy's
+diversification is not yet available. This is not a modelling choice; it
+is what a real investor in 1994 faced.
+
+The second is that the model's cross-section is small early on. A
+cross-sectional regression needs more than one asset to have any
+dispersion in the dependent variable, and needs more still to have a
+usable one. The book's model requires a minimum number of training rows
+and a minimum number of months before it will produce a forecast at all,
+and in the early years it produces nothing. The system then holds the
+policy.
+
+The third is that the \emph{record of the strategy} and the \emph{record of
+the universe} are different objects, and the book reports the live window
+of every fund so that a reader can see exactly which strategy was being
+run when.
+
+\section{Why the restrictions are restrictions}
+
+Every restriction in the universe is doing work.
+
+\textbf{No individual stocks.} A book about a single investor who might
+buy a hundred shares of something is a different book. The advantage of
+the ETF universe is that every position is liquid, that every position has
+a published expense ratio, that every position is a known factor or a
+known sector, and that the diversification is real rather than assumed.
+The cost is that the cross-section is small and the signals are
+low-resolution.
+
+\textbf{No options, futures, or crypto.} The owner's scope, and a scope
+that suits the thesis. The whole argument of Parts V and VI is that the
+protection layer works by reducing exposure and holding cash, and it works
+that way because there are no derivatives to hedge with. A book that
+introduced a hedging overlay would be testing a different system.
+
+\textbf{No leveraged or inverse products.} These would make the
+volatility story artificial: a levered fund's realised volatility is a
+designed constant times the index's, which would make the governor's
+behaviour trivially predictable and the risk estimates meaningless.
+
+\textbf{Several funds tracking the same index.} The universe deliberately
+contains near-duplicates --- three S\&P 500 trackers, two total-market
+trackers, two gold funds, two broad commodity funds, three Treasury
+funds. This is deliberate for a specific reason: the model's job inside a
+sleeve is to choose among funds that are close substitutes, and a universe
+with only one fund per index would make the tilt meaningless. It also
+raises the cost of a naive equal-weight allocation, which is the right
+baseline.
+
+\section{The cost of the universe}
+
+The universe's expense ratios are real and are reported in full in
+Appendix C. The mean across the sixty-one funds is a little under twenty
+basis points a year; the cheapest are at three and the most expensive at
+eighty-five. Those are numbers the reader already pays if they hold any
+of these funds, and they are already inside the return series.
+
+The universe's diversification is not complete either. There is no
+emerging-market fund beyond the two broad ones, no inflation-linked
+outside the United States, no private credit, no real estate outside the
+two funds, no infrastructure, no gold beyond the two vehicles. A reader
+whose circumstances permit more would extend the universe and would have
+to re-run the whole pipeline; the book's code is arranged so that
+extending the universe is a matter of adding a row to a list and re-running
+the fetch, the panel and the system.
+
+\begin{takeaway}[Why sixty-one]
+The universe is restricted so that the system measures what it claims to
+measure. Within the restriction it is deliberately broad enough for the
+tilt to be meaningful, and it contains near-duplicate funds on purpose, so
+that the equal-weight comparator is a serious alternative rather than a
+straw man.
+\end{takeaway}
+
+\begin{keytakeaways}
+\item Sixty-one funds in five sleeves: eleven US equity, six international
+equity, eleven sector, eleven factor, fourteen bonds, eight real assets
+and alternatives.
+\item The live cross-section grows from one fund in 1993 to sixty-one in
+2019, and the book's allocation is scaled to what exists at each date.
+\item The restrictions --- no stocks, no derivatives, no leverage --- are
+what make the protection mechanism in Part V a real mechanism rather than
+a hedge overlay.
+\item Near-duplicate funds are included on purpose, so that the equal-weight
+comparator is a genuine alternative.
+\end{keytakeaways}

@@ -1,0 +1,62 @@
+ticker,expense_ratio,inception_date,total_net_assets,annual_turnover,dividend_yield,category,family
+ACWI,0.0032,2008-03-26,263229030000.00003,0.03,0.0,Global Large-Stock Blend,iShares
+AVUV,0.0025,2019-09-24,2835020000.0,0.06,0.0,Small Value,Avantis Investors
+BIL,0.0013519999,2007-05-25,0.0,6.35,,Ultrashort Bond,State Street Investment Management
+BND,0.00029999999,2007-04-03,0.0,0.38,,Intermediate Core Bond,Vanguard
+BNDX,0.0007,2013-05-31,0.0,0.23,0.0,Global Bond-USD Hedged,Vanguard
+DBC,0.0085,2006-02-03,0.0,0.0,,Commodities Broad Basket,Invesco
+DBMF,0.0085,2019-05-07,459514840000.0,0.0,0.0,Systematic Trend,iM Global Partner Fund Management
+DEM,0.0063,2007-07-13,20018370000.0,0.47,,Diversified Emerging Mkts,WisdomTree
+EEM,0.0072000003,2003-04-07,117486600000.0,0.12,,Diversified Emerging Mkts,iShares
+EFA,0.0032,2001-08-14,74981250000.0,0.04,0.017831106,Foreign Large Blend,iShares
+EFV,0.0031,2005-08-01,71259580000.0,0.039,0.0,Foreign Large Value,iShares
+GLD,0.004,2004-11-18,0.0,0.0,0.0,Commodities Focused,State Street Investment Management
+HYG,0.0049,2007-04-04,0.0,0.22,,High Yield Bond,iShares
+IAU,0.0025,2005-01-21,0.0,0.0,0.0,Commodities Focused,iShares
+IEF,0.0015,2002-07-22,0.0,0.53,,Long Government,iShares
+IVV,0.00029999999,2000-05-15,504559060000.0,0.03,0.007840219,Large Blend,iShares
+IWM,0.0019,2000-05-22,2955280000.0,0.18,0.007590126,Small Blend,iShares
+JNK,0.004,2007-11-28,0.0,0.78,,High Yield Bond,State Street Investment Management
+LQD,0.0014,2002-07-22,0.0,0.16,,Corporate Bond,iShares
+MDY,0.0023,1995-05-04,10689600000.0,0.1577,0.0105167255,Mid-Cap Blend,State Street Investment Management
+MGK,0.0005,2007-12-17,1352111500000.0,0.14,,Large Growth,Vanguard
+MGY,,,,,0.03026906,,
+MTUM,0.0015,2013-04-16,257177270000.0,1.16,0.0,Large Blend,iShares
+MUB,0.0005,2007-09-07,0.0,0.11,,Muni National Interm,iShares
+PDBC,0.0058999998,2014-11-07,0.0,0.18620001,0.0,Commodities Broad Basket,Invesco
+QQQ,0.0018000001,1999-03-10,763952500000.0,0.0,0.0027187685,Large Growth,Invesco
+QUAL,0.0015,2013-07-16,426535660000.0,0.21,,Large Blend,iShares
+RINF,0.003,2012-01-10,0.0,0.0,0.0,Nontraditional Bond,ProShares
+RSP,0.002,2003-04-24,49529450000.0,0.27,,Large Blend,Invesco
+SFY,0.0005,2019-04-10,583134700000.0,0.0,0.0,Large Growth,SoFi
+SHV,0.0015,2007-01-05,0.0,1.15,0.0,Ultrashort Bond,iShares
+SHY,0.0015,2002-07-22,0.0,0.57,,Short Government,iShares
+SIZE,0.0015,2013-04-16,53050520000.0,0.23,,Mid-Cap Blend,iShares
+SPDW,0.00029999999,2007-04-20,54532360000.0,0.03,0.0,Foreign Large Blend,State Street Investment Management
+SPHD,0.003,2012-10-18,47822790000.0,0.57,,Large Value,Invesco
+SPY,0.000945,1993-01-22,504496280000.0,0.03,0.007838957,Large Blend,State Street Investment Management
+TIP,0.0018000001,2003-12-04,0.0,0.22,,Inflation-Protected Bond,iShares
+TLT,0.0015,2002-07-22,0.0,0.18,0.026343493,Long Government,iShares
+USMV,0.0015,2011-10-18,140781690000.0,0.22,0.0,Large Blend,iShares
+USSG,0.00090000004,2019-03-06,524695699999.99994,0.07,0.0,Large Blend,Xtrackers
+VCIT,0.00029999999,2009-11-19,0.0,0.73,,Corporate Bond,Vanguard
+VEA,0.00029999999,2007-07-20,51325770000.0,0.04,,Foreign Large Blend,Vanguard
+VGLT,0.00029999999,2009-11-19,0.0,0.16,,Long Government,Vanguard
+VLUE,0.0015,2013-04-16,129724120000.0,0.3,0.0,Large Value,iShares
+VNQ,0.0013,2004-09-23,32878670000.0,0.07,,Real Estate,Vanguard
+VNQI,0.0011999999,2010-11-01,5751630000.0,0.1,,Global Real Estate,Vanguard
+VTI,0.00029999999,2001-05-24,325625500000.0,0.03,,Large Blend,Vanguard
+VTV,0.00029999999,2004-01-26,174224440000.0,0.08,0.013889523,Large Value,Vanguard
+VUG,0.00029999999,2004-01-26,1142598600000.0,0.12,,Large Growth,Vanguard
+VWO,0.00059999997,2005-03-04,48013020000.0,0.06,0.020952381,Diversified Emerging Mkts,Vanguard
+XLB,0.0008,1998-12-16,45508030000.0,0.29,0.027855711,Natural Resources,State Street Investment Management
+XLC,0.0008,2018-06-18,328545940000.0,0.4,0.0,Communications,State Street Investment Management
+XLE,0.0008,1998-12-16,170307440000.0,0.1,0.03607817,Equity Energy,State Street Investment Management
+XLF,0.0008,1998-12-16,224448300000.0,0.06,0.010422282,Financial,State Street Investment Management
+XLI,0.0008,1998-12-16,93411670000.0,0.03,0.0076321783,Industrials,State Street Investment Management
+XLK,0.0008,1998-12-16,940646440000.0,0.05,,Technology,State Street Investment Management
+XLP,0.0008,1998-12-16,121729350000.0,0.08,0.019141404,Consumer Defensive,State Street Investment Management
+XLRE,0.0008,2015-10-07,45983490000.0,0.08,,Real Estate,State Street Investment Management
+XLU,0.0008,1998-12-16,50840250000.0,0.02,0.045013852,Utilities,State Street Investment Management
+XLV,0.0008,1998-12-16,218568110000.0,0.02,,Health,State Street Investment Management
+XLY,0.0008,1998-12-16,276501100000.0,0.1,,Consumer Cyclical,State Street Investment Management

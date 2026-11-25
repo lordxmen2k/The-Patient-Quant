@@ -1,0 +1,209 @@
+% =====================================================================
+%  Chapter 1 — The Investor and the Machine
+% =====================================================================
+
+\chapter{The Investor and the Machine}
+\label{ch:investor}
+
+This book is about one investor managing one portfolio with money that
+belongs to that investor. Not a fund. Not an endowment with a quarterly
+mark-to-model and a staff of twenty. Not a research division with a mandate
+to publish. One person, one account, one set of decisions, taken over
+decades, with a broker on the other end of them.
+
+That constraint is the whole design. It is what makes the problem tractable
+and what makes the answer unsatisfying, and a book that pretended otherwise
+would be about a different problem. Let us be precise about what it buys and
+what it costs.
+
+\section{What one investor buys}
+
+A single investor faces no capacity constraint in any sense that matters.
+The literature on implementation shortfall and on the cost of exploiting
+anomalies is dominated by institutional results: roughly a trillion dollars
+of live data across nineteen markets from 1998 to 2011, actual trading costs
+found to be less than a tenth of prior estimates, and a clear ordering of
+which anomalies survive the costs --- value and momentum scale, size does
+not, and short-horizon reversals are the most capacity-constrained of all.
+Those are the numbers of a pension fund trying to move a hundred million
+dollars without moving the price against itself. They are the wrong numbers
+for this reader.
+
+The reader of this book is trying to move perhaps fifty thousand dollars in a
+fund whose daily volume is measured in hundreds of millions, and who can
+trade in the first fifteen minutes of the session without moving a single
+basis point. In such a regime the marginal cost of a trade is the
+bid--ask spread and the commission, and nothing else. The economically
+significant frictions for this reader are not market impact at all. They are
+the tax code, the bid--ask spread, and the behavioural failure modes of the
+person doing the trading.
+
+This is an unusually favourable position, and it is worth being clear about
+how unusual. It means the book's central question is not \emph{can this
+signal be traded?} but \emph{can this signal be traded by one person, without
+a hedge fund?} That is a much narrower question, and it has a much better
+answer.
+
+\section{What one investor lacks}
+
+Three things.
+
+The first is \emph{diversification of judgement}. A fund with a research
+staff has several independent opinions about the same question, and when they
+disagree the disagreement is information. A single investor has one opinion,
+and the only way to check it is to look at the data --- which is exactly what
+this book spends two hundred pages on doing, and what the machine-learning
+layer is for.
+
+The second is \emph{the ability to separate signal from noise by
+construction}. When a professional's backtest fails, it is usually because
+they tried enough variants that one of them worked. The variants they tried
+were not recorded, so the failure is invisible. The single investor who
+follows this book is asked to do the opposite: to record every variant tried,
+to declare the family before the test, and to be prepared to publish the
+result even when it is that the machine adds nothing.
+
+The third is \emph{time}. Not the reader's patience --- this book is not
+asking anyone to watch a screen --- but the horizon over which a decision
+must pay for itself. A single investor in the accumulation phase has a
+twenty- to forty-year horizon and a fixed annual saving. A decision that
+reduces the probability of ruin over that horizon is worth more than a
+decision that raises the expected arithmetic return by a fraction of a
+percent, because the arithmetic return is paid once, at the end, and the
+ruin is paid whenever it happens.
+
+\begin{takeaway}[The three asymmetries]
+\begin{itemize}
+\item \textbf{Cost.} For one investor, capacity is not a constraint.
+Bid--ask spread and commission are the whole of the friction.
+\item \textbf{Data.} For one investor, overfitting is the dominant risk.
+There is no second opinion to catch it.
+\item \textbf{Horizon.} For one investor with a long horizon, the variance
+of the \emph{terminal} wealth, not the mean, is the thing to minimise.
+\end{itemize}
+\end{takeaway}
+
+\section{The question, stated precisely}
+
+The owner's question, in the form this book answers it, is:
+
+\begin{quote}
+\textit{Is there a machine-learning procedure that a single investor can
+implement, that makes money and protects principal at the same time, and
+that can be evaluated honestly enough that the investor knows which of those
+two it is actually doing?}
+\end{quote}
+
+Three clauses, and each one is a trap.
+
+\emph{Makes money} is ambiguous in a way that matters. It could mean the
+arithmetic mean return exceeds the market's, which is what an academic
+paper claims and what almost no live system delivers after costs. It could
+mean the geometric mean exceeds the benchmark's, which is the only version
+of the claim that a saver actually experiences, and which is strictly harder
+than the arithmetic version, because volatility is a cost. This book takes
+the geometric version. Every headline number in it is a compound annual
+growth rate, and no claim is made in terms of the arithmetic mean except
+where the arithmetic mean is the object of study.
+
+\emph{Protects principal} is ambiguous in a way that is worse, because it
+sounds like a claim that can be made and is usually made. Principal
+protection is not a property a portfolio has; it is a property of a
+distribution of outcomes, and every portfolio has one. What can be said
+is that the portfolio has a bounded worst case, a drawdown the investor
+can survive, and a recovery time the investor can wait out. Those are three
+quantities, they are computable, and they are the ones this book computes.
+
+\emph{Evaluated honestly} is the clause that decides whether the other two
+mean anything. A machine-learning strategy can be evaluated honestly only
+if the family of strategies tried is declared in advance, the data is free
+of look-ahead, the costs and taxes are charged, and the selection effect is
+subtracted from the result. Most published claims fail one or more of these
+four tests, and a large fraction fail all four.
+
+\section{Why the machine is the instrument and not the protagonist}
+
+There is a version of this book in which the machine does the work and the
+result is a handsome equity curve. That version is not available, for a
+reason that is now well established in the literature and that this book
+takes as its starting premise rather than as a controversy to be won.
+
+The replication evidence is not encouraging for the ambitious version.
+Jensen, Kelly and Pedersen, writing in the \emph{Journal of Finance} in
+2023, surveyed a large literature of asset-pricing tests, reimplemented
+hundreds of them, and found that a majority of published factors do
+replicate out of sample --- and that the failures that do occur are
+concentrated in a set of characteristics where replication is
+methodologically hard. They also found that the returns of factors that
+\emph{do} replicate have weakened over the past decade, and they made a
+sharper methodological point: the standard errors used to evaluate a new
+factor are too small, so that factors at the margin are being accepted at
+rates well above the nominal five per cent.
+
+McLean and Pontiff's result is the one that should govern a single
+investor's expectations. They took 97 variables with published predictive
+power, formed portfolios out of them, and then traded those portfolios
+after publication rather than before it. Returns fell by 26 per cent
+out of sample and by 58 per cent after publication, and 32 per cent of the
+decline was attributable to the trading itself --- to the costs and
+capacity of exploiting a signal that other people now know about.
+
+And Goyal, Welch and Zafirov, surveying 2022, found that more than a third
+of the predictors in the literature were no longer significant even
+in the original sample.
+
+\begin{commonmyths}
+\item \textbf{Myth: ``Machine learning finds signals that humans miss.''}
+Fact: what machine learning reliably finds is the subset of human-found
+signals that survive a large number of trials. The finding is about
+\emph{selection}, not about foresight.
+\item \textbf{Myth: ``If the backtest works, the strategy works.''}
+Fact: the backtest is the only place the strategy was ever tested. Every
+published backtest that was later traded has underperformed its own
+backtest; the median degradation reported in the literature is 26 per cent
+and the post-publication degradation is 58 per cent.
+\item \textbf{Myth: ``A more sophisticated model is a better model.''}
+Fact: a more sophisticated model has more ways to be wrong and more
+parameters to overfit. The sophistication that pays is the one that
+prices its own uncertainty, and Chapter 20 shows what that looks like.
+\end{commonmyths}
+
+\section{What this book therefore does}
+
+It builds one system, completely, and then takes it apart in front of the
+reader.
+
+Part I states the question and the evidence that bounds what any answer
+could look like. Part II sets out the six facts about long-horizon investing
+that any system must respect: the size of the premium, the sequence of
+returns, myopic loss aversion, the behavioural traps, the frictions, and
+the capacity position of a single investor. Part III builds the data layer
+from raw price series, with the live window of every fund recorded and the
+look-ahead traps named. Part IV builds the model layer from its objective
+function upwards --- no library, no black box --- and then builds the
+evaluation machinery that will be used to judge it. Part V builds the
+portfolio layer: a stated strategic policy that the machine is not allowed
+to touch, a bounded tilt inside each sleeve, and a risk governor. Part VI
+assembles and runs the whole thing, with the tax engine attached, and reports
+the result. Part VII reports what the result is worth.
+
+The result is not the one the owner asked for. The machine-learning layer
+adds very little to the strategic allocation and the risk governor, and the
+selection tests cannot distinguish the system's return from the benchmark's.
+The book says so, in the chapters where that is established, with the
+arithmetic shown. What replaces the promise of alpha is something smaller
+and more reliable: a procedure that produces a sensible portfolio, knows how
+little it knows, and shrinks its positions when the evidence is thin.
+
+\begin{keytakeaways}
+\item One investor, one portfolio, own money: capacity is not the binding
+constraint, overfitting is.
+\item ``Makes money'' means a geometric return after costs, taxes and
+selection; ``protects principal'' means a bounded drawdown, a survivable
+recovery time, and a stated worst twelve-month outcome.
+\item The literature that would license a confident machine-learning alpha
+does not exist: replication is partial, decay is documented, and a third of
+published predictors have already died in sample.
+\item The book therefore builds a system whose first job is to know what it
+does not know.
+\end{keytakeaways}

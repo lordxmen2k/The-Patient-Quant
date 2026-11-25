@@ -1,0 +1,145 @@
+% =====================================================================
+%  Chapter 33 — The Selection Tests
+% =====================================================================
+
+\chapter{The Selection Tests}
+\label{ch:selection-results}
+
+Chapter 22 built the four tests. This chapter applies them to the book's
+own family and reports what they say. They say that the system's return
+is not distinguishable from the benchmark's, and that the machinery of
+selecting among the family is, on this evidence, worse than a coin flip.
+
+\section{The family}
+
+The trial family has \numFamilySize{} members: \numModelConfigs{} model
+configurations, three ablations that turn each layer off, two Kelly
+fractions, two tilt scales, two volatility targets, two ensemble
+half-lives, and two alternative strategic policies.
+
+It is deliberately wide. A reality check over twelve near-identical
+model configurations would pass trivially and would mean nothing; a check
+over a family that includes \emph{turn the machine off} and \emph{use a
+completely different allocation} is a check that could fail.
+
+\section{What the tests say}
+
+\begin{center}
+\begin{tabular}{@{}P{1.72in}P{0.72in}P{2.30in}@{}}
+\toprule
+Test & Value & Reading \\
+\midrule
+Deflated Sharpe Ratio       & \numDSR{} & Not significant. The observed Sharpe is below the expected maximum for a family this size. \\
+DSR with implied trials     & \numDSRImplied{} & Not significant. The same conclusion on the correlated-trial correction. \\
+Probability of backtest overfitting & \numPBO{} & Above one half. The selection procedure is worse than a coin flip. \\
+White reality check         & p = \numRCP{} & No member of the family beats the index by more than chance. \\
+Hansen superior predictive ability & p = \numSPAP{} & The same conclusion, with the family reweighted by its own performance. \\
+Newey--West alpha against the index & \numAlphaT{} (p = \numAlphaP{}) & The excess return is \numAlpha{} a month, and is indistinguishable from zero. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{takeaway}[The verdict]
+None of the five tests finds evidence that the system beats the index, and
+the probability of backtest overfitting is above one half, which means the
+procedure of selecting among the family's members is actively unreliable
+on this evidence. The book reports this and does not reinterpret it.
+\end{takeaway}
+
+\section{Reading the probability of backtest overfitting}
+
+The PBO deserves more than a line, because it is the most informative of
+the five and the least familiar.
+
+The construction: split the record into eight contiguous sub-periods in
+every possible way --- \numPBOSplits{} splits --- and for each split,
+rank the \numPBOTrials{} family members by their Sharpe ratio on the first
+half, then see where the first-half winner lands in the second half's
+ranking. The statistic is the probability that it lands in the bottom
+half.
+
+The book's value is \numPBO{}, which is above one half. The probability
+that the in-sample winner is out-of-sample in the bottom half is
+\numPBOProb{}, which is below one half.
+
+The reading is unambiguous: selecting the configuration that worked best
+in one half of the record gives you a configuration that is, more likely
+than not, among the worse half on the other half of the record. The
+selection procedure is doing worse than chance.
+
+\section{Why the family is effectively one trial}
+
+The Deflated Sharpe Ratio's most striking input is the number of
+effectively independent trials, which the book computes from the family's
+own correlation matrix.
+
+The average pairwise correlation between the family's return series is
+\numAvgCorr{} --- the members produce nearly identical portfolios --- and
+the implied number of independent trials is therefore
+\numImpliedTrials{}, rather than the \numFamilySize{} members actually run.
+
+This has two consequences, and they pull in opposite directions.
+
+The first is that the Deflated Sharpe Ratio's penalty is smaller than a
+naive count would give. With a family of twenty-five near-identical
+members, the expected maximum Sharpe ratio under the null is
+\numSRZero{} --- and the book's observed Sharpe ratio is not above it. The
+Monte Carlo estimate of the same quantity, from twenty thousand simulated
+families, is \numSRZeroMonteCarlo{}.
+
+The second is the more important one, and it is a methodological point
+rather than a numerical one. \textbf{If the members of your research
+family all produce nearly the same portfolio, then you did not try
+twenty-five strategies; you tried one.} The trial count is a property of
+the strategies, not of the number of configurations that generate them.
+
+The family's spread against the index is shown in \figref{fig:family}.
+
+\section{What the alpha test says}
+
+The book's system earns an excess return over the index of \numAlpha{} a
+month --- about \numAlpha{} a month over \numAlphaMonths{} months --- with a
+HAC standard error of \numAlphaSE{}, giving a t-statistic of
+\numAlphaT{} and a p-value of \numAlphaP{}.
+
+The t-statistic is not close to significant, and the book would not claim
+it was even if it were. The relevant comparison is not with the critical
+value of a two-sided test at five per cent. It is with the critical value
+that the Deflated Sharpe Ratio implies, which is a much higher bar, and
+which this result does not reach.
+
+\section{What the selection tests do not say}
+
+Three things the reader should not take from this chapter.
+
+They do not say the system is worthless. They say the system's excess
+return is not \emph{distinguishable from zero}, which is a statement about
+what the evidence can distinguish, not about what is true. A real edge of
+half a percentage point a year would look exactly like this in a
+twenty-four-year record with a family of this size.
+
+They do not say the equal-weighted portfolio is better. The equal-weighted
+portfolio is a comparator, not a member of the family, and it is not
+subject to the selection tests. It earns more compound return and takes a
+deeper drawdown, and the reader must choose between those, which is a
+judgement and not a measurement.
+
+They do not say the architecture is wrong. The tests say that the
+\emph{prediction layer} does not contribute. They say nothing about the
+governor, whose contribution was positive in every one of the
+\numWindowCount{} starting windows in Chapter 31, because the governor
+makes no forecast and therefore generates no selection problem.
+
+\begin{keytakeaways}
+\item The Deflated Sharpe Ratio is \numDSR{}, the probability of backtest
+overfitting is \numPBO{}, and both the reality check and the superior
+predictive ability test return a p-value of one.
+\item The family's members are so similar that the implied number of
+independent trials is \numImpliedTrials{} rather than \numFamilySize{},
+and that is a methodological point rather than a technical one.
+\item The Newey--West alpha against the index is \numAlphaT{} with a
+p-value of \numAlphaP{}.
+\item The tests say the prediction layer contributes nothing
+distinguishable from zero; they say nothing about the governor, which
+makes no forecast.
+\end{keytakeaways}

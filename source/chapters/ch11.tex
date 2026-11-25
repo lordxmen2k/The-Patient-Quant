@@ -1,0 +1,131 @@
+% =====================================================================
+%  Chapter 11 — Capacity: Why One Investor Is an Advantage
+% =====================================================================
+
+\chapter{Capacity: Why One Investor Is an Advantage}
+\label{ch:capacity}
+
+Chapter 10 ended with the costs that apply to this reader. This chapter
+states the result that follows from their absence: a single investor
+occupies a position in the cost structure that no institution can occupy,
+and the advantage is large enough to change which strategies are worth
+running at all.
+
+\section{The institutional cost structure}
+
+Frazzini, Israel and Moskowitz's study of trading costs in factor
+strategies assembled roughly a trillion dollars of live data across
+nineteen markets from 1998 to 2011 and compared the realised trading costs
+of factor portfolios against the prior literature's estimates.
+
+Their headline result is that actual trading costs are less than a tenth
+of prior estimates. The prior estimates had been built from the visible
+market impact of large trades; the live data from institutional portfolios
+showed much smaller realised costs, because the portfolios traded far less
+than the estimates assumed and because much of the rebalancing could be
+done internally.
+
+Their second result is a ranking that matters enormously for what a single
+investor should run. The long-horizon value and momentum premia were
+highly scalable --- they can be traded in size without materially
+degrading the return. The short-horizon reversal premia were the most
+capacity-constrained: their returns fall fastest as capital is added,
+because the trade itself is the mechanism of the effect and it must be
+completed before the prices revert. The size factor sat in between, and
+the bet against beta was the most scalable of all.
+
+\section{Why the ranking reverses for one investor}
+
+For a single investor, none of this matters, and the reason is simply
+scale. A portfolio of fifty thousand dollars in a fund with a hundred
+million dollars of daily volume is 0.05 per cent of one day's trading.
+There is no market impact, there is no crowding, and there is no partial
+execution.
+
+But the interesting consequence is not that the single investor escapes
+the costs. It is that the single investor can run strategies that the
+institutional cost structure has made unviable, and can run them on a
+scale where the friction is simply the spread.
+
+Specifically:
+
+\begin{itemize}
+\item \textbf{Short-horizon signals become available.} The reversal
+effect that institutions cannot scale is available at a size where the
+spread cost is two basis points and the signal horizon is a week. This is
+not an opportunity the book takes up --- the book's horizon is monthly ---
+but it is the reason the single investor's constraint set is genuinely
+different from the institution's.
+\item \textbf{Implementation is a rounding error.} For an institution, the
+difference between a good and a bad implementation is worth more than the
+difference between a good and a bad model. For a single investor, the
+implementation cost is a fraction of a basis point a year and the model is
+everything. That is why this book spends five parts on the model.
+\item \textbf{The decay still applies.} McLean and Pontiff's decay finding
+splits into a cost component and a non-cost component. The single investor
+escapes the cost component and is fully exposed to the rest. A signal that
+has decayed because its participants crowded it is not re-energised by
+being small.
+\end{itemize}
+
+\section{The arithmetic of the position}
+
+It is worth being concrete about the size of the advantage, because it is
+the single most under-appreciated fact in the whole subject.
+
+Suppose a strategy has a gross expected excess return of \(\delta\) a year
+and a cost of \(c\) a year, where \(c\) is proportional to the square root
+of the capital deployed divided by the fund's average daily volume. For a
+fund with average daily volume \(V\) and a position of size \(A\), the
+square-root law gives an impact cost of order
+\begin{equation}
+c \approx \frac{\sigma_{\mathrm{day}}}{\sqrt{V}}\,
+              \frac{A}{V}\,\eta,
+\end{equation}
+with \(\eta\) a constant of order one and \(\sigma_{\mathrm{day}}\) the
+daily volatility.
+
+For a broad-market ETF with \(V\) of about five billion dollars and
+\(\sigma_{\mathrm{day}}\) of about 0.8 per cent, and a rebalancing
+requirement of turning over the whole portfolio four times a year, the
+impact cost for a fifty-thousand-dollar position works out at a
+concentration of a fraction of a basis point a year. The same calculation
+for a billion-dollar position in a five-hundred-million-dollar fund is
+three orders of magnitude larger per unit of capital, and the square-root
+law means that quadrupling the capital doubles the cost.
+
+\begin{takeaway}[The structural advantage]
+For one investor the friction is the spread; for the institution it is the
+square-root law applied to a large fraction of the market's daily volume.
+This is why the institutional literature's conclusions about which
+strategies are implementable do not transfer, and why the single investor's
+binding constraint is the quality of the forecast rather than the cost of
+acting on it.
+\end{takeaway}
+
+\section{The exception: the time constraint}
+
+There is one capacity-like constraint that a single investor has and an
+institution does not, and it is worth naming because it is easy to forget.
+
+An institution can hold a strategy for a decade while the capacity
+constants change around it. A single investor who is saving for a house
+in four years, or who is fifty-eight and drawing down, has a horizon that
+may be shorter than the strategy's own convergence time. Chapter 8
+established that the evaluation period changes the premium the investor
+can harvest; this is the mirror image, and it is the reason the book's
+final chapter asks the reader to state their horizon before reading any of
+the allocation advice.
+
+\begin{keytakeaways}
+\item Actual institutional trading costs are less than a tenth of prior
+estimates, and the value and momentum premia are the most scalable.
+\item For one investor the spread is the entire friction, so strategies
+that institutions cannot scale become available, and the binding
+constraint becomes forecast quality rather than implementation.
+\item The single investor does not escape the post-publication decay; only
+the cost component of it.
+\item The one capacity-like constraint the single investor has and the
+institution does not is their own horizon, which may be shorter than the
+strategy's convergence time.
+\end{keytakeaways}

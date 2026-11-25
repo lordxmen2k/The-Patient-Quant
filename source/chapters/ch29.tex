@@ -1,0 +1,147 @@
+% =====================================================================
+%  Chapter 29 — The Tax Engine
+% =====================================================================
+
+\chapter{The Tax Engine}
+\label{ch:tax-engine}
+
+The book runs two portfolios in parallel: one taxable, one tax-exempt,
+with identical weight paths at every month end. This chapter describes
+the engine that produces the difference between them, and the two rules
+in it that make the difference behave correctly.
+
+\section{The account model}
+
+An account holds cash and a set of \emph{lots}. A lot is a purchase of a
+quantity of one security, with an acquisition date and a cost basis. When
+the portfolio is sold, the engine disposes of lots first-in-first-out, and
+each disposal produces a gain or loss, a holding period, and a tax.
+
+The account also holds two running balances: the cumulative capital loss
+position, which carries forward and offsets capital gains, and the
+cumulative net capital loss deducted against ordinary income, which is
+capped at \$3,000 a year.
+
+At each year end, the engine settles: it computes the year's realised
+gains and losses, applies the capital-loss offset rule, computes the tax
+on long-term gains at the preferential rate, on short-term gains at the
+ordinary rate, and on qualified dividends at the preferential rate plus
+the net investment income tax, deducts the capital loss against ordinary
+income up to the cap, carries the rest forward, and pays.
+
+The two accounts run the same weights and the same trades. The tax-exempt
+account does everything except pay tax. The difference between their
+values at any date is therefore the accumulated cost of the tax code, and
+it is a clean measurement of exactly one thing.
+
+\section{Rule one: the holding period}
+
+A lot held for more than one year is long-term; one year or less is
+short-term. The engine computes the holding period from the acquisition
+date to the disposal date.
+
+The rule interacts with the wash-sale machinery in a way that is easy to
+get wrong and that the engine handles explicitly: when a loss is
+disallowed because of a replacement purchase, the replacement lot
+inherits the original lot's holding period. A wash sale therefore does
+not merely defer the loss --- it can convert a later short-term gain into
+a long-term one, which is worth real money.
+
+\section{Rule two: the wash sale, in both directions}
+
+Under the wash-sale rule, a loss is disallowed if the investor acquires
+the same or a substantially identical security within thirty days before
+or after the sale.
+
+Three consequences follow, and the engine implements all three.
+
+\textbf{It operates on purchase.} A purchase of a security within thirty
+days after a loss was realised on that security disallows the loss, even
+if the purchase is made by a different account. This is why the book's
+two accounts cannot be treated as independent: the taxable account's loss
+and the exempt account's purchase interact. The engine models the wash
+sale across the pair of accounts, which is the conservative treatment.
+
+\textbf{It operates on sale.} A sale within thirty days after a purchase
+that was itself a replacement for an earlier loss also disallows the
+loss, and the basis and holding period carry over.
+
+\textbf{The basis is adjusted.} The disallowed loss is added to the basis
+of the replacement shares. A lot bought for \$100 after a \$10 disallowed
+loss has a basis of \$110, and its holding period is the original's.
+
+\begin{takeaway}[Why the rule is modelled in both directions]
+A system that only checks the sale side of the wash-sale rule will
+systematically overstate after-tax returns, because it will believe that
+it can harvest a loss and then immediately buy the same fund back. The
+book's engine tracks the thirty-day window on both sides, across both
+accounts, and adjusts the basis and the holding period.
+\end{takeaway}
+
+\section{The tax schedule}
+
+The book uses the 2025 rules for a single taxpayer with high taxable
+income.
+
+\textbf{Long-term capital gains} are taxed at fifteen per cent, the
+maximum preferential rate, with the ordinary zero and twenty per cent
+brackets applying below that.
+
+\textbf{Short-term capital gains} are taxed as ordinary income.
+
+\textbf{Qualified dividends} are taxed at fifteen per cent, with the
+3.8 per cent net investment income tax added for a taxpayer above the
+threshold.
+
+\textbf{Ordinary dividends} not qualifying are taxed as ordinary income.
+
+\textbf{Capital losses} offset capital gains without limit, and offset
+ordinary income up to \$3,000 a year, with the unused portion carried
+forward.
+
+The engine's schedule is a parameter of the system, and the taxable and
+exempt accounts are the two ends of a comparison in which the only
+difference is the payment of tax.
+
+\section{What the engine deliberately does not do}
+
+Three exclusions, for the same reason the feature layer excludes
+fundamental data: each is a place where a wrong assumption would be
+invisible in the results.
+
+It does not model state and local income tax, or the deductibility of
+investment expenses, or the alternative minimum tax, or the qualified
+dividend and capital-gain rates' interaction with the brackets above
+fifteen per cent. Each would change the tax bill by some fraction of a
+percentage point and each would add a parameter that could not be
+checked.
+
+It does not model the wash sale for \emph{substantially identical} securities
+in the strict sense --- that is, it treats a different fund tracking the
+same index as a different security, which is correct: the Internal
+Revenue Service treats a purchase of a substantially identical security as
+one that is different in name but the same in substance, and the
+substantial-identity standard is a factual question the book cannot
+resolve from a price series. The engine is therefore \emph{optimistic}
+about wash sales across near-duplicate funds, and says so. The effect is
+bounded: the funds that are near-duplicates in this universe are few, and
+the system's turnover is low.
+
+It does not model the tax cost of the fund's own internal trading. That
+cost is real and it is the reason ETF structures distribute so few capital
+gains; the book reports the structural statistics in Chapter 10 rather
+than charging an estimate it cannot compute.
+
+\begin{keytakeaways}
+\item The engine holds lots with acquisition dates and bases, disposes
+first-in-first-out, and settles annually with the capital-loss offset,
+the carryforward and the preferential rates.
+\item The wash sale is modelled in both directions, across both accounts,
+with the basis adjustment and the holding-period tack.
+\item The parallel taxable and tax-exempt accounts have identical weight
+paths, so the gap between them measures exactly one thing: the cost of
+the tax code.
+\item The engine omits state tax, the alternative minimum tax and the
+substantially-identical-security standard, and the book says so rather
+than charging an estimate it cannot check.
+\end{keytakeaways}

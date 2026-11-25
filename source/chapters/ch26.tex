@@ -1,0 +1,154 @@
+% =====================================================================
+%  Chapter 26 — Kelly with an Uncertain Mean
+% =====================================================================
+
+\chapter{Kelly with an Uncertain Mean}
+\label{ch:kelly}
+
+The book's sizing rule is a Kelly criterion applied to an uncertain
+forward return. This chapter derives the criterion, shows why the standard
+form cannot be used with an estimated mean, and derives the
+certainty-equivalent form the book actually uses.
+
+\section{The criterion}
+
+Suppose a strategy wins a fraction \(p\) of its bets and loses the rest,
+with the win paying \(b\) times the stake. The growth rate of the
+investor's wealth, per bet, is
+\begin{equation}
+g(p) = p\log(1+pb) - (1-p)\log(1-p),
+\end{equation}
+and the maximisation of \(g\) gives
+\begin{equation}
+p^{*} = \frac{pb - (1-p)}{b},
+\qquad\text{equivalently}\qquad
+f^{*} = \frac{pb - (1-p)}{b},
+\end{equation}
+where \(f^{*}\) is the fraction of wealth to stake. The well-known
+property of this rule is that it maximises the expected \emph{log}
+wealth, which means it asymptotically beats every other rule --- provided
+the probabilities are correct.
+
+The continuous-time analogue, for a risky asset with excess expected return
+\(\mu\) and volatility \(\sigma\), is the continuous-time Kelly rule
+applied to a diffusion, which gives the familiar
+\begin{equation}
+f^{*} = \frac{\mu}{\sigma^{2}},
+\end{equation}
+the fraction of wealth in the risky asset under logarithmic utility with a
+quadratic penalty. And for a portfolio of several assets with excess means
+\(\mu\) and covariance \(\Sigma\), the mean-variance Kelly solution is
+\begin{equation}
+w^{*} = \Sigma^{-1}\mu.
+\end{equation}
+
+The attraction of the criterion is that it is the only rule that
+compounds. A portfolio that runs at half Kelly gives up a little growth in
+exchange for a materially lower probability of ruin, which is the trade
+Chapter 7 said a saver should care about.
+
+\begin{takeaway}[The attraction and the trap]
+Kelly maximises expected log wealth, so it beats every other rule in the
+long run --- if the probabilities are right. The rest of this chapter is
+about what happens when they are not.
+\end{takeaway}
+
+\section{Why the standard form cannot be used}
+
+The rule above assumes \(\mu\) is known. In this book it is not: it is a
+posterior mean with a posterior variance attached, and Chapter 20 showed
+that the posterior variance is large relative to the posterior mean.
+
+This is not a technical inconvenience; it is the central fact of the
+problem. When \(\mu\) is estimated with error, the Kelly rule computed
+from \(\hat{\mu}\) is not merely noisy but \emph{biased upward in its
+variance}, and a strategy that runs full Kelly on an uncertain mean can
+have a negative expected log growth rate --- the well-known result that
+overbetting on a noisy signal loses money at an exponential rate.
+
+The remedy is standard and appears in the literature in several forms. The
+common thread is to penalise the estimate by its own uncertainty. The
+book uses the certainty-equivalent construction.
+
+\section{The certainty-equivalent construction}
+
+Let the posterior over the excess mean of asset \(i\) be
+\(N(\mu_i, \psi_i)\), with \(\psi_i\) the posterior variance of the mean.
+Under a quadratic utility with relative risk aversion \(\gamma\), the
+certainty-equivalent excess return is
+\begin{equation}
+\tilde{\mu}_i = \mu_i - \frac{\gamma}{2}\psi_i,
+\end{equation}
+because the mean of a concave function of a random variable is less than
+the function of the mean, and to first order the correction is exactly the
+penalty term above.
+
+Substituting into the mean-variance portfolio problem gives the book its
+sizing rule:
+\begin{equation}
+w^{CE} = \frac{1}{\gamma}\left(\Sigma + \Psi\right)^{-1}\mu,
+\qquad
+\Psi = \operatorname{diag}(\psi_1,\dots,\psi_N),
+\end{equation}
+where the \(\Psi\) term is added to the covariance because the
+uncertainty in the mean is a risk that the investor bears when sizing.
+
+The formula has four consequences, and each of them is the reason it is
+used.
+
+\textbf{The position falls as the doubt rises.} If \(\psi_i\) grows, the
+diagonal of \(\Sigma+\Psi\) grows, and the position in asset \(i\) falls.
+A forecast the model is unsure about produces a small trade.
+
+\textbf{The position is bounded in aggregate.} The sum of the
+certainty-equivalent weights is smaller than the sum of the raw ones, so
+the tilt cannot be larger than the raw signal implies.
+
+\textbf{There is a natural closed form for the shrinkage.} For a single
+asset with a signal-to-noise ratio \(z = \mu/\sigma\), the position falls
+with \(z\) approximately as
+\begin{equation}
+w \propto \frac{z}{1 + z^{2}},
+\end{equation}
+which is maximal at \(z = 1\) --- when the forecast is one standard
+deviation from zero --- and then falls again. This is the classical
+result that a signal must be both positive and strong to be worth
+trading, and it is the single most important shape in the book.
+
+\textbf{The scaling is explicit.} The rule is linear in the forecast and
+quadratic in the doubt, and the book's parameter --- the fraction of full
+Kelly --- multiplies the whole thing.
+
+How the position size responds to the forecast and to the uncertainty in it is shown in \figref{fig:kelly-shrinkage}.
+
+\section{The fraction of Kelly}
+
+The book's default is a quarter of full Kelly, and the reason is not
+caution for its own sake. It is that the \emph{estimated} mean is a noisy
+estimate of the true mean, and the certainty-equivalent correction
+already accounts for the posterior variance --- but the posterior variance
+is itself an estimate, and the additional shrinkage of a fractional Kelly
+is cheap insurance against that estimate being wrong.
+
+The two most common arguments against fractional Kelly are worth
+addressing. The first is that it gives up a quarter of the long-run edge.
+The answer is that the edge being given up is an edge that is being
+estimated, and a strategy that runs full Kelly on an estimate has a
+materially higher probability of ruin --- the probability that the
+book's own ruin calculation in Chapter 7 is there to make visible. The
+second is that the optimal fraction depends on the accuracy of the
+estimate, so any fixed fraction is arbitrary. The answer is that it does,
+and that the book's trial family includes fractions of 0.10, 0.25 and
+0.50 so that the reader can see what the choice is worth.
+
+\begin{keytakeaways}
+\item Kelly maximises expected log wealth and beats every other rule in
+the long run, provided the probabilities are right.
+\item With an estimated mean, the standard rule overbets, and the
+certainty-equivalent construction penalises the estimate by its own
+posterior variance: \(w = \gamma^{-1}(\Sigma+\Psi)^{-1}\mu\).
+\item The position falls as the doubt rises and is maximised at a
+signal-to-noise ratio near one, so a weak signal produces no trade.
+\item The book's default is a quarter of full Kelly, and the fraction is
+one of the trial-family parameters.
+\end{keytakeaways}

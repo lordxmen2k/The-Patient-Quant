@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "patientquant"
+version = "1.0.0"
+description = "The investment system behind The Patient Quant: one machine-learned portfolio for a single investor, with its own arithmetic."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Gerald Enrique Nelson Mc Kenzie", email = "editorial@ticointernet.example" }]
+keywords = [
+    "portfolio-management",
+    "machine-learning",
+    "bayesian",
+    "kelly-criterion",
+    "risk-management",
+    "backtest-overfitting",
+    "deflated-sharpe-ratio",
+    "capital-gains-tax",
+    "exchange-traded-funds",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+# The dependency set is deliberately short.  Every estimator in this package
+# is written in numpy from its objective function, including the normal and
+# Student-t distributions, the deflated Sharpe ratio, the CSCV probability of
+# backtest overfitting, the Hansen SPA test and the White reality check.  That
+# is a house rule of the book, not an accident of the environment: the code
+# that ships has to be the code whose mathematics the book prints.
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+figures = ["matplotlib>=3.7"]
+data = ["pillow>=10.0"]
+
+[project.urls]
+Homepage = "https://github.com/lordxmen2k/The-Patient-Quant"
+Repository = "https://github.com/lordxmen2k/The-Patient-Quant"
+Book = "https://github.com/lordxmen2k/The-Patient-Quant/releases/tag/v1.0"
+
+[project.scripts]
+patientquant-fetch = "scripts.fetch_data:main"
+patientquant-run = "scripts.run_system:main"
+
+[tool.setuptools]
+packages = ["patientquant"]
+
+[tool.setuptools.package-data]
+patientquant = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

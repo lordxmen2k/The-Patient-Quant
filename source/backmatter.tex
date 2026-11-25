@@ -1,0 +1,530 @@
+% =====================================================================
+%  The Patient Quant — back matter
+%  Glossary, notes and references, appendices A-E, index,
+%  acknowledgments, about the author, colophon.
+% =====================================================================
+
+\backmatter
+
+% ---- Glossary -------------------------------------------------------------
+\chapter*{Glossary}
+\addcontentsline{toc}{chapter}{Glossary}
+\markboth{Glossary}{Glossary}
+\thispagestyle{plain}
+
+\noindent\small
+Terms are defined as they are used in this book. Where the field uses a term
+in a narrower sense than ordinary English, the finance sense is given.
+Symbols that recur throughout the text are given with their meaning.
+
+\begin{description}[style=nextline,leftmargin=1.1em,labelindent=0pt,
+  font=\normalfont\ttfamily\color{accent},itemsep=3pt,parsep=0pt]
+
+\item[Arithmetic mean] The simple average of a series of returns. Always
+larger than the geometric mean by approximately half the variance per
+period.
+
+\item[Certainty equivalent] The risk-adjusted value of an uncertain
+expected return. Under quadratic utility it is the expected return less
+the risk-aversion coefficient times half the variance of the estimate.
+
+\item[Compound annual growth rate] The constant annual rate that would
+produce the same terminal value as the actual series of returns. The
+money a saver actually earns, as opposed to the arithmetic mean.
+
+\item[Deflated Sharpe Ratio] A test of whether an observed Sharpe ratio
+is larger than the expected maximum Sharpe ratio of a family of trials,
+corrected for the non-normality of the returns.
+
+\item[Drawdown] The fall of a portfolio's value from its running peak.
+The book distinguishes the depth of the worst drawdown from the time it
+took to recover.
+
+\item[Ensemble] The set of model configurations run in parallel and
+combined by a weighted average, where the weights depend on the members'
+realised records.
+
+\item[Forward return] The total return realised between a formation date
+and a later date, at the model's horizon.
+
+\item[Geometric mean] The compounded average of a series of returns. Equal
+to the arithmetic mean less approximately half the variance per period.
+
+\item[Kelly criterion] The position size that maximises the expected
+logarithmic growth of wealth, given a known edge.
+
+\item[Live window] The period over which a fund had a price on the panel
+and could therefore have been held. A backtest that ignores the live
+window has a survivorship bias.
+
+\item[Normal inverse-gamma] A conjugate prior pair under which a linear
+regression with an unknown scale has a closed-form posterior for both the
+coefficients and the scale.
+
+\item[Posterior variance of the mean] The variance of the \emph{estimate}
+of the expected return, as opposed to the variance of the return itself.
+The first governs how much to believe a forecast; the second governs how
+much an asset can lose.
+
+\item[Probability of backtest overfitting] The probability that the
+configuration that wins on one half of a record loses on the other half.
+A value above one half means the selection procedure is harmful.
+
+\item[Reality check] A bootstrap test of whether the best member of a
+family of strategies beats a benchmark by more than the family would by
+chance.
+
+\item[Sequence of returns] The order in which returns arrive. A saver's
+outcome depends on it even though a buy-and-hold investor's does not.
+
+\item[Sharpe ratio] Excess return divided by its standard deviation. The
+book reports both the naive ratio and Lo's corrected ratio.
+
+\item[Sleeve] One of the four asset groups --- United States equity,
+international equity, bonds, real assets --- into which the strategic
+allocation divides the portfolio.
+
+\item[Stationary bootstrap] A bootstrap that preserves serial dependence
+by drawing each observation from the sample or from its immediate
+successor.
+
+\item[Superior predictive ability] A bootstrap test that asks whether the
+best member of a family beats a benchmark, with the family reweighted by
+each member's own performance.
+
+\item[Tilt] The adjustment the model makes to the composition of a sleeve.
+Bounded, and never allowed to change a sleeve's total weight beyond a
+stated scale.
+
+\item[Wash sale] The rule that disallows a loss when the same or a
+substantially identical security is bought within thirty days before or
+after the sale. It applies in both directions and it carries the basis
+and the holding period of the original position.
+
+\end{description}
+\clearpage
+
+% ---- Notes and references --------------------------------------------------
+\chapter*{Notes and References}
+\addcontentsline{toc}{chapter}{Notes and References}
+\markboth{Notes and References}{Notes and References}
+\thispagestyle{plain}
+
+\noindent\small
+Every identifier this book cites was resolved against a registry before it
+was used, and the registry's own title was compared with the title the
+book intended to cite. The complete resolution table, with the registry
+title for each source and the role it plays in the book, is Appendix~E,
+and the ledger itself is published with the code.
+
+Sources are referred to in the text by author and year. Where a claim
+depends on a specific figure, the figure is given in the text and the
+source is named in the same sentence.
+
+\vspace{6pt}
+\noindent\textbf{Behaviour.} Shiller (2015) for the account of market
+exuberance the behavioural literature builds on; Odean (1998) for the
+disposition effect and its magnitude; Barberis and Xiong (2009) for the modelled version; Barber
+and Odean (2000) for the return of the most active retail traders; Kahneman
+and Tversky (1979) for prospect theory; Benartzi and Thaler (1995) for
+myopic loss aversion and the evaluation-period dependence of the equity
+premium; Thaler (2008) for the sell-effect.
+
+\vspace{6pt}
+\noindent\textbf{Evaluation.} Bailey and L\'opez de Prado (2014) for the
+Deflated Sharpe Ratio; Bailey, Borwein, L\'opez de Prado and Zhu (2016) for
+the probability of backtest overfitting and the combinatorial construction
+behind it; Lo (2002) for the sampling error of the Sharpe ratio; Newey and
+West (1987) for the heteroskedasticity and autocorrelation consistent
+covariance matrix; Andrews (1991) for the bandwidth rule; White (2000) for
+the reality check; Hansen (2005) for the superior predictive ability test;
+Abadie (2018) for the distinction between statistical and economic
+significance; Sullivan, Timmermann and White (1999) for data snooping in
+rule-based trading.
+
+\vspace{6pt}
+\noindent\textbf{Evidence.} Jensen, Kelly and Pedersen (2023) for the
+replication evidence and the standard-error finding; McLean and Pontiff
+(2016) for post-publication decay; Goyal, Welch and Zafirov (2024) for the
+review of equity-premium predictors; Harvey, Liu and Zhu (2016) for the
+multiple-testing hurdle; S\&P Dow Jones Indices for the annual SPIVA
+survey of active managers.
+
+\vspace{6pt}
+\noindent\textbf{Portfolio construction.} Markowitz (1952); Kelly (1956)
+for the criterion; Ledoit and Wolf (2004) for the shrinkage estimator; De
+Miguel, Garlappi and Uppal (2009) for the failure of optimised portfolios
+to beat equal weighting; L\'opez de Prado (2016) for hierarchical risk
+parity; Campbell, Lo and MacKinlay (1997) for the econometrics of
+returns; Hansen (2021) and Coqueret and Guida (2020) for the practice of
+machine learning in asset management.
+
+\vspace{6pt}
+\noindent\textbf{Risk.} Moreira and Muir (2017) for volatility-managed
+portfolios; Cederburg, O'Doherty, Wang and Yan (2020) for the replication
+that finds the effect does not survive real-time implementation; Lo and
+Zhang (2024) for the adaptive markets hypothesis; Samuelson (1969) for the
+sequence of returns; Blanchett, Finke and Pfau (2013) for the safe
+withdrawal rate under low bond yields.
+
+\vspace{6pt}
+\noindent\textbf{Factors and costs.} Fama and French (1993; 2015);
+Asness, Moskowitz and Pedersen (2013); Novy-Marx (2013); Frazzini and
+Pedersen (2014); Frazzini, Israel and Moskowitz (2012; 2018); Dong, Kang
+and Peress (2025); Amihud (2002); Carhart (1997); Brown (1992); for the
+live-versus-backtest boundary, the inception dates of the factor funds
+themselves, which are listed in Appendix~C.
+
+\vspace{6pt}
+\noindent\textbf{Prior art.} Dhar and Sedoc (2025) for DBOT; Hwang and
+Zohren (2025) for the signature-informed transformer; DeePM (2026) for
+regime-robust deep learning; and the systematic review of deep
+reinforcement learning for automated equity portfolio management (2026).
+
+\vspace{6pt}
+\noindent\textbf{Law and regulation.} Securities Exchange Act of 1940
+Section 10(b) and Rule 10b-5; Investment Advisers Act of 1940 Sections
+9(a)(2) and 9(a)(3); Regulation FD, 17~CFR 243.100--243.103; Financial
+Industry Regulatory Authority Regulatory Notice 26-10 (2026); the
+Securities and Exchange Commission's investor bulletin on exchange-traded
+funds; and the Internal Revenue Code's wash-sale and capital-loss
+provisions.
+
+\vspace{6pt}
+\noindent\small\textit{Every identifier above, with its registry title and
+its role in the book, is listed in Appendix~E. The resolution ledger is
+published with the source code, and the resolution script is part of it, so
+that the claim can be re-checked rather than trusted.}
+\clearpage
+
+% ---- Appendix A -------------------------------------------------------------
+\chapter{The Data and Its Provenance}
+\label{app:data}
+
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Appendix A: The Data and Its Provenance}
+\markboth{Appendix A}{Appendix A}
+
+The book's data layer draws every price from a single source, caches the
+raw responses with SHA-256 checksums, validates them, and builds the
+panel from the cache. This appendix documents what was fetched, what was
+checked, and what the checks found.
+
+\section{The panel}
+
+The monthly panel runs from \numPanelStart{} to \numPanelEnd{}: 407
+months, 61 funds. The system's own record runs from \numRecordStart{} to
+\numRecordEnd{}, which is \numRecordMonths{} months; the difference is the
+warm-up the model needs before it will produce a forecast, plus the years
+needed to establish the benchmark's own history.
+
+Monthly returns are rebuilt from the raw close and the dividend cash paid
+in that month, rather than read from the vendor's adjusted close, because
+the tax layer needs a genuine transaction price and because the vendor
+applies its dividend factor on a different convention. The two series
+agree to within 0.004 per cent a month on average.
+
+\section{The integrity checks}
+
+Five checks are applied to every series, and a series that fails any of
+them does not enter the panel: finite values; strictly positive prices;
+strictly increasing dates with no duplicates; no gap longer than ten
+calendar days; and no implausible single-day return.
+
+All \numNFunds{} series in the universe pass all five checks. The raw
+responses and their checksums are published with the code, so the
+verification can be re-run against the cache without touching the
+network.
+
+\section{The cached series}
+
+The table lists every raw response in the cache, with the first and last
+bar and the number of bars. Sixty-three series were fetched; two of the
+original sixty-five tickers --- a cryptocurrency product and a European
+equity product --- do not exist at the vendor and were dropped rather than
+substituted, which is why the universe has \numNFunds{} members.
+
+\begingroup
+\scriptsize
+\input{generated_appendix_data}
+\endgroup
+\clearpage
+
+% ---- Appendix B -------------------------------------------------------------
+\chapter{The Estimators, From Their Objective Functions}
+\label{app:estimators}
+
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Appendix B: The Estimators}
+\markboth{Appendix B}{Appendix B}
+
+The book's package depends on \code{numpy}, \code{pandas} and
+\code{matplotlib}, and on nothing else. Every statistical estimator it
+uses is written from its defining objective, including the two
+distributions everything else is built on. This appendix lists what is
+implemented and why.
+
+\section{The distributions}
+
+\code{patientquant/stats.py} implements the error function by its
+definition as a numerical integral, the normal cumulative distribution
+from the error function, the normal quantile function by Acklam's rational
+approximation refined with two Newton--Halley steps, the incomplete beta
+function by its continued-fraction expansion, the Student's \(t\)
+cumulative distribution from the incomplete beta, and the Student's \(t\)
+quantile function by bisection on the inverse.
+
+\section{The model}
+
+\code{patientquant/models.py} implements the normal inverse-gamma
+conjugate update of Chapter 17 directly from the posterior formulas: the
+posterior precision and mean, the scalar parameter updates, the
+posterior variance of the mean, and the walk-forward training-set
+construction. The online Bayesian model average of Chapter 19 is
+implemented from its definition: a proper scoring rule on the standardised
+forecast error, applied horizon-aware, accumulated with an exponential
+discount, and combined by the law of total variance.
+
+\section{The portfolio layer}
+
+\code{patientquant/portfolio.py} implements the Ledoit--Wolf shrinkage
+estimator from its definition --- the shrinkage intensity being the ratio
+of the estimated squared deviation of the sample covariance from the
+scaled identity to the estimated squared error of the sample covariance
+itself --- the pairwise-complete covariance used when a fund has not been
+listed for the whole estimation window, and the certainty-equivalent Kelly
+solve.
+
+\section{The evaluation machinery}
+
+\code{patientquant/evaluation.py} implements the geometric and arithmetic
+means, the compound growth rate, the maximum drawdown, the time to
+recovery, the worst rolling twelve-month outcome, the Sortino and Calmar
+ratios, Lo's scale factor \(\eta(q)\), the first-order autocorrelation of
+a return series, and the Newey--West mean t-statistic with an
+Andrews-style bandwidth.
+
+\code{patientquant/selection.py} implements the expected maximum Sharpe
+ratio in closed form and by Monte Carlo, the Deflated Sharpe Ratio, the
+average pairwise correlation, the implied number of independent trials,
+the combinatorial symmetric cross-validation that produces the
+probability of backtest overfitting, the stationary bootstrap, and both
+the White reality check and the Hansen superior predictive ability test.
+
+\section{The tax engine}
+
+\code{patientquant/costs.py} implements the lot accounting, the
+first-in-first-out disposal, the holding-period classification, the
+wash-sale disallowance in both directions with the basis adjustment and
+the holding-period tack, the capital-loss offset against ordinary income
+with its carryforward, and the annual settlement.
+
+\begin{takeaway}[Why it is written this way]
+A reader who wants to check the book's arithmetic can check it against
+the definitions rather than against a library's implementation of them.
+The estimators are short, the objective of each is stated in the module
+docstring, and the tests in the repository exercise them against values
+that can be computed independently.
+\end{takeaway}
+\clearpage
+
+% ---- Appendix C -------------------------------------------------------------
+\chapter{The Universe and Its Terms}
+\label{app:universe}
+
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Appendix C: The Universe and Its Terms}
+\markboth{Appendix C}{Appendix C}
+
+Every fund in the universe, its sleeve, its expense ratio, the date it
+listed, and the date from which it had a return on the panel. A fund
+cannot be held before it has a price, so the last column is the boundary
+of every backtest in the book.
+
+The expense ratios are shown as percentages. They are not charged
+separately in the simulation, because they are already inside the return
+series; the mean across the universe is \numERMean\% a year, the cheapest
+is \numERMin\% and the most expensive is \numERMax\%.
+
+\begingroup
+\scriptsize
+\input{generated_appendix_universe}
+\endgroup
+\clearpage
+
+% ---- Appendix D -------------------------------------------------------------
+\chapter{The Verification Gates}
+\label{app:gates}
+
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Appendix D: The Verification Gates}
+\markboth{Appendix D}{Appendix D}
+
+The book's build script runs a set of checks after the PDF is produced and
+fails if any of them does. The checks exist because the failure modes they
+catch are all invisible in the output: a stale figure, a hand-transcribed
+number, a caption pointing at the wrong table, a page with overlapping
+labels.
+
+\begin{enumerate}
+\item \textbf{The build completes.} The typesetting runs to a PDF with no
+unresolved references, no missing figures and no errors in the log.
+\item \textbf{Every figure exists.} Each figure named in the source is
+present in the figures directory, and no figure in the directory is
+unreferenced.
+\item \textbf{Every figure is referenced once.} No figure is used twice
+and none is orphaned.
+\item \textbf{No label overlaps.} Every text label in every figure is
+checked against every curve, marker, legend and other label in the same
+figure, and the check fails if any pair overlaps.
+\item \textbf{Every macro is defined.} Each \code{\textbackslash num}
+macro used in the text is defined in the generated macro file, and every
+macro name is checked to be a legal control word, since a name carrying a
+digit would typeset the page and lose the number without any error.
+\item \textbf{Every macro agrees with the data.} Each macro is
+recomputed from \texttt{build/numbers.json} and compared with what the
+text would print.
+\item \textbf{No stray number.} Every percentage and every decimal in the
+prose is checked against the canonical data, and any that cannot be
+traced is reported for inspection.
+\item \textbf{The citation keys resolve.} Every citation in the source
+appears in the source ledger, and every ledger entry is cited.
+\item \textbf{The ledger is clean.} Every identifier in the ledger
+resolves against its registry with a matching title.
+\item \textbf{The page count is right.} The page count written into the
+colophon matches the PDF.
+\item \textbf{The word count is right.} The word count written into the
+colophon matches the source.
+\item \textbf{No template residue survives.} The text contains no
+unresolved template, no substituted field and no construction marker of any
+kind.
+\item \textbf{The copyright string is exact.} The string
+\texttt{Copyright 2026 Tico Internet LLC} appears and nothing else does.
+\item \textbf{No leaked secrets.} The repository contains no key, token
+or password.
+\item \textbf{The fonts are embedded.} The PDF's fonts are the house
+fonts and are fully embedded.
+\item \textbf{The PDF is well formed.} The file passes a structural
+check.
+\item \textbf{The data cache is intact.} Every cached series matches the
+checksum in the manifest.
+\item \textbf{The panel rebuilds.} The monthly panel rebuilt from the
+cache matches the panel the numbers were computed from.
+\item \textbf{The system reruns.} The whole system runs end to end from
+the cache and reproduces the numbers.
+\item \textbf{No look-ahead in the training set.} Every training row
+satisfies the horizon constraint, checked directly on the data.
+\item \textbf{The source is well formed.} Every heading argument is
+closed and every chapter file's braces balance, because an unclosed
+argument makes LaTeX swallow the text that follows it without saying so.
+\end{enumerate}
+
+\begin{takeaway}[Why the gates exist]
+The book's own claim is that evaluation is the part that matters. A claim
+about evaluation is worth nothing if the evaluation itself is not checked,
+and each of these gates catches one way in which a book like this can be
+subtly wrong without looking wrong.
+\end{takeaway}
+\clearpage
+
+% ---- Appendix E -------------------------------------------------------------
+\chapter{The Source Ledger}
+\label{app:ledger}
+
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{Appendix E: The Source Ledger}
+\markboth{Appendix E}{Appendix E}
+
+Every identifier this book cites, resolved against a registry, with the
+registry's own title and the role the source plays. The resolution
+script is published with the code, and the ledger can be rebuilt by
+running it.
+
+All fifty identifiers resolved with a matching registry title. Where an
+identifier was initially wrong, the registry's own record for the work
+was adopted in its place; where a work could not be resolved at all, it
+was removed from the book and the claim it was to support was either
+carried by the book's own computation or by a source that does resolve.
+
+\begingroup
+\scriptsize
+\input{generated_appendix_ledger}
+\endgroup
+\clearpage
+
+% ---- Index ------------------------------------------------------------------
+\printindex
+
+% ---- Acknowledgments --------------------------------------------------------
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\markboth{Acknowledgments}{Acknowledgments}
+\thispagestyle{plain}
+
+The data in this book comes from a single vendor's public chart endpoint,
+and the institution behind it has made it possible for a book like this to
+be written at all.
+
+The decision to report a null result was not easy, and it belongs to the
+owner of the project, who asked for the truth and then did not ask for it
+to be softened.
+
+\begin{keytakeaways}
+\item The book is a work of analysis, and the analysis is published with
+it, so that the reader can check the arithmetic rather than trust it.
+\end{keytakeaways}
+\clearpage
+
+% ---- About the author --------------------------------------------------------
+\chapter*{About the Author}
+\addcontentsline{toc}{chapter}{About the Author}
+\markboth{About the Author}{About the Author}
+\thispagestyle{plain}
+
+\noindent\textbf{Gerald Enrique Nelson Mc Kenzie} is the founder of Tico
+Internet LLC and the author of this volume and its predecessors. He
+writes about the quantitative parts of subjects that are usually treated as
+narrative: near-Earth object characterisation and impact accountability,
+lunar surface architecture, dark matter and the beginning of the universe,
+and now the arithmetic of long-horizon investing.
+
+The method is the same in each case. The argument is built from primary
+sources, the quantitative claims carry their own arithmetic, the
+instruments are published so that the arithmetic can be checked, and the
+limits of the analysis are stated in the same voice as its conclusions.
+
+\begin{keytakeaways}
+\item Every book in this series stands on its own science and publishes
+its own instruments.
+\end{keytakeaways}
+\clearpage
+
+% ---- Colophon ---------------------------------------------------------------
+\chapter*{Colophon}
+\addcontentsline{toc}{chapter}{Colophon}
+\markboth{Colophon}{Colophon}
+\thispagestyle{plain}
+
+\noindent\small
+\setmainfont{Outfit}
+\noindent The Patient Quant is set in Outfit, with DejaVu Sans Mono for
+code and identifiers and Fira Math for mathematics, and typeset with
+XeLaTeX in a 6-by-9-inch trim. The figures are computed with Python and
+matplotlib and embedded as vector graphics.
+
+\noindent The body text runs to \bookWords{} words across \bookPages{}
+numbered pages, in seven parts and thirty-eight chapters, with eighteen
+figures, five appendices and an index.
+
+\noindent Every number the book states about its own results is written by
+\texttt{build/make\_numbers\_tex.py} from the system's output, and every
+figure is drawn by \texttt{build/make\_figures.py} from the same files.
+The verification gates of Appendix D are run by \texttt{build/verify.py}
+after the typesetting, and the build fails if any of them does.
+
+\vspace{8pt}
+\noindent\textbf{DOI}\quad \href{https://doi.org/\bookDOI}{\texttt{\bookDOI}}\par
+
+\vspace{8pt}
+\noindent Copyright \textcopyright\ 2026 Tico Internet LLC.
+\clearpage

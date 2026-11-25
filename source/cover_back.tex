@@ -1,0 +1,100 @@
+% =====================================================================
+%  Back cover — The Patient Quant
+%  Typeset standalone at the 6 x 9 in trim, full bleed.
+%  Vertical positions are measured in inches from the foot of the page.
+% =====================================================================
+\documentclass{article}
+\usepackage[paperwidth=6in,paperheight=9in,margin=0pt]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\setmainfont{Outfit}[
+  UprightFont={Outfit Regular}, BoldFont={Outfit Bold},
+  ItalicFont={Outfit Regular}, ItalicFeatures={FakeSlant=0.20},
+  BoldItalicFont={Outfit Bold}, BoldItalicFeatures={FakeSlant=0.20},
+  Ligatures={TeX}]
+\setsansfont{Outfit}[
+  UprightFont={Outfit Regular}, BoldFont={Outfit Bold},
+  ItalicFont={Outfit Regular}, ItalicFeatures={FakeSlant=0.20},
+  BoldItalicFont={Outfit Bold}, BoldItalicFeatures={FakeSlant=0.20},
+  Ligatures={TeX}]
+\setmonofont{DejaVu Sans Mono}[
+  UprightFont={DejaVu Sans Mono}, BoldFont={DejaVu Sans Mono Bold},
+  Ligatures={TeX}]
+
+\definecolor{ink}{HTML}{080B14}
+\definecolor{accent}{HTML}{E8B85C}
+\definecolor{txt}{HTML}{E6E9F0}
+\definecolor{dim}{HTML}{939BAB}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+  % ---- the plate, full bleed (a different crop from the front) ----------
+  \node[anchor=south west,inner sep=0] at (current page.south west)
+    {\includegraphics[width=\paperwidth,height=\paperheight]{../figures/cover_back_art.jpg}};
+
+  % ---- title strip -------------------------------------------------------
+  \node[anchor=south west,inner sep=0,text=accent] at ([xshift=0.60in,yshift=8.26in]current page.south west)
+    {\fontsize{9.2}{11}\selectfont\sffamily\bfseries
+     {\addfontfeatures{LetterSpace=15}THE PATIENT QUANT}};
+
+  \fill[accent] ([xshift=0.60in,yshift=8.00in]current page.south west)
+         rectangle ([xshift=5.40in,yshift=8.02in]current page.south west);
+
+  \node[anchor=south west,inner sep=0,text=dim] at ([xshift=0.60in,yshift=7.66in]current page.south west)
+    {\fontsize{9.8}{12}\selectfont\sffamily Gerald Enrique Nelson Mc Kenzie};
+
+  % ---- blurb -------------------------------------------------------------
+  \node[anchor=north west,inner sep=0,text=txt,align=left] at ([xshift=0.60in,yshift=7.24in]current page.south west)
+    {\fontsize{8.1}{11.0}\selectfont\sffamily
+     This book builds one complete investment system for a single investor,\\
+     runs it over 291 months of history net of trading costs and of the\\
+     capital gains tax, and reports what it is actually worth.\\[7pt]
+     The answer is a null result, and it is reported as one. The layer that\\
+     forecasts returns and tilts the portfolio inside its sleeves contributes\\
+     about minus zero point zero three percentage points a year. The layer\\
+     that slows the portfolio down when volatility rises and brakes it when\\
+     the drawdown deepens contributes about plus zero point two one\\
+     percentage points a year and about two point three points of\\
+     drawdown --- and it does so in every one of the twenty windows the\\
+     book tests.\\[7pt]
+     The test that chose the system is reported as well, and it is\\
+     unflattering: the selection procedure is worse than a coin flip, at a\\
+     probability of backtest overfitting of 0.571. The book publishes its\\
+     own instruments --- the Python package, the data cache, the source\\
+     ledger and the verification gates --- so that every number can be\\
+     checked, an assumption changed and the argument re-run.};
+
+  % ---- parts -------------------------------------------------------------
+  \node[anchor=south west,inner sep=0,text=accent] at ([xshift=0.60in,yshift=2.72in]current page.south west)
+    {\fontsize{6.8}{8}\selectfont\sffamily\bfseries {\addfontfeatures{LetterSpace=18}INSIDE}};
+
+  \node[anchor=north west,inner sep=0,text=txt,align=left] at ([xshift=0.60in,yshift=2.58in]current page.south west)
+    {\fontsize{8.4}{11.4}\selectfont\sffamily
+     I \quad The Question\\
+     II \quad The Evidence\\
+     III \quad The Data\\
+     IV \quad The Model\\
+     V \quad The Portfolio\\
+     VI \quad The System\\
+     VII \quad The Verdict};
+
+  % ---- footer ------------------------------------------------------------
+  \fill[dim,opacity=0.45] ([xshift=0.60in,yshift=0.92in]current page.south west)
+         rectangle ([xshift=5.40in,yshift=0.93in]current page.south west);
+
+  \node[anchor=south west,inner sep=0,text=dim] at ([xshift=0.60in,yshift=0.66in]current page.south west)
+    {\fontsize{7.6}{9.6}\selectfont\sffamily
+     Tico Internet LLC \quad\textperiodcentered\quad 2026 First Edition
+     \quad\textperiodcentered\quad Apache License 2.0};
+
+  \node[anchor=south west,inner sep=0,text=dim] at ([xshift=0.60in,yshift=0.46in]current page.south west)
+    {\fontsize{7.6}{9.6}\selectfont\sffamily DOI 10.5281/zenodo.24527200};
+\end{tikzpicture}
+\null
+\end{document}

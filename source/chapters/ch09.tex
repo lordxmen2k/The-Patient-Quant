@@ -1,0 +1,165 @@
+% =====================================================================
+%  Chapter 9 — Four Behavioural Traps and Their Magnitudes
+% =====================================================================
+
+\chapter{Four Behavioural Traps and Their Magnitudes}
+\label{ch:behaviour}
+
+Chapter 8's effect is about how often the investor looks. This chapter is
+about what the investor does when they do. The four traps below are the
+ones the literature has quantified, and each one has a number attached,
+because a trap without a magnitude is an anecdote.
+
+The literature these traps come from is broader than the four papers
+below. Shiller's \emph{Irrational Exuberance} is the standard account of
+the underlying phenomenon: that prices are not the output of a rational
+expectations process, that narratives move them, and that the same
+mechanisms that produce exuberance produce the errors an individual
+investor is about to make. The four traps are the individual-level,
+quantified pieces of it.
+
+\section{Trap one: the disposition effect}
+
+Odean examined 10,000 brokerage accounts from 1987 to 1993 and found that
+investors realise gains far more readily than losses: the average annual
+return on stocks sold was 14.83 per cent, against 9.76 per cent on stocks
+held. And the effect persists: in the year after a sale, the winners that
+had been sold outperformed the losers that had been held by 3.4 percentage
+points.
+
+That 3.4-point figure is the size of the opportunity that the trap denies
+the investor. It is not a small effect and it is not a rounding error; it
+is comparable to the entire equity premium for the decade.
+
+The mechanism is now modelled. Barberis and Xiong's 2009 analysis in the
+\emph{Journal of Finance} shows that a preference for realising gains
+combined with a loss-aversion term that depends on the investor's own
+realised gains and losses generates the disposition effect as a consequence,
+rather than treating it as a primitive. The model also reproduces the two
+facts that make the effect economically consequential: realised losses are
+small in absolute terms relative to the portfolio, so the tax cost of
+realising them is low; and the portfolio's position in the losing asset is
+small, so the expected benefit from realising the loss is also small. The
+gains are being harvested for the wrong reason and the losses are being
+suffered for the wrong reason, and the investor is worse off for it.
+
+The implication for a system is specific: \emph{never let a rule depend on
+whether a position is currently above or below its cost basis}. The tax
+engine in Chapter 29 tracks lots and holding periods because the tax code
+requires it, but no allocation rule in this book is permitted to read the
+cost basis. A rule that could see the cost basis would be able to reproduce
+the disposition effect exactly, and would have to be argued out of it.
+
+\section{Trap two: trading too much}
+
+Barber and Odean examined 66,465 households from 1991 to 1996 and found
+that the most active traders --- the top quartile by turnover --- earned
+11.4 per cent a year, against 17.9 per cent a year for the market. The
+most active traders underperformed the market by 6.5 percentage points a
+year, and the more active the household, the worse it did.
+
+This is the trap that a machine-learning system is most obviously exposed
+to, because a system that is permitted to rebalance without friction will
+rebalance without reason. It is also the trap that a system with a
+no-trade band, a turnover report and an explicit spread-cost model is
+partially protected against --- and the protection is partial, not
+complete, because the discipline has to be maintained by whoever runs it.
+
+\section{Trap three: herding and the information cascade}
+
+The third trap is social rather than cognitive, and it is the one the
+least literature has quantified at the individual level. It operates
+through the information cascade: when investors cannot distinguish a
+private signal from others' actions, they follow, and the following is
+itself the information that the next investor follows. The consequences are
+large in the aggregate --- the herding observed in equity markets
+contributes to the excess volatility documented in Chapter 3 --- and
+individually they are the mechanism by which an investor's allocation
+becomes a copy of a benchmark's, with all the benchmark's risks and none of
+its scale.
+
+For a single investor reading this book, the practical form of the trap is
+the most obvious one: the temptation to hold what is fashionable, and the
+tendency to believe that the reason it is fashionable is that it is good.
+The structural defence is that the strategic allocation in this book is
+\emph{stated in advance}, with a written justification, and is not
+re-derived from whatever happened to work last year. That is not
+intellectual timidity; it is the direct consequence of the evidence in
+Chapter 3 that a policy fitted to the recent past is a policy fitted to
+noise.
+
+\section{Trap four: the illusion of control through sophistication}
+
+The fourth trap is the one this book is most exposed to, and it deserves
+the most space.
+
+The temptation runs like this: the investor has a machine. The machine has
+a model with twelve features and a Bayesian posterior and a Kelly sizing
+rule. The outputs are precise, well-formatted, and update every month.
+Precision of presentation is easily mistaken for precision of knowledge,
+and a system that reports a Sharpe ratio to three decimal places invites
+the reader to treat it as a measurement.
+
+Two protections are built into this book, and both are visible in its
+structure.
+
+The first is that the selection machinery of Part IV is applied to this
+book's own family of configurations and its own results are reported
+whatever they are. The second is that the trial family is declared in
+advance and its size is published, so that a reader can compute for
+themselves how much of the reported performance is the maximum of a noisy
+sample rather than a property of the system.
+
+\begin{takeaway}[The four traps and their sizes]
+\begin{itemize}
+\item \textbf{Disposition effect:} winners sold beat losers held by 3.4
+percentage points in the following year.
+\item \textbf{Overtrading:} the most active quartile of retail households
+earned 11.4 per cent against the market's 17.9 per cent.
+\item \textbf{Herding:} the aggregate mechanism is well documented; the
+individual defence is a pre-commitment to a stated allocation.
+\item \textbf{Sophistication:} the defence is a declared trial family and
+the willingness to publish a null result.
+\end{itemize}
+\end{takeaway}
+
+\section{Why a system is not immune to any of them}
+
+It is worth being explicit that a machine-learning system is not immune to
+these traps, and in two of the four it is more exposed than a human.
+
+The disposition effect cannot bite a system directly, because the system
+does not experience a gain or a loss. But it can bite the system's
+\emph{owner}: if the system holds a losing position and the owner sees the
+account statement, the owner may override it. This is why the system's
+reporting is designed to be read quarterly at most, and why the drawdown
+brake exists --- to give the owner a reason not to override.
+
+Overtrading is worse for a system than for a human, because a system that
+is permitted to trade whenever its signal moves will trade whenever its
+signal moves, and the signal moves constantly. The no-trade band and the
+turnover statistic in Chapter 33 are the defences, and they are stated as
+numbers so that the owner can see them.
+
+Hereding does not apply to the system at all, and that is one of the
+genuine advantages of automation: the system holds the stated allocation
+because the allocation is stated, not because the last three months were
+good.
+
+Sophistication is the trap the system walks into by construction, and the
+only defence is the one this book spends Part IV on.
+
+\begin{keytakeaways}
+\item The four traps have magnitudes: 3.4 points a year denied by the
+disposition effect, 6.5 points a year lost by the most active retail
+traders, plus a documented aggregate herding effect and the book's own
+version of the sophistication trap.
+\item A rule that could see the cost basis could reproduce the disposition
+effect exactly; no allocation rule in this book is permitted to read it.
+\item A system is more exposed than a human to overtrading and to the
+illusion of control, and only partly protected by a no-trade band and a
+declared trial family.
+\item The defences are stated as numbers --- turnover, trial count,
+published results --- so that a reader can check them rather than trust
+them.
+\end{keytakeaways}

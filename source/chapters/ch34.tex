@@ -1,0 +1,117 @@
+% =====================================================================
+%  Chapter 34 — The Window Sensitivity
+% =====================================================================
+
+\chapter{The Window Sensitivity}
+\label{ch:window}
+
+Every backtest is a story about a window. This chapter takes the book's
+conclusion --- that the governor contributes and the model does not --- and
+asks what happens to it when the window moves. It is the check that
+separates a finding from a coincidence, and it is the one that a reader
+should apply to any backtest they are shown, including this one.
+
+\section{The method}
+
+The method is simple and it is worth stating precisely, because it is not
+the same as the usual sensitivity analysis.
+
+The system's layer attribution is recomputed from \numWindowCount{}
+different starting months, spread across the record. For each starting
+month, the policy alone, the policy with the model, and the policy with
+the governor are each re-measured over the remaining months, and the
+contribution of each layer is the difference in compound growth rate
+between the layer and the policy alone.
+
+The start dates are twelve months apart, and a window is only counted if
+it contains at least sixty months of record, because a compound growth
+rate computed over three years is not a compound growth rate in any
+useful sense.
+
+\section{What the governor does across the windows}
+
+The governor's contribution to the compound growth rate is positive in
+every one of the \numWindowCount{} windows. Its mean is \numGovMean{} a
+year, its minimum is \numGovMin{}, and its maximum is \numGovMax{}.
+
+That consistency is the finding. It is not a large effect, and the book
+does not claim it is. But it is the same sign and a similar magnitude in
+every sub-period of a twenty-four-year record, including the windows
+that contain the 2008 crisis and the windows that contain only the
+post-crisis recovery.
+
+The layer attribution from every starting month is shown in \figref{fig:window-sensitivity}.
+
+The explanation is not hard to see once the mechanism is understood. The
+governor acts on the portfolio's own drawdown, and every sub-period of
+the record contains a drawdown. Whatever the sub-period, there is
+something for the governor to do, and what it does --- reduce exposure
+during a decline --- is worth a little in that sub-period because the
+sub-period's subsequent recovery is what it protects.
+
+\section{What the model does across the windows}
+
+The model's contribution has a mean of \numTiltMean{} a year and a median
+of \numTiltMedian{}, and it is positive in only \numTiltPosFrac{} of the
+windows. Its best window is \numTiltMax{} and its worst is
+\numTiltMin{}.
+
+A layer whose contribution is positive in a quarter of the windows and
+whose best case is a twentieth of a percentage point a year is a layer
+that is not doing anything. The consistency of the governor and the
+inconsistency of the model are the same phenomenon seen from two sides: a
+mechanism that responds to realised state has a predictable effect on
+every sub-period, and a mechanism that responds to a forecast does not.
+
+\section{What this says about backtests in general}
+
+The generalisation is worth making, because the reader will meet it
+again.
+
+A backtest whose conclusion is robust to the choice of window is
+reporting something about the mechanism. A backtest whose conclusion
+depends on the window is reporting something about the sample. The
+distinction cannot be made from a single equity curve, and no amount of
+significance testing on the full sample substitutes for it.
+
+The test is cheap --- recompute the thing from a dozen starting dates ---
+and it is not commonly done. The reason it is not commonly done is the
+same reason Chapter 4's five leaks are not commonly checked: the failure
+is invisible unless someone goes looking for it.
+
+\begin{takeaway}[The general lesson]
+Recompute the conclusion from a dozen starting months. If the sign of the
+effect survives, you have a mechanism. If it does not, you have a sample,
+and the equity curve you are about to believe is a story about which
+months you happened to include.
+\end{takeaway}
+
+\section{The limitation of this check}
+
+Two limitations, stated so that the check is not mistaken for more than it
+is.
+
+It does not address the regime problem. A window sensitivity checks
+whether the conclusion is stable across sub-periods of the record; it
+does not check whether the record contains the regime the system will
+face next. Chapter 36 takes that up.
+
+And it does not address the family. The window sensitivity as computed
+here uses the default configuration. A configuration that was chosen
+because it worked in one window would pass its own window sensitivity if
+the reader did not also move the start date when they chose it --- which
+is exactly the researcher-level leak of Chapter 16, and exactly why the
+family is the unit of evaluation rather than the single configuration.
+
+\begin{keytakeaways}
+\item The governor's contribution is positive in all \numWindowCount{}
+windows, with a mean of \numGovMean{} a year and a minimum of
+\numGovMin{}.
+\item The model's contribution is positive in only \numTiltPosFrac{} of
+the windows, with a median of \numTiltMedian{}.
+\item A conclusion that survives a dozen starting months is about a
+mechanism; a conclusion that does not is about a sample.
+\item The check does not address regime change, and it does not protect
+against a configuration that was chosen using the window it was tested
+on.
+\end{keytakeaways}

@@ -1,0 +1,160 @@
+% =====================================================================
+%  Chapter 37 — The Law
+% =====================================================================
+
+\chapter{The Law}
+\label{ch:law}
+
+The owner asked for every legal advantage. This chapter sets out the legal
+envelope the system operates in, and it is short, because the envelope is
+wide and the system stays well inside it.
+
+\section{What the reader is doing}
+
+The reader buys and sells exchange-traded funds in their own account, for
+their own money, without telling anyone what to do and without being paid
+by anyone to do it.
+
+Under the Investment Advisers Act of 1940, a person who advises others
+about securities for compensation must register as an investment adviser.
+Section 9(a)(2) is the operative prohibition on doing so without
+registration, and Section 9(a)(3) prohibits fraudulent, deceptive or
+manipulative acts by an adviser. A person managing their own money is
+outside both: the Act's definition of an investment adviser excludes
+investment advisers who, as a substantial part of their regular business,
+provide advice with respect to securities only to investment accounts
+over which they exercise investment discretion, and only to accounts they
+own, in each case without compensation.
+
+The practical rule is short. Managing your own money is not advice to
+anyone else and requires no registration. Running the same system on
+behalf of a family member, a colleague or a paying client is a different
+activity entirely, and it is the point at which this chapter stops being
+relevant and a lawyer starts being relevant.
+
+\begin{takeaway}[The one-line rule]
+Trading your own account is not advisory activity and needs no
+registration. Doing the same thing for someone else, for compensation or
+with discretion over their money, is. This book assumes the first case and
+says nothing useful about the second.
+\end{takeaway}
+
+\section{What the system does not do}
+
+Three things a system of this kind could conceivably do that would
+create legal exposure, and that this one does not.
+
+\textbf{It does not manipulate.} Section 10(b) of the Securities Exchange
+Act and Rule 10b-5 prohibit fraud in connection with the purchase or
+sale of securities, and Rule 10a-1 and 10a-2 prohibit manipulative
+practices. The system buys a fund because its model ranks that fund
+favourably relative to the other funds available, and it sells a fund
+because its model or the governor says to. It does not create a
+synthetic quote, does not wash a trade between accounts, does not buy in
+order to move a price, and does not have the market impact to move a
+price in any case --- Chapter 11 showed that the reader's position is a
+rounding error against the fund's daily volume.
+
+\textbf{It does not disclose anything selectively.} Regulation FD, at
+17~CFR 243.100 through 243.103, requires a company that is an issuer or
+an insider to disclose material non-public information to securities
+holders and to the market. A private investor who is not an insider and
+who does not receive issuer information is not subject to it. The
+provision matters to this book only as a warning: the moment a reader
+begins to receive information from an issuer in connection with a
+position, the analysis of this chapter stops applying.
+
+\textbf{It does not borrow.} No part of the system uses margin, and
+Chapter 38's recommendations are all unlevered. This matters because the
+margin rules have changed recently and because borrowing turns a
+drawdown into a forced sale, which is the one thing the entire architecture
+of this book exists to prevent.
+
+\section{The margin rules, and a flag}
+
+The Financial Industry Regulatory Authority issued Regulatory Notice
+26-10 on 20 April 2026, effective 4 June 2026, which replaced the
+day-trading margin requirements --- including the familiar \$25,000
+minimum equity for a pattern day trader --- with new intraday margin
+standards under Rule 4210(d)(2).
+
+The book's environment presents one complication that must be flagged
+rather than smoothed over: the Securities and Exchange Commission's
+investor education page on day trading still describes the \$25,000
+pattern-day-trader requirement. The two are not consistent, and a reader
+who relies on the investor education page rather than the regulatory notice
+would be relying on a statement that the notice has superseded.
+
+The system in this book is unaffected either way, because it does not day
+trade, does not use margin, and trades monthly. The flag is included
+because the book is about taking every advantage, and an advantage that
+consists of acting on stale regulatory guidance is not an advantage.
+
+\section{The tax rules, as compliance rather than as arithmetic}
+
+The tax layer of Chapter 29 is not only an arithmetic model. It is a
+statement of what the reader must actually do.
+
+The wash-sale rule is a reporting and substantiation requirement: the
+basis of the replacement shares is adjusted, the holding period carries
+over, and the disallowed loss is tracked. A reader running this system
+must keep the lot records that make that possible. The book's engine
+keeps them, and the data they need --- the acquisition date, the
+quantity, the basis, the disposal date --- is exactly the data a broker's
+tax lot report provides.
+
+The capital-loss carryforward and the \$3,000 annual offset against
+ordinary income are also substantiation items. The engine computes them,
+but the reader must report them.
+
+\section{Exchange-traded funds, and the investor bulletin}
+
+The Securities and Exchange Commission's investor bulletin on exchange-
+traded funds makes two points that bear directly on this book's costs.
+The first is that the bid--ask spread is a real cost to the investor that
+does not appear in the expense ratio, and that most funds publish their
+median spread on their own website. The second is that an ETF's price can
+diverge from the value of the assets it holds.
+
+Neither point creates a legal exposure, and both are handled. The spread
+is charged in the book's cost model. The divergence is a consequence of
+the creation and redemption mechanism: an authorised participant
+exchanges a basket of securities for ETF shares and can arbitrage the
+difference, which is what keeps the price close to the value.
+
+\begin{takeaway}[Why the ETF structure is the safe wrapper]
+The creation and redemption mechanism is what keeps an ETF's price close
+to the value of its holdings, and it is the reason a single investor
+cannot move an ETF's price against itself. A single investor buying a
+fraction of a per cent of a fund's daily volume is not manipulating
+anything; a single investor cannot.
+\end{takeaway}
+
+\section{The limits of this chapter}
+
+Three exclusions, stated rather than hidden.
+
+This is not legal advice, and a reader with specific circumstances should
+obtain it. This chapter is a description of the envelope as it stood at
+the date on the copyright page, not a legal opinion.
+
+It does not cover state law, which varies on the treatment of some
+securities and on the definition of advice.
+
+And it does not cover the reader's own employment. A reader who is
+subject to a restricted list, a personal account dealing policy, or a
+conflict-of-interest rule at their employer has obligations that this
+chapter does not know about, and those obligations are strict.
+
+\begin{keytakeaways}
+\item Trading your own account requires no registration; advising others
+for compensation does, and this book assumes the first case.
+\item The system does not manipulate, does not make selective disclosures,
+and does not borrow --- the last of which is what keeps a drawdown from
+becoming a forced sale.
+\item The margin rules changed in June 2026 and the investor education
+material has not caught up; the book flags the conflict rather than
+reconciling it.
+\item The tax layer is a compliance record as well as an arithmetic model,
+and the wash-sale bookkeeping is a substantive obligation.
+\end{keytakeaways}

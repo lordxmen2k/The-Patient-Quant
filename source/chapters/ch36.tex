@@ -1,0 +1,133 @@
+% =====================================================================
+%  Chapter 36 — When the Machine Is Wrong
+% =====================================================================
+
+\chapter{When the Machine Is Wrong}
+\label{ch:wrong}
+
+Everything in this book has been about a machine that does almost nothing.
+This chapter is about the other case: what happens when a system like this
+one is wrong, and what the reader should do when it is.
+
+\section{Three ways it fails}
+
+A forecasting layer fails in three distinguishable ways, and they have
+different signatures and different remedies.
+
+\textbf{It is wrong about the sign.} The model predicts that a fund will
+outperform its peers and it underperforms. The remedy is the obvious one:
+the tilt is bounded, the losses are small, and the next month produces a
+new forecast. This is the failure mode the architecture was designed for,
+and it is why the tilt's contribution is a fraction of a basis point
+rather than a catastrophe.
+
+\textbf{It is right about the sign and wrong about the size.} The model
+says a fund will outperform and it does, but by less than the forecast.
+The cost is the same as above: the tilt was small.
+
+\textbf{It is right about the sign and wrong about the horizon.} The model
+says a fund will outperform over three months and it underperforms over
+twelve. This is the failure mode the ensemble's two horizons and the
+discounted score are designed to catch, and Chapter 19 showed that the
+ensemble's members routinely disagree.
+
+None of these three is dangerous, and that is the point of the
+architecture.
+
+\section{The failure that is dangerous: the regime}
+
+The dangerous failure is not about any particular forecast. It is about
+the relationship between the model and the market changing.
+
+Three mechanisms would do it. A change in the composition of the investor
+base --- the crowding mechanism of Chapter 3 --- would compress the
+returns that the features were picking up. A change in the structure of
+the market itself --- the arrival of a new instrument, a change in the
+index construction rules, a change in the tax code --- would break the
+mapping from the features to the returns. And a change in the
+distribution of returns --- a crisis, a regime of much higher volatility
+--- would change the scale on which every threshold in the system sits.
+
+The system's defences against this are partial and worth listing
+honestly. The discounted ensemble score is a defence of the first kind:
+a member whose edge has decayed stops being weighted. The half-life is a
+parameter precisely so that the speed of the defence can be argued about
+rather than assumed. The drawdown brake is a defence of the third kind,
+and the shock of a regime change is precisely the sort of thing that
+produces the drawdown the brake responds to.
+
+What the system has no defence against is the second kind. A change in
+the market's structure does not announce itself in the model's own
+performance until after it has happened.
+
+\begin{takeaway}[The honest limit]
+The system can notice that a forecast has stopped working, because the
+ensemble's score is computed from realised outcomes and is discounted. It
+cannot notice that the feature set has stopped describing the market,
+because that is a change in the relationship rather than in the
+performance of any particular forecast.
+\end{takeaway}
+
+\section{What a reader should watch}
+
+Four observables, all of them available from the record without any
+additional machinery.
+
+\textbf{The tilt's contribution.} Chapter 34 computes it over every
+starting month. A reader who runs the system can compute the same thing
+each year and watch whether the tilt's contribution has turned
+persistently negative. If it has, the model has stopped working, and the
+honest response is to turn it off --- which is one of the book's
+ablations and requires no new code.
+
+\textbf{The ensemble's weight concentration.} If one member's weight
+collapses towards one, the model has found a single configuration it
+believes in, which is both a good sign and a warning: it means the
+evidence is being carried by one member, and the between-model uncertainty
+that the architecture relies on has gone.
+
+\textbf{The mean cash weight.} A rise in the cash weight means the system
+is finding less edge, and it is the system's own word on the matter.
+
+\textbf{The drawdown brake's firing frequency.} A brake that fires
+constantly is either in a regime the system was not designed for or has a
+threshold that is wrong for the reader's circumstances.
+
+The ensemble's weights over the record are shown in \figref{fig:model-weights}, and a reader should watch them for concentration.
+
+\section{When the reader should override the system}
+
+This is the question Chapter 8 is really about, and the book should
+answer it directly.
+
+The system should be overridden when the reader's circumstances have
+changed --- not when the portfolio has. A change in income, in the
+stability of employment, in the horizon, or in the willingness to sit
+through a drawdown is a legitimate reason to change the strategic
+allocation, and the book's architecture permits exactly that, because the
+allocation was never the model's to set.
+
+The system should not be overridden because the portfolio is down. That is
+the disposition effect of Chapter 9 and the myopic loss aversion of
+Chapter 8, and both of them are worth more to the investor than the
+system is.
+
+And the system should not be overridden because a particular month's
+forecast looks wrong to the reader. The forecast is a posterior mean with
+a large uncertainty attached, the position it produced was small for
+exactly that reason, and the reader's opinion of a specific fund is not
+more informative than the model's.
+
+\begin{keytakeaways}
+\item A forecasting layer that is wrong about the sign, the size or the
+horizon is dangerous only in proportion to the size of the positions it
+produced, which is why the tilt is bounded and priced.
+\item The dangerous failure is a regime change, and the system's defences
+against it are partial: a discounted score notices a decaying edge, but
+nothing notices a change in the mapping from features to returns.
+\item Four observables let a reader know the model has stopped working: the
+tilt's contribution, the ensemble's weight concentration, the cash
+weight, and the brake's firing frequency.
+\item Override the system when your circumstances change; do not override
+it because the portfolio is down.
+\end{keytakeaways}

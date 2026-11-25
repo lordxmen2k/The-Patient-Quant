@@ -1,0 +1,121 @@
+% =====================================================================
+%  Chapter 27 — The Certainty-Equivalent Tilt
+% =====================================================================
+
+\chapter{The Certainty-Equivalent Tilt}
+\label{ch:tilt}
+
+Chapter 26 derived a sizing rule for assets. This chapter applies it to
+the book's actual problem --- tilting inside a sleeve, without touching
+the sleeve --- and explains the mechanics that turn a set of position
+sizes into a portfolio the investor can hold.
+
+\section{Why the tilt is bounded and renormalised}
+
+The certainty-equivalent solve of Chapter 26 produces, for each sleeve, a
+vector of weights. Left alone, those weights would replace the sleeve's
+allocation entirely, which is not what the book wants: the sleeve's
+\emph{total} is set by policy, and the model is permitted to change only
+its composition.
+
+The book therefore does three things in sequence.
+
+First, it takes the certainty-equivalent weights for the sleeve's live
+members and clips the deviations from the base weights to a bound:
+\begin{equation}
+d_i = \operatorname{clip}\!\left(
+  \frac{w_i^{CE}}{b_i} - 1,\ -\frac{1}{2},\ \frac{1}{2}\right),
+\end{equation}
+where \(b_i\) is the base weight of member \(i\) inside the sleeve.
+
+Second, it applies the tilt:
+\begin{equation}
+\tilde{b}_i = b_i\left(1 + \kappa\, d_i\right),
+\end{equation}
+where \(\kappa\) is the tilt scale. The book uses \(\kappa = 0.25\), so the
+tilt moves a sleeve's composition by at most an eighth in either
+direction.
+
+Third, it renormalises the sleeve back to its policy weight:
+\begin{equation}
+b_i \leftarrow \tilde{b}_i\,\frac{\sum_j b_j}{\sum_j \tilde{b}_j},
+\end{equation}
+so that the sleeve's total is exactly what the policy says.
+
+\begin{takeaway}[What the bound buys]
+The tilt can change which funds inside a sleeve are held and can move the
+sleeve's total within a bound, and it can do neither by much. A reader
+who disagrees with the model can undo its entire contribution by
+reverting to the base weights, and the difference will be at most a
+fraction of a per cent of the portfolio per month.
+\end{takeaway}
+
+\section{Why the clipping is a second layer of protection}
+
+The clip at \(\pm 1/2\) on the deviation is not a numerical convenience.
+It bounds the influence of any single asset's forecast on the portfolio.
+
+Without it, a single fund whose posterior mean happened to be extreme
+would dominate its sleeve's allocation, and the tilt would stop being a
+tilt and become a concentrated bet on one forecast. With it, the maximum
+sleeve-relative move per member is 50 per cent before the tilt scale is
+applied, and 12.5 per cent after.
+
+The second-order effect is more important than the first, and it is
+favourable. The clip is a *non-linearity* that the certainty-equivalent
+rule did not ask for, and it makes the tilt's response to an extreme
+forecast flatter than the linear rule would be. The practical consequence
+is that the tilt's contribution to the portfolio's return distribution has
+bounded tails, which is what makes it safe to add to a portfolio whose
+main job is to protect principal.
+
+\section{What the tilt does in practice}
+
+The book's system produces an average cash weight and an average turnover,
+both reported in Part VI, and they are the direct evidence of how much the
+tilt does.
+
+The qualitative picture is stable across the whole record and across
+almost every configuration in the trial family. The tilt is small: the
+average sleeve-relative deviation is a fraction of a percentage point.
+The turnover is modest: a few per cent a month. The mean cash weight is
+small but non-zero, and it rises in the periods when the posterior over
+the edge is least favourable.
+
+This is the expected behaviour of a system whose forecast is a posterior
+with a large variance, and Chapter 20's arithmetic predicts it exactly. A
+forecast that is a fraction of a standard deviation from zero produces a
+certainty-equivalent weight that is nearly zero.
+
+The response of the certainty-equivalent weight to the signal-to-noise ratio of the forecast is shown in \figref{fig:kelly-shrinkage}.
+
+\section{The cost of the tilt}
+
+Two costs, and both are small.
+
+The \emph{spread cost} is charged on every one-way trade, at half the
+quoted spread. The tilt is the source of essentially all of the system's
+turnover, so the cost of the tilt is the cost of the whole system.
+
+The \emph{tax cost} is subtler and larger. The tilt causes the portfolio
+to realise gains and losses, and realised gains are taxed at the
+preferential rate while realised losses offset ordinary income only up to
+\$3,000 a year. A portfolio that tilts has a systematically higher
+turnover of realised gains, and the tax bill is the price of the tilt.
+
+The book's taxable account exists to measure exactly this, and Part VI
+reports the gap between the two accounts. It is the clearest single
+illustration of the point of Chapter 3: a strategy that does not work has
+costs, and the costs are paid whether or not the strategy pays.
+
+\begin{keytakeaways}
+\item The tilt is clipped, scaled and renormalised, so that the model can
+change a sleeve's composition but not its total, and can move the total
+only within a bound.
+\item The clip is a second, non-linear layer of protection that bounds the
+tilt's contribution to the tail of the portfolio's return distribution.
+\item The tilt's actual magnitude is a fraction of a percentage point per
+sleeve, which is what Chapter 20's arithmetic predicts.
+\item The tilt's costs are real: it is the source of the turnover and the
+tax bill, and it pays them whether or not it pays the investor.
+\end{keytakeaways}

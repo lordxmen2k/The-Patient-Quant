@@ -1,0 +1,141 @@
+% =====================================================================
+%  Chapter 18 — The Normal-Inverse-Gamma Posterior in Detail
+% =====================================================================
+
+\chapter{The Normal-Inverse-Gamma Posterior in Detail}
+\label{ch:nig}
+
+Chapter 17 stated the model and its update. This chapter takes the two
+scalar parameters seriously, because the book's central claim --- that
+the machine's job is to estimate the posterior over the edge --- lives
+entirely in the relationship between \(\alpha_n\), \(\beta_n\) and the
+quantities the portfolio layer consumes.
+
+\section{Why inverse-gamma}
+
+The scale \(\sigma^2\) is unknown and the coefficients are unknown, and
+they are not independent: a large \(\sigma^2\) makes any particular
+coefficient hard to pin down. The conjugate treatment is to give
+\(\sigma^2\) an inverse-gamma prior and condition the coefficient prior
+on it, so that \(\beta \mid \sigma^2\) is normal with precision proportional
+to \(1/\sigma^2\).
+
+With \(\alpha_0 = 2.5\) and \(\beta_0 = 0.5\), the prior mean of
+\(\sigma^2\) is
+\begin{equation}
+E[\sigma^2] = \frac{\beta_0}{\alpha_0 - 1} = \frac{0.5}{1.5} = \frac{1}{3},
+\end{equation}
+which in monthly terms is an annualised volatility of about
+\(\sqrt{12/3} = 2\), i.e. 200 per cent. That is a deliberately absurd
+prior on the scale: it says that before seeing any data, the residual
+volatility of a fund could be anything, and that the data must supply
+almost all of the information.
+
+The reason for the absurdity is that the prior on the scale is the one
+place where a sensible prior would be actively harmful. A prior that said
+"monthly residual volatility is around four per cent" would dominate the
+data in the early years, when there are few observations, and would
+suppress exactly the volatility estimate the risk layer needs. An
+uninformative prior on the scale costs almost nothing, because the data
+speaks quickly about the scale --- the scale needs only the number of
+observations, not their signal.
+
+\section{The posterior scale and what it measures}
+
+The posterior parameters are
+
+\begin{equation}
+\alpha_n = \alpha_0 + \frac{n}{2},
+\qquad
+\beta_n = \beta_0 + \frac{1}{2}\,\mathrm{RSS}_n,
+\end{equation}
+where \(\mathrm{RSS}_n\) is the residual sum of squares plus the prior
+term, and the posterior mean of \(\sigma^2\) is
+
+\begin{equation}
+E[\sigma^2 \mid y] = \frac{\beta_n}{\alpha_n - 1}.
+\end{equation}
+
+What this quantity is \emph{not} is the volatility of the fund. It is the
+volatility of the residual of the regression --- the part of the fund's
+monthly return that the twelve features do not explain. For a broad
+market tracker, the features explain almost nothing, so the residual
+volatility is nearly the whole volatility. For a fund whose recent
+behaviour is well described by its own momentum and volatility, the
+residual is smaller.
+
+This matters because the book's risk layer needs the \emph{total} risk of
+the portfolio, and gets it from the empirical covariance matrix of
+returns, not from the model's residual scale. The model's scale is used
+for the thing it is good at: measuring how much of the forecast's
+uncertainty is irreducible.
+
+\section{Where the doubt comes from}
+
+The posterior variance of the mean at a new point is
+\begin{equation}
+v_{\mathrm{mean}} = \hat{\sigma}^2\, x_*^{\prime}A_n^{-1}x_*.
+\end{equation}
+
+Three things determine its size, and they are worth separating because
+they behave differently over the life of the system.
+
+\textbf{The information in the features.} The term \(x_*^{\prime}A_n^{-1}x_*\)
+is the Mahalanobis distance of the new observation from the prior mean in
+the metric of the data's information. A fund whose features are unusual
+relative to everything the model has seen --- a fund that has just moved
+far from its own history --- has a larger value, and therefore a more
+uncertain forecast.
+
+\textbf{The amount of data.} Through the prior term in
+\(A_n^{-1} = (\Lambda + X^{\prime}X)^{-1}\), the prior acts as a floor. In
+the early years, when \(X^{\prime}X\) is small, \(A_n^{-1}\) is close to
+\(\Lambda^{-1}\), and every forecast carries the prior's uncertainty
+however much data there is. As the panel grows, \(A_n^{-1}\) shrinks and
+the forecasts tighten --- but only for the funds whose features are
+well-represented in the data.
+
+\textbf{Disagreement with the prior.} The prior mean is zero. A forecast
+far from zero is a forecast the prior does not support, and the model's
+own uncertainty about it is correspondingly larger.
+
+The posterior band and the share of the uncertainty that is doubt about the forecast are shown in \figref{fig:posterior}.
+
+\section{The consequence that shapes the portfolio layer}
+
+Here is the step that the rest of the book depends on, and it is worth
+stating as a single sentence.
+
+The forecast \(\mu\) is a random variable whose posterior spread is
+\(v_{\mathrm{mean}}\). The investor does not know \(\mu\); the investor
+knows a distribution. If the portfolio layer sized a position on \(\mu\)
+alone, it would be acting as though the investor knew the expected return
+exactly, and would therefore take a full position whenever the sign of
+\(\mu\) was right --- which is precisely when it is most likely to be
+wrong.
+
+The certainty-equivalent construction of Chapter 26 does the opposite: it
+replaces the unknown expected return by the quantity an investor who is
+risk-averse to being wrong should act on, and the size of the position
+falls as the doubt rises. When the doubt is large --- which, as
+\figref{fig:posterior} shows, it usually is --- the position
+becomes small, and the portfolio is close to the stated policy.
+
+This is why the book can report, in Part VI, that the machine's
+contribution to the return is small, and still be describing a system that
+works. A layer that contributes nothing when it knows nothing is not a
+defect; it is the layer doing its job.
+
+\begin{keytakeaways}
+\item The scale prior is deliberately uninformative, because the data
+speaks quickly about the scale and a sensible prior would suppress the
+early-year volatility estimates the risk layer needs.
+\item The posterior scale is the volatility of the regression residual,
+not the volatility of the fund; the portfolio's total risk comes from the
+empirical covariance of returns.
+\item The posterior variance of the mean is small relative to the
+posterior variance of the observation, and that gap is the entire
+justification for the certainty-equivalent sizing of Chapter 26.
+\item A layer that contributes nothing when it knows nothing is the layer
+working correctly.
+\end{keytakeaways}

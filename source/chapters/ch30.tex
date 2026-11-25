@@ -1,0 +1,135 @@
+% =====================================================================
+%  Chapter 30 — Assembling the System
+% =====================================================================
+
+\chapter{Assembling the System}
+\label{ch:assembled}
+
+This chapter describes the assembled system end to end: the monthly loop,
+the order in which the layers act, and the accounting that runs alongside.
+It is the chapter in which the reader can check that the architecture of
+Parts IV and V is what the code actually does.
+
+\section{The monthly loop}
+
+At each month end \(t\), the system does the following, in this order.
+
+\begin{enumerate}
+\item \textbf{Receive dividends.} The cash dividends paid during month
+\(t\) are credited to the accounts, in proportion to the positions held at
+the end of month \(t-1$. No dividend is received on a position bought
+during month \(t\).
+\item \textbf{Form the target weights.} The strategic allocation is scaled
+to the funds that exist; the base weights inside each sleeve are
+inverse-volatility; the model's tilt is computed, clipped, scaled and
+renormalised; and the risk governor then applies the volatility scaler
+and the drawdown brake.
+\item \textbf{Trade.} The target is compared with the current holdings.
+Trades smaller than a no-trade band are skipped. Sells happen before
+buys, so that the cash raised by a sale is available for a purchase in the
+same month rather than the next.
+\item \textbf{Price and value.} The positions are revalued at the next
+month's prices, and each account's value is recorded.
+\item \textbf{Settle the year.} If the month is a December, the taxable
+account's tax for the year is computed and paid; the tax-exempt account
+settles with no payment.
+\end{enumerate}
+
+The order matters, and each choice has a reason.
+
+Dividends are credited before trading, because a dividend paid in month
+\(t\) on a position held at the end of month \(t-1\) is income the
+investor actually received and can reinvest.
+
+Sells precede buys, so that the spread paid on a reallocation is charged
+once per security rather than twice, and so that the account is not left
+holding cash it did not need to hold.
+
+The no-trade band exists for two reasons that Chapter 8 and Chapter 10
+give separately: it saves spread costs, and it reduces the number of
+moments at which the investor is invited to look at the account.
+
+\section{Why the loop is monthly}
+
+The data is monthly, the target horizons are one and three months, and the
+governor acts on a drawdown that is measured in months. Monthly is the
+natural frequency of the whole system.
+
+But the reason to state the frequency is not the implementation; it is
+Chapter 8. The evaluation frequency of the portfolio is a behavioural
+parameter with a large price. A system that rebalances monthly but whose
+owner looks at it monthly has made the myopic loss aversion of
+Benartzi and Thaler fully operative on a strategy whose whole point is a
+long horizon.
+
+This is why the book's reporting cadence is deliberately slower than its
+rebalancing cadence, and why the drawdown brake exists in the form it
+does: the system is built so that the owner's attention is not required
+at monthly frequency, even though the system's own arithmetic runs there.
+
+\begin{takeaway}[The reporting cadence]
+The system rebalances monthly and reports quarterly. The gap between the
+two is a deliberate application of Chapter 8: the psychic cost of
+evaluating a long-horizon portfolio more often than necessary is larger
+than most of the effects this book measures.
+\end{takeaway}
+
+\section{The no-trade band and the cost model}
+
+The no-trade band is half a per cent of the portfolio's value. A target
+weight that differs from the current weight by less than that is not
+traded. The effect on turnover is substantial, and the effect on the
+tax bill is larger, because most of what the band suppresses is the
+realisation of small gains.
+
+The cost model charges half the quoted spread on each one-way trade. For
+the most liquid funds the book charges two basis points of spread, for
+the rest six. The costs are charged in the simulation, not estimated
+afterwards, and Chapter 33 reports the result under doubled and tripled
+spreads.
+
+Expense ratios are not charged, for the reason set out in Chapter 10: they
+are already inside the price series from which the returns are built.
+
+\section{The two accounts}
+
+The taxable and tax-exempt accounts are run in the same loop, with the same
+targets and the same trades, and the only difference is that one pays tax
+at each year end. They are also linked for the wash-sale rule: a
+purchase in either account within the thirty-day window of a loss in the
+taxable account disallows that loss.
+
+The point of running both is that it isolates the tax exactly. A reader
+who wants to know what the strategy is worth in a taxable account gets
+the answer without having to model the tax themselves, and a reader who
+wants to know what the strategy is worth in a retirement account gets
+that answer too, from the same weights.
+
+The governor's two traces over the record --- the exposure multiplier it applied and the drawdown that triggered the brake --- are shown in \figref{fig:governor}.
+
+\section{What the assembly does not include}
+
+The system's own record is a simulation. It is not a trading record, and
+the book is careful never to describe it as one. It uses prices at month
+end, charges a spread approximation rather than modelling the order
+book, assumes the trades fill, assumes the investor can act at the month
+end without market impact --- which Chapter 11 showed is safe at this
+size --- and assumes no cash drag and no forced sales.
+
+It also assumes the investor behaves: no overriding, no panic selling, no
+additional purchases. Chapter 8's argument is that the system's design
+is what makes that assumption reasonable, and Chapter 36 takes the
+assumption seriously and asks what happens when it fails.
+
+\begin{keytakeaways}
+\item The monthly loop credits dividends, forms the target, trades with a
+no-trade band and sells before buying, revalues, and settles the tax at
+the year end.
+\item The rebalancing cadence is monthly and the reporting cadence is
+quarterly, which is a direct application of the myopic loss aversion
+result.
+\item The cost model charges half the spread per one-way trade and does
+not charge expense ratios, because they are already in the returns.
+\item The record is a simulation under stated assumptions, not a trading
+record, and the book never describes it as one.
+\end{keytakeaways}

@@ -1,0 +1,352 @@
+% =====================================================================
+%  The Patient Quant — front matter
+%  Half-title, title page, copyright, dedication, epigraph, contents,
+%  figures, tables, management summary, preface, how to use this book.
+% =====================================================================
+
+% ---- Half-title ---------------------------------------------------------
+\pagestyle{plain}
+\clearpage
+\thispagestyle{empty}
+\vspace*{1.15in}
+{\sffamily\fontsize{22}{26}\selectfont\color{txt}\bookTitle\par}
+\vspace{10pt}
+{\sffamily\fontsize{11}{14}\selectfont\color{txtdim}\bookSubtitle\par}
+\vfill
+{\sffamily\small\color{txtdim}\bookAuthor\par}
+\vspace{6pt}
+{\sffamily\small\color{txtdim}\bookImprint\par}
+\clearpage
+
+% ---- Title page ---------------------------------------------------------
+\clearpage
+\thispagestyle{empty}
+\vspace*{0.75in}
+{\sffamily\fontsize{26}{30}\selectfont\bfseries\color{txt}\bookTitle\par}
+\vspace{12pt}
+{\sffamily\fontsize{12}{16}\selectfont\color{accent}\bookSubtitle\par}
+\vspace{22pt}
+\noindent{\color{accent}\rule{\textwidth}{1.8pt}}\par
+\vspace{18pt}
+{\sffamily\large\color{txt}\bookAuthor\par}
+\vspace{8pt}
+{\sffamily\small\color{txtdim}\bookImprint, publisher\par}
+\vspace{4pt}
+{\sffamily\small\color{txtdim}\bookEdition\par}
+\vspace{18pt}
+{\sffamily\small\color{txtdim}
+Facts current as of \bookFactsDate.\par}
+\vfill
+\clearpage
+
+% ---- Copyright page -----------------------------------------------------
+\clearpage
+\thispagestyle{plain}
+\noindent{\sffamily\bfseries\color{txt}\bookTitle}\par
+\noindent{\sffamily\small\color{txtdim}\bookSubtitle}\par
+\vspace{14pt}
+\noindent\rule{\textwidth}{0.4pt}\par
+\vspace{10pt}
+\noindent Copyright \textcopyright\ 2026 Tico Internet LLC. All rights
+reserved.\par
+\vspace{6pt}
+\noindent Tico Internet LLC, publisher.\par
+\vspace{10pt}
+\noindent\textbf{Edition:} 2026 First Edition.\par
+\vspace{6pt}
+\noindent\textbf{Subject headings:} Portfolio management --- Personal
+finance; Portfolio performance --- Evaluation; Machine learning ---
+Applications; Bayesian analysis; Risk management; Capital gains tax;
+Mutual funds --- United States; Exchange-traded funds; Saving and
+investing; Risk.\par
+\vspace{10pt}
+\noindent\textbf{Licence.} This work is published under the Apache License,
+Version 2.0. The complete licence text is available at
+\href{https://www.apache.org/licenses/LICENSE-2.0}{\code{apache.org/licenses/LICENSE-2.0}}.
+The book may be copied, modified and redistributed, including for commercial
+purposes, provided that this notice and the attribution required by the
+licence are retained.\par
+\vspace{10pt}
+\noindent\textbf{DOI:} \href{https://doi.org/\bookDOI}{\texttt{\bookDOI}}\par
+\vspace{10pt}
+\noindent\textbf{ISBN:} 978-1-0000-0000-0 (reserved; to be assigned on
+publication).\par
+\vspace{10pt}
+\noindent\textbf{Source materials.} The Python package, the build scripts,
+the figures, the data cache and the research ledger behind this book are
+published at \texttt{github.com/lordxmen2k/The-Patient-Quant}. Every figure
+in the book is computed by that code from the data in that repository; no
+figure is transcribed.\par
+\vspace{10pt}
+\noindent\textbf{What this book is.} This book builds one complete
+investment system for a single investor, runs it over
+\numRecordMonths{} months of history net of trading costs and of the
+capital gains tax, and reports what it is worth. It carries its own
+arithmetic: the estimators, the tax engine and the evaluation machinery
+are written from their objective functions and are included with the
+book. It states its losses plainly, and its central result is a null
+result: the machine-learning layer contributes approximately nothing, and
+the risk layer contributes a materially shallower worst episode. It does
+not promise an edge, and it does not describe a live trading record.\par
+\vspace{10pt}
+\noindent\rule{\textwidth}{0.4pt}\par
+\vspace{8pt}
+{\sffamily\small\color{txtdim}Typeset in XeLaTeX with Outfit, DejaVu Sans Mono
+and Fira Math. First edition, 2026.\par}
+\clearpage
+
+% ---- Dedication ---------------------------------------------------------
+\clearpage
+\thispagestyle{empty}
+\vspace*{2.6in}
+\begin{center}
+{\sffamily\itshape\color{txtdim}
+For the person who has to keep holding the statement,\\[6pt]
+and who would rather know.\par}
+\end{center}
+\vfill
+\clearpage
+
+% ---- Epigraph -----------------------------------------------------------
+\clearpage
+\thispagestyle{plain}
+\begin{epigraph}
+The best time to plant a tree was twenty years ago. The second best time
+is now, and the second best answer is to hold the index and stop reading.
+
+\rule{1.6in}{0.3pt}
+
+This book, on the evidence it gathers
+\end{epigraph}
+\vfill
+\clearpage
+
+% ---- Contents -----------------------------------------------------------
+\clearpage
+\thispagestyle{plain}
+\markboth{Contents}{Contents}
+\tableofcontents
+\addcontentsline{toc}{chapter}{Contents}
+\clearpage
+
+% ---- Figures ------------------------------------------------------------
+\clearpage
+\thispagestyle{plain}
+\markboth{Figures}{Figures}
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\clearpage
+
+% ---- Tables -------------------------------------------------------------
+\clearpage
+\thispagestyle{plain}
+\markboth{Tables}{Tables}
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\clearpage
+
+% ---- Management summary -------------------------------------------------
+% The front matter's unnumbered chapters must not number their sections.
+\setcounter{secnumdepth}{-1}
+\chapter*{Management Summary}
+\addcontentsline{toc}{chapter}{Management Summary}
+\markboth{Management Summary}{Management Summary}
+\thispagestyle{plain}
+
+This page is the book in the form a decision-maker needs it. The remainder
+of the volume derives, tests and qualifies every statement below.
+
+\section*{The question}
+
+Whether there is a machine-learning procedure that a single investor can
+implement, that makes money and protects principal at the same time, and
+that can be evaluated honestly enough that the investor knows which of the
+two it is actually doing.
+
+\section*{The answer}
+
+A complete, specified, runnable system --- a stated strategic allocation
+that the model may not touch, a bounded forecast-driven tilt inside each
+sleeve, a risk governor, a capital-gains tax engine and a monthly
+rebalancing loop --- evaluated over \numRecordMonths{} months, net of
+spread costs and of tax, against the benchmark and against four
+competitors, with the trial family declared in advance and the selection
+tests applied to the book's own results.
+
+\section*{The rule}
+
+The strategic allocation is never set by the model. The model may tilt
+inside a sleeve by a bounded amount, and it may hold cash. Everything the
+model does is therefore reversible by the reader without changing the
+book's argument, and the protection layer --- which needs no forecast and
+therefore cannot be wrong about the future --- is what carries the result.
+
+\section*{The five numbers that decide it}
+
+\begin{itemize}
+\item \textbf{\numFullCAGR{}} a year, against the index's
+\textbf{\numSpyCAGR{}}, over \numRecordMonths{} months.
+\item \textbf{\numFullDD{}}, against the index's \textbf{\numSpyDD{}} ---
+a shallower worst episode by about seventeen percentage points.
+\item \textbf{\numFullSharpe{}}, against the index's \textbf{\numSpySharpe{}}
+--- indistinguishable on risk-adjusted return.
+\item \textbf{\numPBO{}} --- the probability that the best configuration in
+the first half of the record is among the worst in the second half is
+above one half. The selection procedure is worse than a coin flip.
+\item \textbf{\numTiltMean{}} a year --- what the machine-learning layer
+contributes. Approximately nothing, in both senses of the phrase.
+\end{itemize}
+
+\section*{What it does not do}
+
+It does not beat the index. It does not claim that any forecast was
+found. It does not argue that the equal-weighted portfolio of the same
+sixty-one funds is worse --- on this record that portfolio earned
+\textbf{\numEqualCAGR{}} with a drawdown of \textbf{\numEqualDD{}}, more
+money and more pain, with no machinery at all. And it does not describe a
+live trading record; it describes a simulation under stated assumptions.
+
+\begin{keytakeaways}
+\item The protection comes from the risk layer, which needs no forecast,
+and its contribution is positive in every starting month tested.
+\item The prediction layer contributes approximately nothing, and the
+selection tests cannot distinguish the system's return from the
+benchmark's.
+\item The evaluation is the transferable result: a declared trial family
+of \numFamilySize{} members, four selection tests applied to the book's
+own results, and a null reported as a null.
+\item The largest number in the subject is behavioural: the psychic cost of
+evaluating a long-horizon portfolio annually is 5.1 per cent a year.
+\end{keytakeaways}
+\clearpage
+
+% ---- Preface ------------------------------------------------------------
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\markboth{Preface}{Preface}
+\thispagestyle{plain}
+
+The owner of this project asked for a book about making money and
+protecting principal with quant prediction algorithms and machine learning,
+and the request was framed in the language of the trading floor: getting
+every advantage and avoiding every pitfall.
+
+Written to that specification, the book has an obvious and wrong ending.
+A system that predicts returns, trades them, and reports a Sharpe ratio
+would satisfy the request and would also be worth nothing, for reasons
+that are now well established and that the first four chapters set out.
+The replication evidence is partial and the published factors have decayed.
+Most professional managers, with orders of magnitude more data and more
+people, lose to a passive index on every long window measured. A third of
+the published equity-premium predictors no longer work in their own
+original sample.
+
+So the book was built the other way round. The forecast was made to be
+\emph{priced}, not to be believed: the model's output is a posterior
+distribution over the forward return, and the portfolio layer's job is to
+size positions against the width of that distribution. The measurement
+then came out where the measurement was always going to come out. The
+model's contribution is \numTiltMean{} a year, with a median of
+\numTiltMedian{}, and it is positive in \numTiltPosFrac{} of the
+windows tested. The risk governor's contribution is positive in every
+one.
+
+\section*{What the book does}
+
+It builds the whole thing. The data layer fetches and checksums sixty-one
+funds' price and dividend histories and rebuilds the monthly total returns
+from their components, masking the period before each fund listed so that
+a new listing does not acquire an artificial history of zero volatility.
+The model layer is a conjugate normal-inverse-gamma panel regression,
+refitted at every formation date on rows whose outcome has already been
+realised, combined across \numModelConfigs{} configurations by an online
+Bayesian model average whose weights depend only on outcomes already
+known. The portfolio layer applies a stated allocation, a
+certainty-equivalent Kelly tilt bounded inside each sleeve, a damped
+volatility scaler and a two-level drawdown brake. The tax engine keeps
+lots, applies the wash-sale rule in both directions across two accounts,
+and settles annually. The evaluation layer computes the compound growth
+rate, the Lo-corrected Sharpe ratio, the maximum drawdown, the time to
+recovery, the worst rolling twelve-month outcome, the Newey--West alpha,
+the Deflated Sharpe Ratio, the probability of backtest overfitting, the
+White reality check and the Hansen superior predictive ability test, and
+applies them all to the book's own family.
+
+None of it is a black box. Every estimator is written from its objective
+function, including the normal and Student distributions, and the package
+runs with nothing but \code{numpy}, \code{pandas} and \code{matplotlib}.
+
+\section*{What the book concludes}
+
+That the prediction is the easy part and it does not work; that the
+protection is the hard part and it does; and that the architecture which
+lets the two coexist --- a stated allocation the machine may not touch, a
+bounded tilt, a posterior that prices its own uncertainty, a governor
+that needs no forecast, a tax engine, and a trial family declared in
+advance --- is the result worth carrying away.
+
+\section*{How to read it if you are in a hurry}
+
+Read the Management Summary, then Part VII. If you want to know whether
+the numbers are real, read Appendix A and the verification gates in
+Appendix D, and then run the code.
+
+\begin{keytakeaways}
+\item The book was written to a specification whose obvious ending would
+have been worth nothing, so it was built the other way round: the
+forecast is priced rather than believed.
+\item Every estimator is written from its objective function; the package
+runs on \code{numpy}, \code{pandas} and \code{matplotlib} alone.
+\item The conclusion is that the risk layer carries the result and the
+prediction layer does not, and that the architecture is the transferable
+part.
+\end{keytakeaways}
+\clearpage
+
+% ---- How to use this book ------------------------------------------------
+\chapter*{How to Use This Book}
+\addcontentsline{toc}{chapter}{How to Use This Book}
+\markboth{How to Use This Book}{How to Use This Book}
+\thispagestyle{plain}
+
+\section*{If you intend to run the system}
+
+Start with Appendix A, which documents the data and its provenance, and
+Appendix C, which lists every fund, its expense ratio, its inception date
+and the live window over which the book could actually hold it. Then read
+Chapter 30, which describes the monthly loop in enough detail to
+reproduce it, and Chapter 33, which reports what the system is worth
+after every cost.
+
+The package is at \texttt{github.com/lordxmen2k/The-Patient-Quant}. The
+data fetch is a single command; the analysis is a single command; the
+figures are a single command. The build script runs the whole chain.
+
+\section*{If you intend to argue with it}
+
+The chapters most likely to be argued with are Chapter 23, which fixes the
+strategic allocation outside the model, Chapter 25, which reports the
+evidence that optimised portfolios do not beat equal weighting, and
+Chapter 32, which reports that the equal-weighted portfolio beat this
+system on compound return over the record.
+
+The book's own numbers are in \texttt{build/numbers.json} and in the
+generated macro file, and every figure is computed from those files. If a
+number in the text disagrees with the code, the code is right and the text
+is wrong, and the verification gates are set up to catch exactly that.
+
+\section*{If you are only reading for the argument}
+
+Part I states the question and the evidence that bounds it. Part VII gives
+the verdict and the recommendations. Part IV contains the mathematics and
+is the part that will matter if you want to build one of these yourself.
+
+\begin{keytakeaways}
+\item Run it: Appendix A and Appendix C document the data, Chapter 30 the
+loop, and the repository runs the whole chain with one command.
+\item Argue with it: Chapters 23, 25 and 32 are the load-bearing claims,
+and every number behind them is in the repository.
+\item Read it for the argument: Parts I and VII, with Part IV if you intend
+to build one of these yourself.
+\end{keytakeaways}
+\clearpage

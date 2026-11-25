@@ -1,0 +1,199 @@
+% =====================================================================
+%  Chapter 14 — Features from First Principles
+% =====================================================================
+
+\chapter{Features from First Principles}
+\label{ch:features}
+
+The model's input is twelve numbers per fund per month. This chapter defines
+each of them, states why it is there, and derives the two that are not
+immediate --- the Amihud illiquidity measure and the beta --- because a
+feature that is merely named is a feature that has not been checked.
+
+\section{The momentum family}
+
+Three features measure the same underlying quantity at different lengths,
+and the reason for having three rather than one is that the length is the
+parameter most likely to be wrong.
+
+\[
+\begin{aligned}
+\mathrm{mom}_{12,1,t} &= \frac{P_{t-1}}{P_{t-13}} - 1, \\
+\mathrm{mom}_{6,1,t}  &= \frac{P_{t-1}}{P_{t-7}} - 1, \\
+\mathrm{mom}_{36,t}    &= \frac{P_t}{P_{t-36}} - 1.
+\end{aligned}
+\]
+
+The subscript ``1'' is the skip. The most recent month's return is
+excluded, and the reason is worth stating carefully because it is the
+single most consequential convention in the feature layer.
+
+The argument is that a price that has just risen has already been
+accompanied by the buying that pushed it there. The cross-sectional
+empirical regularity is that the one-month reversal is large and negative
+--- the short-horizon effect that Chapter 11 noted institutions cannot
+scale --- and that including the most recent month in a momentum measure
+contaminates it with exactly that effect. A twelve-month momentum that
+includes the last month is a mixture of a genuine medium-horizon signal
+and a strong short-horizon reversal, and the mixture's weight depends on
+how much of the move happened in the last month.
+
+The thirty-six-month feature has no skip, for a different reason. At that
+length the one-month effect is a rounding error and the extra
+complexity of a skip is not worth it.
+
+\section{The reversal feature}
+
+\[
+\mathrm{rev}_{1,t} = -r_{t-1}.
+\]
+
+One number, and it is the negative of last month's return. This is the
+short-horizon reversal effect, and it is included in the feature set for
+two reasons. The first is that it is the strongest single regularity in
+the cross-section of liquid ETFs, and a model that does not contain it
+would be unable to express the fact that a fund that rose last month is
+currently expensive in the sense that matters. The second is that the
+book is testing a hypothesis, and the hypothesis includes the claim that
+the reversal is *stronger* than the momentum at short horizons. Letting
+the model see both, and weighting them by the posterior, is how that claim
+gets tested rather than asserted.
+
+\section{The volatility family}
+
+\[
+\mathrm{vol}_{12,t} = \sqrt{12}\cdot s_{12,t},
+\]
+where \(s_{12,t}\) is the sample standard deviation of the trailing
+twelve monthly returns, and
+\[
+\mathrm{volRatio}_t = \frac{\mathrm{vol}_{6,t}}{\mathrm{vol}_{12,t}} - 1.
+\]
+
+The first is the level of risk, and it is a feature because a forward
+return distribution conditional on recent volatility differs from the
+unconditional one --- low-volatility assets have historically earned
+slightly less than high-volatility assets, which is the low-beta and
+minimum-volatility premium, and the model should be able to express that
+view if the data supports it.
+
+The second is the \emph{change} in risk, and it is included for a
+different reason: it is a crude measure of the information state. A fund
+whose recent volatility has risen relative to its own year is in a
+different regime from one whose volatility has fallen, and a signal that
+ignores that distinction is treating them as the same asset.
+
+\section{The trend, drawdown and exposure features}
+
+\[
+\mathrm{trend}_{12,t} = \frac{1}{12}\sum_{j=0}^{11}
+  \mathbb{1}\{r_{t-j} > 0\} - \frac12,
+\]
+the excess of positive months over negative ones in the trailing year,
+centred. This is a distributional shape measure rather than a magnitude
+measure: a fund that rose by ten per cent in one month and fell by ten per
+cent in eleven has the same twelve-month return as one that rose in ten
+months and fell in two, and the two are in different places in the
+distribution.
+
+\[
+\mathrm{dd}_{12,t} = \frac{P_t}{\max_{j=0,\dots,12} P_{t-j}} - 1,
+\]
+the distance from the twelve-month high. This is the feature most closely
+related to the behavioural literature of Part II, and it is the one that
+speaks most directly to the drawdown brake of Chapter 28: a fund already
+far below its high is in the state in which a human holder is most likely
+to sell, and the model can be asked what it expects from that state.
+
+The two market-exposure features are the standard regression coefficients
+of the fund's monthly return on the benchmark's:
+
+\[
+\beta_{36,t} = \frac{\operatorname{Cov}(r_i, r^m)_{36}}{\operatorname{Var}(r^m)_{36}},
+\qquad
+\rho_{36,t} = \operatorname{Corr}(r_i, r^m)_{36},
+\]
+both estimated over the trailing thirty-six months.
+
+A high beta is not, by itself, a prediction. It is a statement about how
+much of the market's risk the fund carries, and its usefulness here is
+that it lets the model distinguish a fund that is a levered version of the
+market from one that is genuinely different. A low correlation with the
+market is a statement about diversification potential, and it is the
+feature that makes the cross-sectional model able to express a preference
+for a fund that adds something to a portfolio that already holds the
+market.
+
+\section{The liquidity feature, derived}
+
+The Amihud (2002) measure is the ratio of the absolute price change to
+the dollar volume, averaged over a window. The book uses the monthly
+form
+
+\[
+\mathrm{illiq}_{12,t} = \frac{1}{12}\sum_{j=0}^{11}
+  \frac{|r_{t-j}|}{V_{t-j}\cdot P_{t-j}},
+\]
+scaled by \(10^6\) for legibility.
+
+The intuition is that a dollar traded in a thin market moves the price
+more, so the price change per unit of money is a measure of how expensive
+it is to trade. A high value means the fund moves a lot for little money:
+it is illiquid, and it is expensive to hold in the sense that a position
+in it cannot be exited at the quoted price.
+
+The economic content is that illiquidity is priced: illiquid assets earn
+a premium. Whether that premium is available to a single investor is a
+separate question, and the book's answer --- developed in Chapter 33 ---
+is that the spread cost the investor actually pays is a significant
+fraction of it.
+
+\section{Standardisation, and why it is per-date}
+
+Every feature is standardised within each date:
+\[
+z_{i,t} = \frac{x_{i,t} - \bar{x}_t}{s_t},
+\]
+where \(\bar{x}_t\) and \(s_t\) are the mean and standard deviation of
+that feature across the funds that exist on date \(t\).
+
+Two properties matter. The first is that the standardisation is computed
+per date, so no statistic computed over the whole sample ever enters the
+model; there is no in-sample mean to leak. The second is that the
+standardisation is computed on the \emph{available} cross-section, which
+changes over time, so the scale of the signal is comparable across dates
+even as the universe grows.
+
+It also means that the model is estimating a \emph{relative} quantity: the
+predicted cross-sectional rank of a fund's forward return against the funds
+that existed alongside it. That is the right target for a tilt that can
+only move money within a sleeve, and it is the reason the feature layer
+needs no level information at all.
+
+\section{What the feature set is for}
+
+The honest summary of this chapter is that the feature set is small,
+price-based, and deliberately incapable of expressing a fundamental view.
+It can express momentum, reversal, volatility, trend shape, drawdown
+state, market exposure, diversification and liquidity --- and nothing else.
+
+That is a limitation and it is also the point. A system with twelve
+price-based features and a handful of configurations has a small enough
+hypothesis space that the selection machinery of Part IV has a chance of
+working. A system with twelve hundred features from a data vendor's
+fundamentals database does not, and Chapter 33 will show what happens when
+the trial family is small enough to be evaluated honestly.
+
+\begin{keytakeaways}
+\item Twelve features in four families: momentum (with a one-month skip),
+reversal, volatility and its change, trend shape and drawdown state,
+market beta and correlation, and Amihud illiquidity.
+\item The one-month skip on momentum is not a convention; it is the removal
+of a strong short-horizon reversal from a medium-horizon signal.
+\item Standardisation is per date and on the available cross-section, so no
+whole-sample statistic ever enters the model and no scale is carried
+across dates.
+\item The feature set can express relative preference within the funds that
+exist alongside a fund, which is exactly what a within-sleeve tilt needs
+and exactly what a level-based forecast would not.
+\end{keytakeaways}

@@ -1,0 +1,126 @@
+% =====================================================================
+%  Chapter 35 — The Taxable Investor's Record
+% =====================================================================
+
+\chapter{The Taxable Investor's Record}
+\label{ch:taxable-record}
+
+The system's tax-exempt record is the cleanest thing the book measures. The
+taxable record is the one the reader is most likely to have, and it is
+worse. This chapter reports the difference, explains where it comes from,
+and draws the conclusion that a reader who has a taxable account must act
+on.
+
+\section{The two accounts}
+
+The system runs two portfolios in parallel from the same month, with the
+same weights and the same trades. The only difference is that one pays
+tax.
+
+\begin{center}
+\begin{tabular}{@{}P{1.70in}rrrr@{}}
+\toprule
+ & Compound growth & Sharpe & Deepest drawdown & Worst 12 months \\
+\midrule
+Tax-exempt account & \numFullCAGR{} & \numFullSharpe{} & \numFullDD{} & \numFullWorstYear{} \\
+Taxable account    & \numTaxCAGR{} & \numTaxSharpe{} & \numTaxDD{} & \numTaxWorstYear{} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The cost is \numTaxPenalty{} a year of compound growth. Over the
+\numRecordMonths{} months of the record, the taxable account pays
+\numTaxTotal{} dollars of tax on a starting capital of \numInitialCapital{}
+dollars --- \numTaxFraction{} of the initial capital, paid away.
+
+The two accounts, and the wedge between them, are shown in \figref{fig:tax}.
+
+\figref{fig:tax} makes a point that is easy to miss: the wedge is
+not constant. It widens, because the tax is charged on a portfolio whose
+value is growing, and because the system's turnover keeps realising gains
+into a rising base.
+
+\section{Where the money goes}
+
+Three components, and it is worth separating them because they have
+different remedies.
+
+\textbf{The preferential rate is good news.} Long-term capital gains are
+taxed at fifteen per cent for most taxpayers, against a marginal ordinary
+rate that is typically thirty-two or thirty-seven per cent. A portfolio
+that trades a great deal and holds long-term gains is, on this account,
+better off than a buy-and-hold investor in a taxable account, because the
+buy-and-hold investor eventually realises a large long-term gain and pays
+the tax on it. The book's system realises gains every year, at the
+preferential rate, and the wedge it creates is smaller than the wedge a
+liquidation event would create.
+
+\textbf{Short-term gains are the expensive part.} A gain realised within a
+year is taxed as ordinary income, at the full marginal rate plus the net
+investment income tax. The book's no-trade band and the system's low
+turnover --- \numTurnover{} a month --- keep most of the realised gains in
+the long-term bucket. This is the single largest design decision in the
+tax layer: a system that rebalanced more aggressively would convert
+long-term rates into short-term ones and would be materially worse after
+tax.
+
+\textbf{The wash-sale rule is the tax layer's own constraint.} Because
+the rule applies in both directions, the system cannot harvest a loss and
+immediately buy the same fund back. Over the record, this occasionally
+prevents the system from doing something it would otherwise have done ---
+holding a losing position longer than it would like --- and the effect is
+a small drag on the taxable account relative to a naive backtest that
+ignored the rule.
+
+\section{The mechanical result worth stating}
+
+There is a comparison worth making, because it is the argument for
+automated, patient, long-horizon management in a taxable account.
+
+The taxable system earns \numTaxCAGR{} with a drawdown of \numTaxDD{},
+while the benchmark earns \numSpyCAGR{} with a drawdown of \numSpyDD{} in
+an account with no tax at all. But a real investor in the benchmark does
+not experience \numSpyCAGR{}: at the end, they own the whole position and
+must realise it, and the tax on that realisation is charged on the
+entire accumulated gain.
+
+The book does not model that liquidation --- it would be a single
+transaction and the rates are known --- but it is worth naming the
+asymmetry. A system that realises gains gradually, at the preferential
+rate, every year, converts a deferred tax liability into an annually
+paid, annually-priced one. The deferral is a benefit to the holder of the
+index that the system does not have to pay for.
+
+\begin{takeaway}[The taxable conclusion]
+The tax costs \numTaxPenalty{} a year of compound growth, and it is paid
+on a portfolio that keeps growing. The system's low turnover is what
+keeps most of the realised gains in the long-term bucket, and that is a
+design decision rather than an accident: the no-trade band is a tax
+instrument as much as a cost instrument.
+\end{takeaway}
+
+\section{What this means for a reader}
+
+If the reader has a taxable account and a long horizon, the conclusion is
+that the tax layer is not a detail to be deferred and it is not a reason
+to abandon the approach. It is a reason to make the system's turnover low,
+to hold the tax-exempt account for the assets that are not being traded,
+and to accept that the tax-exempt record is the honest measure of the
+strategy and the taxable record is the honest measure of the investor's
+outcome.
+
+If the reader has a taxable account and a short horizon, the conclusion
+is the opposite: the tax friction compounds with the behavioural friction
+of Chapter 8, and a system that rebalances is likely to be the wrong
+instrument.
+
+\begin{keytakeaways}
+\item The taxable account pays \numTaxTotal{} dollars over the record,
+\numTaxFraction{} of the initial capital, and gives up \numTaxPenalty{} a
+year of compound growth.
+\item The tax is charged on a growing portfolio, so the wedge widens.
+\item Low turnover keeps most realised gains in the long-term bucket; the
+no-trade band is a tax instrument as much as a cost instrument.
+\item A taxable reader with a short horizon should not run a rebalancing
+system at all.
+\end{keytakeaways}
