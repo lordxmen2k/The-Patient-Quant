@@ -112,7 +112,7 @@ python3 build/check_numbers.py
 
 ## Verification
 
-`build/verify.py` runs twenty gates against the finished PDF: that it
+`build/verify.py` runs twenty-two gates against the finished PDF: that it
 builds and is a book, with no errors in the typesetting log; that every
 figure named in the source exists; that every figure is used exactly once
 and no label is defined twice; that no label in any figure overlaps a
@@ -125,7 +125,10 @@ no template residue survives; that the copyright string is exact; that no
 secret is in the repository; that the house fonts are embedded; that the
 PDF is structurally sound; that the data cache matches its checksums; that
 the panel rebuilds from the cache; that there is no look-ahead in the
-training set; and that every heading argument in the source is closed.
+training set; that every heading argument in the source is closed; that
+the index is populated with headwords and page numbers; and that no index
+mark has eaten a word from the prose, stranded a piece of punctuation, or
+been put inside a formula.
 
 ## Data
 
