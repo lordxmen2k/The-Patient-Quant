@@ -2,7 +2,7 @@
 %  Chapter 32 — The Record
 % =====================================================================
 
-\chapter{The Record}
+\chapter{The Record}\idx{Record}
 \label{ch:record}
 
 This chapter reports the system's record and puts it beside four
@@ -17,7 +17,7 @@ The system runs from \numRecordStart{} to \numRecordEnd{}: \numRecordMonths{}
 months, or just over twenty-four years. The panel it draws on is longer,
 running from \numPanelStart{} to \numPanelEnd{}, because the model needs a
 warm-up before it will produce a forecast and because the earlier years
-are needed to establish the benchmark's own history.
+are needed to establish the benchmark\idx{Benchmark}'s own history.
 
 The initial capital is \numInitialCapital{} dollars, and the account is
 rebalanced monthly.
@@ -28,11 +28,11 @@ rebalanced monthly.
 \begin{tabular}{@{}P{1.62in}rrrrr@{}}
 \toprule
  & \multicolumn{2}{c}{Growth} & & & \\
-Variant & annual rate & Sharpe & drawdown & worst 12m & recovery \\
+Variant & annual rate & Sharpe & drawdown & worst 12m & recovery\idx{Recovery} \\
 \midrule
 The index, bought and held   & \numSpyCAGR{} & \numSpySharpe{} & \numSpyDD{} & \numSpyWorstYear{} & \numSpyRecovery{} \\
 Equal weight of every fund   & \numEqualCAGR{} & \numEqualSharpe{} & \numEqualDD{} & \numEqualWorstYear{} & \numEqualRecovery{} \\
-The policy, no rebalancing   & \numPolicyCAGR{} & \numPolicySharpe{} & \numPolicyDD{} & \numPolicyWorstYear{} & \numPolicyRecovery{} \\
+The policy, no rebalancing\idx{Rebalancing}   & \numPolicyCAGR{} & \numPolicySharpe{} & \numPolicyDD{} & \numPolicyWorstYear{} & \numPolicyRecovery{} \\
 \textbf{The system}           & \textbf{\numFullCAGR{}} & \textbf{\numFullSharpe{}} & \textbf{\numFullDD{}} & \textbf{\numFullWorstYear{}} & \numFullRecovery{} \\
 The system, in a taxable account & \numTaxCAGR{} & \numTaxSharpe{} & \numTaxDD{} & \numTaxWorstYear{} & \numTaxRecovery{} \\
 \bottomrule
@@ -64,7 +64,7 @@ against the index's \numSpyRecovery{}, which is an improvement, but the
 taxable account's \numTaxRecovery{} months is not.
 
 \textbf{An equal-weighted portfolio of all sixty-one funds does better on
-the money and worse on the drawdown.} The naive comparator earns
+the money and worse on the drawdown.} The naive comparator\idx{Comparator} earns
 \numEqualCAGR{} with a drawdown of \numEqualDD{}. This is Chapter 25's
 finding made concrete: the book's architecture is not the best available
 way to invest in this universe, and a rule requiring no model, no
@@ -82,7 +82,7 @@ would not run this system.
 
 What the system is competitive on is the pair that the owner's question
 actually asks for: growth \emph{and} protection. Judged on the compound
-growth rate alone, the index wins and the system loses. Judged on the
+growth\idx{Compound growth} rate alone, the index wins and the system loses. Judged on the
 Sharpe ratio, the system and the index are indistinguishable. Judged on
 the deepest drawdown, the system wins by a wide margin and the equal
 weight comparator is second.

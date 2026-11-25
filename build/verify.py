@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The book's verification gates.
 
-Nineteen checks run after the PDF is typeset.  Each one catches a way in
+Twenty-two checks run after the PDF is typeset.  Each one catches a way in
 which a book like this can be subtly wrong without looking wrong: a stale
 figure, a hand-transcribed number, a caption pointing at the wrong
 figure, a page with overlapping labels, a number in the prose that the
@@ -709,6 +709,153 @@ def gate_20_source():
                        (f" and {len(problems) - 4} more" if len(problems) > 4 else ""))
 
     return True, f"{len(files)} chapters, every heading argument closed"
+
+
+# ---------------------------------------------------------------------
+#  The index
+#
+#  The book carries an index.  Three things can go wrong with one, and
+#  none of them is visible in the typeset output: the index can fail to
+#  build and simply print nothing, a mark can quietly delete a word from
+#  the sentence it sits in, and a mark placed just before a clause's
+#  punctuation leaves that punctuation stranded after it.
+# ---------------------------------------------------------------------
+
+
+def _unmatched_dollars(text: str) -> list[int]:
+    """The offsets of the dollar signs that open or close a formula.
+
+    An escaped dollar sign is a literal dollar sign, not a delimiter, so
+    it is skipped; the manuscript writes \\$3,000 and the like.
+    """
+    out = []
+    index = 0
+    while index < len(text):
+        if text[index] == "\\":
+            index += 2
+            continue
+        if text[index] == "$":
+            out.append(index)
+        index += 1
+    return out
+
+
+def index_marks_eat_words(text: str, name: str) -> list[str]:
+    """Find the index marks that have taken a word out of the prose.
+
+    \\idx prints nothing: it registers a term the prose already writes.
+    Used where the word belongs, it silently deletes that word from the
+    sentence, and nothing in a LaTeX build reports it.
+
+    The test: the sentence that holds the mark must still contain the
+    term once the mark is taken out.
+    """
+    flat = re.sub(r"[ \t]+", " ", text)
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9])", flat)
+
+    bad: list[str] = []
+    for sentence in sentences:
+        for match in re.finditer(r"\\(idx|idxw)\{([^{}]*)\}", sentence):
+            kind, entry = match.group(1), match.group(2)
+            if kind == "idxw":
+                continue
+            key = re.sub(r"[^A-Za-z0-9]", "", entry.split()[0]).lower()
+            if not key:
+                continue
+            without = sentence[:match.start()] + " " + sentence[match.end():]
+            without = re.sub(r"[^A-Za-z0-9]", "", without).lower()
+            if key not in without:
+                bad.append(f"{name}: {entry}")
+    return bad
+
+
+def index_marks_at_clause_end(text: str, name: str) -> list[str]:
+    """Find the index marks that sit at the end of a clause.
+
+    A mark at the end of a clause stands where the word belongs: the
+    sentence would end with the word missing and the clause's punctuation
+    stranded after it.
+    """
+    bad: list[str] = []
+    for match in re.finditer(r"\\idx\{([^{}]*)\}", text):
+        after = text[match.end():match.end() + 40].lstrip()
+        if after[:1] in (".", ";", ":"):
+            before = text[max(0, match.start() - 70):match.start()]
+            before = re.sub(r"[ \t]+", " ", before.replace("\n", " ")).strip()
+            bad.append(f"{name}: {match.group(1)} in '...{before[-50:]}'")
+    return bad
+
+
+def index_marks_in_maths(text: str, name: str) -> list[str]:
+    """Find the index marks that have been put inside a formula.
+
+    A mark between two dollar signs does not print its term but it still
+    splits the formula.
+    """
+    bad: list[str] = []
+    dollars = _unmatched_dollars(text)
+    for first, second in zip(dollars[0::2], dollars[1::2]):
+        inside = text[first:second]
+        for match in re.finditer(r"\\(?:idx|idxw)\{", inside):
+            bad.append(f"{name}: a mark inside a formula")
+    return bad
+
+
+@gate("21. the index is populated")
+def gate_21_index():
+    """The index must carry headwords, and it must have been built.
+
+    \\printindex prints nothing at all when the index file is missing, so
+    a book can be typeset without an index and nothing in the output
+    says so.
+    """
+    index_file = os.path.join(SRC, "main.idx")
+    if not os.path.exists(index_file):
+        return False, "no main.idx: the index was never built"
+    with open(index_file, encoding="utf-8", errors="replace") as fh:
+        lines = fh.read().splitlines()
+    headwords = set()
+    for line in lines:
+        match = re.search(r"\\indexentry\{([^{}]*)", line)
+        if match:
+            headwords.add(match.group(1))
+    if len(headwords) < 60:
+        return False, f"{len(headwords)} headwords, at least 60 wanted"
+    return True, f"{len(headwords)} headwords"
+
+
+@gate("22. the index marks are sound")
+def gate_22_index_marks():
+    """No mark may eat a word, strand a punctuation mark, or sit inside a
+    formula.
+
+    Each of those three is invisible in the typeset output.  A word eaten
+    by a mark simply does not appear; a stranded full stop still looks
+    like a full stop; and a mark inside a formula renders as nothing.
+    """
+    files = sorted(pathlib.Path(SRC, "chapters").glob("*.tex"))
+    eaten: list[str] = []
+    stranded: list[str] = []
+    in_math: list[str] = []
+    for path in files:
+        text = path.read_text(encoding="utf-8")
+        eaten += index_marks_eat_words(text, path.name)
+        stranded += index_marks_at_clause_end(text, path.name)
+        in_math += index_marks_in_maths(text, path.name)
+
+    problems = []
+    for label, items in (("ate a word", eaten),
+                         ("stranded a punctuation mark", stranded),
+                         ("sat inside a formula", in_math)):
+        if items:
+            problems.append(f"{len(items)} mark(s) {label}: "
+                            + "; ".join(items[:3]))
+    if problems:
+        return False, " | ".join(problems)
+
+    marks = sum(len(re.findall(r"\\idx\{", p.read_text(encoding="utf-8")))
+                for p in files)
+    return True, f"{marks} marks, none of them harmful"
 
 
 if __name__ == "__main__":

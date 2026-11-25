@@ -2,7 +2,7 @@
 %  Chapter 36 — When the Machine Is Wrong
 % =====================================================================
 
-\chapter{When the Machine Is Wrong}
+\chapter{When the Machine Is Wrong}\idx{Wrong}
 \label{ch:wrong}
 
 Everything in this book has been about a machine that does almost nothing.
@@ -17,7 +17,7 @@ different signatures and different remedies.
 \textbf{It is wrong about the sign.} The model predicts that a fund will
 outperform its peers and it underperforms. The remedy is the obvious one:
 the tilt is bounded, the losses are small, and the next month produces a
-new forecast. This is the failure mode the architecture was designed for,
+new forecast. This is the failure mode\idx{Failure mode} the architecture was designed for,
 and it is why the tilt's contribution is a fraction of a basis point
 rather than a catastrophe.
 
@@ -28,16 +28,18 @@ The cost is the same as above: the tilt was small.
 \textbf{It is right about the sign and wrong about the horizon.} The model
 says a fund will outperform over three months and it underperforms over
 twelve. This is the failure mode the ensemble's two horizons and the
-discounted score are designed to catch, and Chapter 19 showed that the
+discounted score\idx{Discounted score} are designed to catch, and Chapter 19 showed that the
 ensemble's members routinely disagree.
 
 None of these three is dangerous, and that is the point of the
 architecture.
 
-\section{The failure that is dangerous: the regime}
+\section{The failure that is dangerous: the regime}\idx{Regime}
 
 The dangerous failure is not about any particular forecast. It is about
-the relationship between the model and the market changing.
+the relationship between the model and the market changing. This is where
+the tail risk\idx{Tail risk} lives: the three failures above cost fractions of a basis
+point, and this one is the failure that the architecture cannot price.
 
 Three mechanisms would do it. A change in the composition of the investor
 base --- the crowding mechanism of Chapter 3 --- would compress the
@@ -46,7 +48,7 @@ the market itself --- the arrival of a new instrument, a change in the
 index construction rules, a change in the tax code --- would break the
 mapping from the features to the returns. And a change in the
 distribution of returns --- a crisis, a regime of much higher volatility
---- would change the scale on which every threshold in the system sits.
+--- would change the scale on which every threshold\idx{Threshold} in the system sits.
 
 The system's defences against this are partial and worth listing
 honestly. The discounted ensemble score is a defence of the first kind:
@@ -95,7 +97,7 @@ threshold that is wrong for the reader's circumstances.
 
 The ensemble's weights over the record are shown in \figref{fig:model-weights}, and a reader should watch them for concentration.
 
-\section{When the reader should override the system}
+\section{When the reader should override the system}\idx{Override}
 
 This is the question Chapter 8 is really about, and the book should
 answer it directly.

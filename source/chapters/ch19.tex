@@ -2,7 +2,7 @@
 %  Chapter 19 — Online Bayesian Model Averaging
 % =====================================================================
 
-\chapter{Online Bayesian Model Averaging}
+\chapter{Online Bayesian Model Averaging}\idx{Model averaging}
 \label{ch:ensemble}
 
 The book's model set has twelve members. This chapter explains how they
@@ -64,7 +64,7 @@ produces a forecast at date \(s\) whose outcome is realised at \(s+h\). At
 date \(t\), the score of that member uses the forecast made at \(t-h\),
 because that is the forecast whose outcome is realised exactly now. The
 book implements this by construction: the score is attached to the
-formation date \(t-h\), and it becomes available to the ensemble only at
+formation date \(t-h\), and it becomes available to the ensemble\idx{Ensemble} only at
 \(t\).
 
 \begin{takeaway}[The rule that must not be broken]
@@ -77,13 +77,13 @@ the resulting equity curve would be a fiction.
 
 \section{Why the score is discounted}
 
-The score is accumulated with an exponential discount:
+The score is cumulative\idx{Cumulative}, and it is accumulated with an exponential discount:
 \begin{equation}
 L_{m,t} = \delta\, L_{m,t-1} + \ell_{m,t},
 \qquad
 \delta = 2^{-1/H},
 \end{equation}
-where \(H\) is a half-life in months and the book uses \(H = 60\) by
+where \(H\) is a half-life\idx{Half-life} in months and the book uses \(H = 60\) by
 default.
 
 Two arguments justify the discount, and they are different.

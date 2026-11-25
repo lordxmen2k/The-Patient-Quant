@@ -2,7 +2,7 @@
 %  Chapter 28 — The Risk Governor
 % =====================================================================
 
-\chapter{The Risk Governor}
+\chapter{The Risk Governor}\idx{Governor}
 \label{ch:governor}
 
 The risk governor is the layer that does the work. Part VI will show that
@@ -15,11 +15,11 @@ built the way it is.
 
 The governor has two parts, and they act on different things.
 
-The \textbf{volatility scaler} reduces the portfolio's exposure when the
+The \textbf{volatility scaler} reduces the portfolio's exposure\idx{Exposure} when the
 recent realised volatility is high and restores it when it is low. It acts
 on the \emph{level} of risk.
 
-The \textbf{drawdown brake} reduces the portfolio's exposure when the
+The \textbf{drawdown brake\idx{Drawdown brake}} reduces the portfolio's exposure when the
 portfolio is in a drawdown, at two thresholds. It acts on the
 \emph{history} of the portfolio.
 
@@ -37,7 +37,11 @@ multiplies every risky weight by
 \begin{equation}
 s = \min\left(1,\ \left(\frac{\sigma^{*}}{\hat{\sigma}}\right)^{\delta}\right),
 \end{equation}
-where \(\delta\) is the damping parameter and the book uses \(\delta = 0.5\).
+where \(\delta\) is the damping\idx{Damping} parameter and the book uses \(\delta = 0.5\).
+
+This is volatility scaling\idx{Volatility scaling}, and it is the first of the two mechanisms this
+chapter introduces. It changes the size of the position, not its sign, and
+it is the layer that turns a forecast into a number of dollars.
 
 Two details are deliberate.
 

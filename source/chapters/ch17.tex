@@ -2,10 +2,10 @@
 %  Chapter 17 — A Panel Regression as a Conjugate Update
 % =====================================================================
 
-\chapter{A Panel Regression as a Conjugate Update}
+\chapter{A Panel Regression as a Conjugate Update}\idx{Conjugate update}\idx{Panel regression}
 \label{ch:conjugate}
 
-The book's model is a linear regression on a panel of funds, with a prior
+The book's model is a linear regression on a panel of funds, with a prior\idx{Prior}
 that happens to be conjugate to the likelihood. This chapter derives it,
 explains why a prior is not optional, and shows how the same equations
 produce both the forecast and --- more importantly --- the uncertainty in
@@ -45,7 +45,7 @@ y_i = x_i^{\prime}\beta + \varepsilon_i,
 \qquad
 \varepsilon_i \sim N(0, \sigma^2),
 \end{equation}
-with the conjugate prior
+with the conjugate prior\idx{Conjugate prior}
 
 \begin{equation}
 \beta \mid \sigma^2 \sim N(m_0,\ \sigma^2\Lambda^{-1}),
@@ -64,7 +64,7 @@ deviations of zero. A precision of \(2.0\) is stronger. Neither is
 enough to prevent the data from speaking, and both are enough to prevent
 a single lucky month from producing a coefficient of eight.
 
-\section{The posterior}
+\section{The posterior}\idx{Posterior}
 
 Because the prior is conjugate, the posterior is available in closed form
 and the update is a matrix identity. With \(n\) training observations,

@@ -2,11 +2,11 @@
 %  Chapter 25 — Shrinkage, Risk Parity, and the Case Against Optimisation
 % =====================================================================
 
-\chapter{Shrinkage, Risk Parity, and the Case Against Optimisation}
+\chapter{Shrinkage, Risk Parity, and the Case Against Optimisation}\idx{Optimisation}\idx{Risk parity}
 \label{ch:shrinkage}
 
 Before the book uses a forecast to size a position, it has to decide how to
-estimate the covariance matrix of returns, and the answer to that question
+estimate the covariance\idx{Covariance} matrix of returns, and the answer to that question
 is a large part of why the book's result is what it is. This chapter
 derives the shrinkage estimator, explains what risk parity does, and
 presents the uncomfortable evidence that the optimisation being done is
@@ -29,14 +29,14 @@ usual fix in the literature is to impose structure --- a factor model, a
 one-factor model, a constant-correlation model --- and the book uses one of
 those in the comparator role of Chapter 33.
 
-\section{Ledoit and Wolf's shrinkage estimator}
+\section{Ledoit and Wolf's shrinkage estimator}\idx{Ledoit and Wolf}
 
 The estimator the book uses is Ledoit and Wolf's linear shrinkage toward a
 scaled identity. Let the target be
 \begin{equation}
 F = \frac{\mathrm{tr}(\hat\Sigma)}{N}\,I,
 \end{equation}
-the scaled identity, and let the shrinkage intensity be
+the scaled identity, and let the shrinkage intensity\idx{Shrinkage intensity} be
 \begin{equation}
 \hat{\kappa} = \frac{\hat{\pi}}{\hat{\rho}},
 \end{equation}
@@ -92,7 +92,7 @@ period and a growth rate below the stated policy's.
 
 Risk parity optimises nothing about return, because it has no view about
 return. That is its virtue for an institution with an explicit risk
-budget and its vice for a saver with a compounding objective: it is a
+budget and its vice for a saver with a compounding\idx{Compounding} objective: it is a
 rule for not losing, and the owner of this book asked for a rule for
 compounding.
 
@@ -107,7 +107,7 @@ discretionary allocation, and it is more uncomfortable for this book than
 for anyone else, because this book does discretionary allocation.
 
 They compared a large set of portfolio strategies --- mean-variance with
-estimated parameters, minimum-variance, hierarchical risk parity, and
+estimated parameters, minimum-variance, hierarchical risk parity\idx{Hierarchical risk parity}, and
 various robustified versions --- against the equal-weighted portfolio over
 the same data. The result: \emph{none} of the optimised strategies
 outperformed the equal-weighted portfolio over the full sample, out of
@@ -123,7 +123,7 @@ plausible portfolios are tiny relative to the error in estimating them.
 
 \begin{takeaway}[The uncomfortable evidence]
 Over fourteen alternative datasets, optimised portfolios failed to beat
-equal weighting, and the differences were not statistically significant.
+equal weighting\idx{Equal weighting}, and the differences were not statistically significant.
 The estimation error in expected returns is large relative to the
 differences between the strategies being compared. This book performs
 optimisation anyway, but it performs it on the \emph{tilt} rather than on

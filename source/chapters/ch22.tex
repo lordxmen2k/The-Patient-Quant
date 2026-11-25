@@ -2,7 +2,7 @@
 %  Chapter 22 — Selection: DSR, PBO, the Reality Check and the SPA
 % =====================================================================
 
-\chapter{Selection: DSR, PBO, the Reality Check and the SPA}
+\chapter{Selection: DSR, PBO, the Reality Check and the SPA}\idx{Reality check}
 \label{ch:selection}
 
 This chapter builds the four tests that judge the book's own system. They
@@ -17,15 +17,15 @@ Each of the four tests answers a different question, and none of them
 answers all of it.
 
 \begin{itemize}
-\item The \textbf{Deflated Sharpe Ratio} asks: given that I tried \(N\)
+\item The \textbf{Deflated Sharpe Ratio\idx{Deflated Sharpe ratio}} asks: given that I tried \(N\)
 strategies, is my Sharpe ratio larger than the expected maximum Sharpe
 ratio of \(N\) draws from the null?
-\item The \textbf{Probability of backtest overfitting} asks: if I split my
+\item The \textbf{Probability of backtest overfitting\idx{Probability of backtest overfitting}} asks: if I split my
 record in half, how often does the strategy that wins on the first half
 lose on the second?
 \item The \textbf{Reality Check} asks: is the best member of my family
 better than the benchmark by more than the family would manage by chance?
-\item The \textbf{Superior Predictive Ability} test asks the same
+\item The \textbf{Superior Predictive Ability\idx{Superior predictive ability}} test asks the same
 question, but weights the family members by their own performance rather
 than assuming they are equally good.
 \end{itemize}
@@ -79,6 +79,10 @@ construction that is worth understanding, because it is elegant and it is
 the test that most directly answers the question a reader will ask: does
 this strategy's edge survive being cut in half?
 
+The construction is combinatorially symmetric cross-validation\idx{Combinatorially symmetric cross-validation} --- CSCV for
+short --- and the symmetry in the name is the point of the construction:
+each split is a cross-validation\idx{Cross-validation} in which the two halves exchange roles.
+
 Take the \(T\) months of the strategy family's returns. Split them into
 \(S\) contiguous sub-periods of equal length, in every possible way: the
 number of splits is the binomial coefficient
@@ -126,7 +130,7 @@ d_k(t) = r_k(t) - r_b(t),
 with the null distribution obtained by bootstrapping the centred
 differences \(d_k(t) - \bar{d}_k\).
 
-The bootstrap is the stationary bootstrap, in which each observation is
+The bootstrap\idx{Bootstrap} is the stationary bootstrap, in which each observation is
 either drawn from the sample or from its immediate successor, with the
 probability of drawing the successor fixed at a small value. The
 stationary bootstrap is used rather than the simple bootstrap because the
@@ -178,7 +182,7 @@ the ablations, the sizing variants, the ensemble half-life variants and
 the alternative strategic policies. Its size is published.
 
 The tests are run against the benchmark on the same months as the system,
-with the same alignment.
+with the same alignment\idx{Alignment}, so that the two halves are directly comparable.
 
 The implied number of independent trials is computed from the family's own
 correlation matrix and substituted into the Deflated Sharpe Ratio, and

@@ -6,11 +6,11 @@
 \label{ch:attribution}
 
 This is the chapter the book exists for. It takes the assembled system
-apart and reports, in order, what each layer is worth. The answer is not
+apart and reports, in order, what each layer\idx{Layer} is worth. The answer is not
 the one the owner asked for, and it is stated here in the first paragraph
 rather than at the end.
 
-\section{The attribution}
+\section{The attribution}\idx{Attribution}
 
 Four portfolios, the same policy, the same data, the same costs, the same
 taxes, the same months:
@@ -32,7 +32,10 @@ The whole system            & \numFullCAGR{} & --- & \numFullSharpe{} & --- & \n
 \end{center}
 
 The differences, computed from the same numbers and rounded in the
-direction that flatters the layer:
+direction that flatters the layer. This is an ablation\idx{Ablation}, and each layer is
+removed from the whole system in turn and the remainder measured, so that
+what a layer is worth is the difference between the system with it and the
+system without it.
 
 \begin{itemize}
 \item \textbf{The model:} \numTiltCAGR{} against \numCoreCAGR{} for the
@@ -67,7 +70,7 @@ moves.}
 \label{fig:layers}
 \end{figure}
 
-\section{What the model's contribution means}
+\section{What the model's contribution means}\idx{Contribution}
 
 Three readings are possible, and the book gives all three, because they
 are not exclusive and the reader should be able to choose.
@@ -77,7 +80,7 @@ Chapter 20's arithmetic predicts and what the record shows. The
 posterior over the edge is a distribution centred very near zero with a
 standard deviation large compared with the mean, and the
 certainty-equivalent tilt is correspondingly close to zero. The model
-tilt's own turnover is a fraction of a per cent a month and its effect on
+tilt's own turnover\idx{Turnover} is a fraction of a per cent a month and its effect on
 the compound rate is a fraction of a basis point.
 
 \textbf{The second: the model is doing its job by doing nothing.} The

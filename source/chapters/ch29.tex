@@ -2,7 +2,7 @@
 %  Chapter 29 — The Tax Engine
 % =====================================================================
 
-\chapter{The Tax Engine}
+\chapter{The Tax Engine}\idx{Tax}
 \label{ch:tax-engine}
 
 The book runs two portfolios in parallel: one taxable, one tax-exempt,
@@ -12,21 +12,21 @@ in it that make the difference behave correctly.
 
 \section{The account model}
 
-An account holds cash and a set of \emph{lots}. A lot is a purchase of a
+An account holds cash and a set of \emph{lots}. A lot\idx{Lot} is a purchase of a
 quantity of one security, with an acquisition date and a cost basis. When
 the portfolio is sold, the engine disposes of lots first-in-first-out, and
-each disposal produces a gain or loss, a holding period, and a tax.
+each disposal produces a gain or loss, a holding period\idx{Holding period}, and a tax.
 
 The account also holds two running balances: the cumulative capital loss
-position, which carries forward and offsets capital gains, and the
+position, which carries forward and offsets capital gains\idx{Capital gains}, and the
 cumulative net capital loss deducted against ordinary income, which is
 capped at \$3,000 a year.
 
 At each year end, the engine settles: it computes the year's realised
-gains and losses, applies the capital-loss offset rule, computes the tax
+gains\idx{Realised gains} and losses, applies the capital-loss offset rule, computes the tax
 on long-term gains at the preferential rate, on short-term gains at the
 ordinary rate, and on qualified dividends at the preferential rate plus
-the net investment income tax, deducts the capital loss against ordinary
+the net investment income tax\idx{Net investment income tax}, deducts the capital loss against ordinary
 income up to the cap, carries the rest forward, and pays.
 
 The two accounts run the same weights and the same trades. The tax-exempt
@@ -40,7 +40,7 @@ A lot held for more than one year is long-term; one year or less is
 short-term. The engine computes the holding period from the acquisition
 date to the disposal date.
 
-The rule interacts with the wash-sale machinery in a way that is easy to
+The rule interacts with the wash-sale\idx{Wash sale} machinery in a way that is easy to
 get wrong and that the engine handles explicitly: when a loss is
 disallowed because of a replacement purchase, the replacement lot
 inherits the original lot's holding period. A wash sale therefore does
@@ -78,7 +78,7 @@ book's engine tracks the thirty-day window on both sides, across both
 accounts, and adjusts the basis and the holding period.
 \end{takeaway}
 
-\section{The tax schedule}
+\section{The tax schedule}\idx{Tax schedule}
 
 The book uses the 2025 rules for a single taxpayer with high taxable
 income.
@@ -95,7 +95,7 @@ threshold.
 
 \textbf{Ordinary dividends} not qualifying are taxed as ordinary income.
 
-\textbf{Capital losses} offset capital gains without limit, and offset
+\textbf{Capital losses\idx{Capital losses}} offset capital gains without limit, and offset
 ordinary income up to \$3,000 a year, with the unused portion carried
 forward.
 

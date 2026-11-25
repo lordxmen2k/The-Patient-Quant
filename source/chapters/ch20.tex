@@ -2,7 +2,7 @@
 %  Chapter 20 — The Posterior over the Edge
 % =====================================================================
 
-\chapter{The Posterior over the Edge}
+\chapter{The Posterior over the Edge}\idx{Edge}
 \label{ch:posterior-edge}
 
 The phrase ``the edge'' is used loosely in this literature, and the
@@ -16,14 +16,19 @@ An edge is a difference between an expected return and a benchmark. It is
 not a return. It is not a Sharpe ratio. It is not a t-statistic. It is not
 a thing you can observe.
 
-What can be observed, from data, is a posterior distribution over the
+What can be observed, from data, is a posterior distribution\idx{Posterior distribution} over the
 edge. The model produces, for each fund and each date, a mean \(\mu\) and
 a variance \(v\), and the interpretation is: given everything the model
 knows and everything it does not, the expected forward return of this fund
 is a random variable with that distribution.
 
+The output is therefore a belief\idx{Belief} about the edge, expressed as a
+distribution rather than as a number. That distinction is the whole
+argument of the book, and Chapter 26 is where the belief is converted into
+the size of a position.
+
 The edge relative to the benchmark is then the difference of two such
-random variables, and if the benchmark's own uncertainty is ignored --- as
+random variables, and if the benchmark's own uncertainty\idx{Uncertainty} is ignored --- as
 the book does, since the benchmark is observed rather than estimated ---
 the edge has mean \(\mu_i - \mu_b\) and variance \(v_i + v_b\) under
 independence.
@@ -50,7 +55,7 @@ same position size it would use for a well-established premium, will
 lose the spread on every one of those trades.
 
 \begin{takeaway}[The governing fact]
-A forecast of magnitude \(\mu\) with uncertainty \(v\) is evidence of a
+A forecast of magnitude \(\mu\) with uncertainty \(v\) is evidence\idx{Evidence} of a
 positive edge only when \(\mu \gg \sqrt{v}\). Until then the honest
 statement is that the model does not know, and the only rational response
 to not knowing is to hold the position one would hold without the model.
@@ -99,7 +104,7 @@ That is the honest state of affairs for a price-based model of a liquid
 ETF, and it is not a criticism of the model --- it is a statement about
 the difficulty of the problem. Chapter 3's evidence says as much from a
 different direction. What the model can offer is not certainty but
-\emph{calibration}: the probability it reports is a probability, and a
+\emph{calibration\idx{Calibration}}: the probability it reports is a probability, and a
 reader who trusts it can size positions against it.
 
 \section{The three ways the posterior can be wrong}

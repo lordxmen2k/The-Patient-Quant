@@ -2,7 +2,7 @@
 %  Chapter 21 — The Sharpe Ratio and Its Estimation Error
 % =====================================================================
 
-\chapter{The Sharpe Ratio and Its Estimation Error}
+\chapter{The Sharpe Ratio and Its Estimation Error}\idx{Sharpe ratio}
 \label{ch:sharpe}
 
 The Sharpe ratio is the book's summary statistic and the most misused
@@ -22,19 +22,19 @@ is
 s^2 = \frac{1}{T-1}\sum_{t=1}^{T}(r_t - \bar{r})^2.
 \end{equation}
 
-The trap is that the textbook standard error,
+The trap is that the textbook standard error\idx{Standard error},
 \begin{equation}
 \mathrm{SE}(\widehat{SR}) \approx \frac{1}{\sqrt{T-1}},
 \end{equation}
 is derived under the assumption that the returns are serially independent.
-Monthly strategy returns are not. They have negative autocorrelation from
+Monthly strategy returns are not. They have negative autocorrelation\idx{Autocorrelation} from
 the no-trade band and from the mean reversion in the tilt; they have
 positive autocorrelation from the momentum features and from the
 volatility governor, which scales exposure down after a bad period and
 therefore produces a run of low returns followed by a run of higher
 returns.
 
-\section{Lo's correction}
+\section{Lo's correction}\idx{Lo's correction}
 
 Lo's 2002 result in the \emph{Financial Analysts Journal} states that the
 true sampling variance of the Sharpe ratio is inflated by a scale factor

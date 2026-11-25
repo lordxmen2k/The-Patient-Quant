@@ -47,6 +47,52 @@ figures with broken ones. `source/generated_numbers.tex` is written only by
 `build/make_appendix_tables.py`, and `figures/fig_*.pdf` only by
 `build/make_figures.py`.
 
+## The index
+
+The book carries an index, and it is built the way the reference volume built
+its own: `build/add_index_marks.py` holds the table of terms and the chapter
+each is indexed from, `build/index_marks.py` finds a place for each term, and
+`makeindex` writes the page numbers. The placement engine is deliberately
+conservative, because an index mark is invisible and the three ways it can go
+wrong are all invisible too:
+
+* a mark placed where the word belongs deletes the word from the sentence, and
+  nothing in a LaTeX build reports the deletion;
+* a mark placed just before a clause's punctuation strands that punctuation;
+* a mark placed between two dollar signs splits the formula.
+
+Two marks therefore never land where they would do one of those three things,
+and gate 22 checks the manuscript for all three after the typesetting.
+
+Four faults in the first placement engine were found and fixed, and each of
+them had silently cost index entries:
+
+* the search did not know that LaTeX comments begin with a percent sign, and
+  twenty-six marks went into the comment line that names each chapter — the
+  one line of the file that is never typeset. The search now masks the
+  comments before it looks for anything;
+* the search counted every dollar sign when it decided whether it was inside
+  a formula, so a written-out `\$3,000` in Chapter 29 made everything after
+  it look like mathematics. Escaped dollar signs are now skipped;
+* the search did not know that the manuscript writes a hyphen as two hyphens,
+  so `bid--ask spread` was not found by a search for `bid-ask spread`;
+* the search did not know that a heading argument is a moving argument, in
+  which LaTeX refuses an `\index`. A mark in a heading is now written after
+  the heading's closing brace.
+
+Where the book discussed a concept without naming it, the prose was changed
+to name it — *active management*, *data snooping*, *multiple testing*,
+*point-in-time data*, *moving average*, *leakage*, *purge and embargo*,
+*hyperparameters*, *posterior predictive*, *combinatorially symmetric
+cross-validation*, *volatility scaling*, *ablation*, *tail risk*, *insider
+trading*. Those are small additions to the manuscript and they are the reason
+the index can carry a headword for each concept rather than only for the
+words the writer happened to use.
+
+The script is idempotent: it strips the marks it finds before it places the
+new ones, so the table of terms can be changed and the index rebuilt without
+the marks accumulating.
+
 ## The number rule
 
 No headline number is transcribed. It is computed by `scripts/run_system.py`,

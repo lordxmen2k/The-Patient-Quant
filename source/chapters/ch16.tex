@@ -12,6 +12,10 @@ the five ways it happens in a system like this one, states the mechanism
 by which the book prevents each, and identifies the one that the book
 cannot fully prevent.
 
+Look-ahead\idx{Look-ahead} bias enters a backtest in five regular ways, and the book calls
+the general condition \emph{leakage\idx{Leakage}}: information that crosses backwards in
+time, from a moment the investor did not live through into one they did.
+
 \section{One: the shifted target}
 
 The first is the subtlest and the most common in home-built systems. A
@@ -23,9 +27,13 @@ arithmetic: the target at row \(t\) must equal the realised return between
 \(t\) and \(t+h\), and must be \emph{unavailable} at \(t\). The book
 enforces this in the training-set construction of Chapter 17, where the
 rows used to fit the model at date \(t\) are restricted to those with
-\(s + h \le t\).
+\(s + h \le t\). In the vocabulary of the cross-validation literature this
+is a purge\idx{Purge} and an embargo: the rows whose label window overlaps the
+forecast window are purged from the training set, and the embargo\idx{Embargo} is the
+\(h\)-month gap that the same restriction opens between the last training
+label and the date being forecast.
 
-\section{Two: the survivorship-adjusted universe}
+\section{Two: the survivorship-adjusted universe}\idx{Survivorship}
 
 The second is the universe. A backtest that holds a fund which did not
 exist yet, or that had been liquidated, has made an error of the same kind

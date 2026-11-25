@@ -2,7 +2,7 @@
 %  Chapter 4 — The Replication Crises, and What to Do About Them
 % =====================================================================
 
-\chapter{The Replication Crises, and What to Do About Them}
+\chapter{The Replication Crises, and What to Do About Them}\idx{Replication crises}
 \label{ch:replication-crisis}
 
 Chapter 3 surveyed what the evidence says. This chapter asks a different
@@ -12,9 +12,9 @@ it?
 
 \section{The machinery of self-deception}
 
-There is a specific and well-documented failure mode in empirical finance,
-and it is worth naming precisely because everything in Parts IV and VI is
-built to detect it.
+There is a specific and well-documented failure mode in empirical finance ---
+the multiple testing\idx{Multiple testing} problem --- and it is worth naming precisely because
+everything in Parts IV and VI is built to detect it.
 
 The procedure looks like this. A researcher has a dataset. They form a
 hypothesis --- often a plausible economic story about why a variable should
@@ -29,7 +29,7 @@ aggregate result is a literature in which the median published result is
 smaller than the noise, in which the standard errors are too small, in
 which a third of the results no longer work in their own original sample,
 and in which the professional industry, applying the same methods at scale
-and with far more resources, loses to a passive index on every long window
+and with far more resources, loses to a passive\idx{Passive} index on every long window
 measured.
 
 The failure is not in any individual step. It is in the fact that the
@@ -46,7 +46,7 @@ governed by the \emph{variance of the Sharpe ratio across trials} and by
 the number of trials.
 
 For a portfolio strategy with \(T\) months of returns, the estimated
-Sharpe ratio has a standard error of approximately
+Sharpe ratio has a standard error\idx{Standard error} of approximately
 \begin{equation}
 \mathrm{SE}(\hat{SR}) \approx \frac{1}{\sqrt{T - 1}},
 \end{equation}
@@ -93,7 +93,7 @@ There is a further difficulty that the Deflated Sharpe Ratio handles only
 partially, and that this book handles explicitly.
 
 Most of the variants a researcher tries are not independent of one another.
-A momentum signal at a twelve-month horizon and at a thirteen-month horizon
+A momentum\idx{Momentum} signal at a twelve-month horizon and at a thirteen-month horizon
 are nearly the same strategy; the change in Kelly fraction from 0.10 to
 0.50 is a rescaling of the same positions; and the members of this book's
 model ensemble differ from each other only in which features they use and
@@ -122,10 +122,12 @@ approximately one trial.
 
 \section{The third bias: the test is chosen after the data}
 
-There is a selection effect even in the choice of the \emph{test}. If a
-researcher computes a \(t\)-statistic for a hundred variants and reports the
-one with the largest \(t\), the reported \(t\) is biased upwards in a way
-that no correction to the standard error can undo. This is why the
+There is a selection effect even in the choice of the \emph{test}, and
+this is the part of data snooping\idx{Data snooping} that the corrections for multiple
+testing do not reach, because a correction has to know which test was
+chosen. If a researcher computes a \(t\)-statistic for a hundred variants
+and reports the one with the largest \(t\), the reported \(t\) is biased
+upwards in a way that no correction to the standard error can undo. This is why the
 literature has produced tests specifically designed for it: the White
 reality check, which asks whether the \emph{best} of a family beats a
 benchmark better than the family would by chance, and Hansen's test for
@@ -165,7 +167,7 @@ alternative policies --- not only the configurations that might work.
 \item The number of \emph{effectively independent} trials is computed from
 the family's own correlation matrix, and used in place of the raw count.
 \item Every test --- Deflated Sharpe Ratio, probability of backtest
-overfitting, reality check, superior predictive ability --- is applied to
+overfitting\idx{Backtest overfitting}, reality check, superior predictive ability --- is applied to
 this family's own returns, against a stated benchmark.
 \end{enumerate}
 \end{takeaway}

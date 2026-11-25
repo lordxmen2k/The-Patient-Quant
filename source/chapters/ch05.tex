@@ -2,7 +2,7 @@
 %  Chapter 5 — The Prior Art and the White Space
 % =====================================================================
 
-\chapter{The Prior Art and the White Space}
+\chapter{The Prior Art and the White Space}\idx{White space}
 \label{ch:prior-art}
 
 A book that builds a machine-learning investment system owes the reader an
@@ -10,14 +10,14 @@ account of what has already been built. This chapter surveys the work
 closest to the one in this book, states what each of them actually
 demonstrates, and identifies the space that is genuinely unoccupied.
 
-\section{The closest work: DBOT}
+\section{The closest work: DBOT}\idx{DBOT}
 
 The nearest neighbour in the literature is DBOT, by Dhar and Sedoc, posted
 as arXiv preprint 2504.05639 in April 2025 and registered with a DataCite
 identifier of 10.48550/arXiv.2504.05639. The paper fine-tunes GPT-4o on
 Damodaran's \emph{Musings on Markets} --- the collected valuation notes of
 one of the most widely-read equity analysts alive --- and asks whether a
-language model that has read a decade of professional thinking can be
+language model\idx{Language model} that has read a decade of professional thinking can be
 made to produce systematic investment decisions.
 
 The claim of the paper is about \emph{stability}, and it is a legitimate and
@@ -54,7 +54,7 @@ underrated weakness of window-based features: that the \emph{order} of
 returns carries information that a summary statistic discards.
 
 \textbf{DeePM} (arXiv 2601.05975, Oxford) is explicitly about regime
-robustness in systematic macro portfolio management --- that is, about
+robustness\idx{Regime robustness} in systematic macro\idx{Macro} portfolio management --- that is, about
 making a learned allocator robust to the fact that the data generating
 process changes. Its problem statement is the same one this book confronts
 from the other side: rather than making the model robust to regime change
@@ -71,7 +71,7 @@ literature is remarkable, and so is the fact that it needed a systematic
 review to be legible at all.
 
 \textbf{The empirical result inside that frontier} is the one that should
-give a single investor pause. In a 2026 deep reinforcement learning study
+give a single investor pause. In a 2026 deep reinforcement learning\idx{Deep reinforcement learning} study
 for global equity portfolios, a recurrent network beat a Transformer
 outright. The lesson is not that LSTM networks are superior to attention
 mechanisms; the subject matter is too new and too narrow to support that.

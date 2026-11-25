@@ -12,12 +12,12 @@ selecting among the family is, on this evidence, worse than a coin flip.
 
 \section{The family}
 
-The trial family has \numFamilySize{} members: \numModelConfigs{} model
+The trial family\idx{Trial family} has \numFamilySize{} members: \numModelConfigs{} model
 configurations, three ablations that turn each layer off, two Kelly
 fractions, two tilt scales, two volatility targets, two ensemble
 half-lives, and two alternative strategic policies.
 
-It is deliberately wide. A reality check over twelve near-identical
+It is deliberately wide. A reality check\idx{Reality check} over twelve near-identical
 model configurations would pass trivially and would mean nothing; a check
 over a family that includes \emph{turn the machine off} and \emph{use a
 completely different allocation} is a check that could fail.
@@ -29,7 +29,7 @@ completely different allocation} is a check that could fail.
 \toprule
 Test & Value & Reading \\
 \midrule
-Deflated Sharpe Ratio       & \numDSR{} & Not significant. The observed Sharpe is below the expected maximum for a family this size. \\
+Deflated Sharpe Ratio\idx{Deflated Sharpe ratio}       & \numDSR{} & Not significant. The observed Sharpe is below the expected maximum for a family this size. \\
 DSR with implied trials     & \numDSRImplied{} & Not significant. The same conclusion on the correlated-trial correction. \\
 Probability of backtest overfitting & \numPBO{} & Above one half. The selection procedure is worse than a coin flip. \\
 White reality check         & p = \numRCP{} & No member of the family beats the index by more than chance. \\
@@ -75,7 +75,7 @@ own correlation matrix.
 
 The average pairwise correlation between the family's return series is
 \numAvgCorr{} --- the members produce nearly identical portfolios --- and
-the implied number of independent trials is therefore
+the implied number of independent trials\idx{Implied number of independent trials} is therefore
 \numImpliedTrials{}, rather than the \numFamilySize{} members actually run.
 
 This has two consequences, and they pull in opposite directions.

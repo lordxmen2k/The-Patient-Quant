@@ -16,7 +16,7 @@ quantifies each.
 The friction has three parts, and for this reader they are small but not
 zero.
 
-\textbf{The bid--ask spread.} Every trade crosses the spread, and the
+\textbf{The bid--ask spread.} Every trade crosses the spread\idx{Spread}, and the
 book charges half a spread per one-way trade, which is the correct
 first-order charge: you buy at the offer and sell at the bid, so a round
 trip costs one full spread. For a liquid broad-market fund the spread is
@@ -27,16 +27,18 @@ result to doubling and tripling those numbers.
 
 The spread is the friction the Securities and Exchange Commission
 explicitly warns about: in its investor bulletin on exchange-traded funds,
-the Commission notes that the bid--ask spread is a cost to the investor
-that is not visible in the expense ratio, and that most funds publish
+the Commission notes that the bid--ask spread\idx{Bid-ask spread} is a cost to the investor
+that is not visible in the expense ratio\idx{Expense ratio}, and that most funds publish
 their median spread on their own website. It is the single most common
 hidden cost in the retail ETF account.
 
 \textbf{Commissions.} The book's model charges none, because at the
 brokerages this reader is likely to use, a small monthly basket of
-liquid ETFs trades commission-free. This is a modelling choice and it is
-favourable to the system; a reader at a paying broker should add their
-own per-trade cost. Chapter 33 reports the result under a cost regime
+liquid ETFs trades commission-free. The commissions\idx{Commissions} a reader at a paying
+broker pays are the second friction the book's cost model does not
+charge. This is a modelling choice and it is favourable to the system; a
+reader at a paying broker should add their own per-trade cost. Chapter 33
+reports the result under a cost regime
 that is ten times the book's assumption.
 
 \textbf{Expense ratios.} These are \emph{not} charged separately, and the
@@ -64,7 +66,7 @@ most expensive around fifty-five.
 The choice of vehicle is not neutral, and the tax treatment of the wrapper
 is one of the larger structural advantages available to a small investor.
 
-An exchange-traded fund that sells securities in kind --- that is, that
+An exchange-traded fund\idx{Exchange-traded fund} that sells securities in kind --- that is, that
 delivers the securities themselves to the shareholders who are selling,
 rather than selling them for cash and distributing the proceeds --- can
 avoid realizing capital gains inside the fund when its shareholders trade.
@@ -101,7 +103,7 @@ The distinction is worth several percentage points a year and it is the
 single largest reason the book's taxable account lags its tax-exempt
 twin.
 
-\textbf{Ordinary dividends and the qualified dividend tax rate.} Dividends
+\textbf{Ordinary dividends and the qualified dividend\idx{Qualified dividend} tax rate.} Dividends
 are taxed as ordinary income, with the exception of the qualified dividend
 tax rate applied to the portion of a dividend that qualifies. The book
 models a 15 per cent long-term rate on qualified dividends and adds the
@@ -126,7 +128,7 @@ directions, so a system that buys a security within thirty days of a sale
 at a loss has its loss disallowed --- the system cannot simply ignore the
 rule when it is buying, only when it is selling. Second, because the basis
 and the holding period carry over, the rule changes the timing of the tax
-and not only its amount, so a wash sale can turn a short-term gain into a
+and not only its amount, so a wash sale can turn a short-term gain\idx{Short-term gain} into a
 long-term one later. The engine tracks lots, applies the thirty-day window
 in both directions, adjusts the basis of the replacement, and tacks the
 holding period.
@@ -149,7 +151,7 @@ code paid by this particular portfolio's trading pattern.}
 
 \section{Why taxes belong in the book at all}
 
-The conventional reason is that taxes are a large drag on a high-turnover
+The conventional reason is that taxes are a large drag on a high-turnover\idx{Turnover}
 strategy and a small one on a low-turnover one. The deeper reason is
 different and more useful for this reader.
 

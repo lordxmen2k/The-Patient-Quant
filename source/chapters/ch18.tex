@@ -2,7 +2,7 @@
 %  Chapter 18 — The Normal-Inverse-Gamma Posterior in Detail
 % =====================================================================
 
-\chapter{The Normal-Inverse-Gamma Posterior in Detail}
+\chapter{The Normal-Inverse-Gamma Posterior in Detail}\idx{Normal-inverse-gamma}
 \label{ch:nig}
 
 Chapter 17 stated the model and its update. This chapter takes the two
@@ -10,6 +10,12 @@ scalar parameters seriously, because the book's central claim --- that
 the machine's job is to estimate the posterior over the edge --- lives
 entirely in the relationship between \(\alpha_n\), \(\beta_n\) and the
 quantities the portfolio layer consumes.
+
+The two numbers that govern the prior are hyperparameters\idx{Hyperparameters}, and they are
+not themselves estimated from the data: they are set before the data
+arrives, and they are what the trial family varies. \(\alpha_0\) and
+\(\beta_0\) set the prior on the scale, and \(\lambda\) sets the prior
+precision on each coefficient.
 
 \section{Why inverse-gamma}
 
@@ -76,6 +82,12 @@ The posterior variance of the mean at a new point is
 \begin{equation}
 v_{\mathrm{mean}} = \hat{\sigma}^2\, x_*^{\prime}A_n^{-1}x_*.
 \end{equation}
+
+Added to it is the residual scale, and the sum is the variance of the
+\emph{posterior predictive\idx{Posterior predictive}} distribution for a fund the model has not seen
+before. The forecast therefore arrives with a mean and a variance, and the
+portfolio layer consumes only those two moments; it never sees the
+distribution itself.
 
 Three things determine its size, and they are worth separating because
 they behave differently over the life of the system.

@@ -7,10 +7,10 @@
 
 The model's input is twelve numbers per fund per month. This chapter defines
 each of them, states why it is there, and derives the two that are not
-immediate --- the Amihud illiquidity measure and the beta --- because a
-feature that is merely named is a feature that has not been checked.
+immediate --- the Amihud illiquidity measure and the beta\idx{Beta} --- because a
+feature\idx{Feature} that is merely named is a feature that has not been checked.
 
-\section{The momentum family}
+\section{The momentum family}\idx{Momentum}
 
 Three features measure the same underlying quantity at different lengths,
 and the reason for having three rather than one is that the length is the
@@ -30,7 +30,7 @@ single most consequential convention in the feature layer.
 
 The argument is that a price that has just risen has already been
 accompanied by the buying that pushed it there. The cross-sectional
-empirical regularity is that the one-month reversal is large and negative
+empirical regularity is that the one-month reversal\idx{Reversal} is large and negative
 --- the short-horizon effect that Chapter 11 noted institutions cannot
 scale --- and that including the most recent month in a momentum measure
 contaminates it with exactly that effect. A twelve-month momentum that
@@ -59,7 +59,7 @@ the reversal is *stronger* than the momentum at short horizons. Letting
 the model see both, and weighting them by the posterior, is how that claim
 gets tested rather than asserted.
 
-\section{The volatility family}
+\section{The volatility family}\idx{Volatility}
 
 \[
 \mathrm{vol}_{12,t} = \sqrt{12}\cdot s_{12,t},
@@ -118,16 +118,16 @@ both estimated over the trailing thirty-six months.
 A high beta is not, by itself, a prediction. It is a statement about how
 much of the market's risk the fund carries, and its usefulness here is
 that it lets the model distinguish a fund that is a levered version of the
-market from one that is genuinely different. A low correlation with the
+market from one that is genuinely different. A low correlation\idx{Correlation} with the
 market is a statement about diversification potential, and it is the
 feature that makes the cross-sectional model able to express a preference
 for a fund that adds something to a portfolio that already holds the
 market.
 
-\section{The liquidity feature, derived}
+\section{The liquidity feature, derived}\idx{Liquidity}
 
 The Amihud (2002) measure is the ratio of the absolute price change to
-the dollar volume, averaged over a window. The book uses the monthly
+the dollar volume\idx{Volume}, as a moving average\idx{Moving average} over a window. The book uses the monthly
 form
 
 \[

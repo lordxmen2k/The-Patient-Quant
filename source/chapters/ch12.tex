@@ -14,7 +14,7 @@ have.
 \section{One source, cached, checksummed}
 
 The book draws every price from a single source and holds nothing else.
-This is a constraint, not an accident: a system that mixes sources must
+This is a constraint\idx{Constraint}, not an accident: a system that mixes sources must
 reconcile their conventions at every join, and each reconciliation is a
 place where a look-ahead can hide.
 
@@ -23,7 +23,7 @@ close, adjusted close, volume --- for each fund over an explicit date
 range, and it requests the dividend events separately. It writes each raw
 response to disk, verbatim, with a SHA-256 checksum recorded in a
 manifest. It validates what came back, and it refuses to proceed if the
-validation fails. And it builds the panel from the cache, never from the
+validation fails. And it builds the panel from the cache\idx{Cache}, never from the
 network, so that the numbers in the book are reproducible from the
 repository alone.
 
@@ -32,7 +32,7 @@ and non-empty; that the price is strictly positive; that the dates are
 strictly increasing with no duplicates; that no gap between consecutive
 observations exceeds ten calendar days, which catches both truncated
 downloads and long suspensions; and that no single-day return exceeds a
-plausibility bound, which catches unadjusted splits and bad vendor data.
+plausibility bound, which catches unadjusted splits and bad vendor\idx{Vendor} data.
 
 \begin{takeaway}[The four integrity checks]
 Finite values; strictly positive prices; strictly increasing dates with no
@@ -72,7 +72,7 @@ and the vendor's as an independent check on it.
 
 \section{The four ways a price series lies}
 
-\subsection{Survivorship bias}
+\subsection{Survivorship bias}\idx{Survivorship bias}
 
 The universe is a list of funds that exist \emph{now}. A backtest that
 assumes all of them were available throughout the sample is assuming that
@@ -101,7 +101,7 @@ missing months as zero returns would give it a realised volatility of
 zero and a beta of zero --- which are not merely wrong numbers but
 \emph{attractive-looking} wrong numbers, because a zero-volatility asset
 is one a covariance-based optimiser would want to hold in quantity. The
-book therefore masks the return series to missing before inception, and
+book therefore masks the return series to missing before inception\idx{Inception}, and
 computes covariances pairwise, so that a newly listed fund's own history
 rather than an artefact of its non-existence determines its risk.
 
@@ -122,7 +122,7 @@ volume, both of which are contemporaneous and final.
 
 The most dangerous of all, and the one the book sidesteps entirely rather
 than defending against. Macroeconomic series are revised, sometimes by
-years, and the vintage of a revision is not usually available. A backtest
+years, and the vintage of a revision\idx{Revision} is not usually available. A backtest
 that uses a revised series will have used information that did not exist
 at the formation date, and the error is invisible in the results.
 
@@ -152,6 +152,10 @@ otherwise is the thing this book is arguing against.
 It cannot see valuation. There is no price-to-earnings, no price-to-book,
 no cash-flow yield, because those require financial statements whose
 filing dates and revisions are a second, separate data-quality problem.
+Point-in-time data\idx{Point-in-time data} --- the value of a number as it stood on the day it was
+published, rather than as it stands after every later revision --- is the
+standard that solves that problem, and the price-and-volume panel the book
+uses has no vintage of anything at all.
 
 It cannot see flows, sentiment or positioning. There is no volume-weighted
 flow, no options data, no short interest.
